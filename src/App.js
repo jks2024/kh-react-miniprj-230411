@@ -1,11 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import Login from './signup/Login';
+import Home from './pages/Home';
+import Signup from './signup/Signup';
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <p>git 적용 확용용 수정</p>
-    </>
+    <Router>
+      <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
+          <Route path="/Home" element={<Home />} />
+      </Routes>
+    </Router>
   );
 }
 
