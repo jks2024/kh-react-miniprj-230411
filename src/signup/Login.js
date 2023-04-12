@@ -88,8 +88,6 @@ const Login = () => {
             setIdMessage("오바른 형식 입니다.");
             setIsId(true);
         }
-
-
     }
 
 
