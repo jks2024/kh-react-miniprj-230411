@@ -1,5 +1,6 @@
 import React, {useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
+import imgLogo from "../images/tier_logo.png"
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -94,7 +95,10 @@ const Login = () => {
 
     return (
        <Container>
-            <div className="item1">이미지 로고</div>
+            <div className="item1">
+              <img src={imgLogo} alt="Logo" />
+            </div>
+
             <div className="item2">
                 <input className="input" placeholder="이름" value ={inputId} onChange={onChangeId}/>
             </div>
