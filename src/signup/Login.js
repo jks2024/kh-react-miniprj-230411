@@ -1,5 +1,6 @@
 import React, {useState } from 'react';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import Modal from '../utils/Modal';
 import imgLogo from "../images/tier_logo.png"
 import styled from 'styled-components';
 
@@ -132,6 +133,12 @@ const Login = () => {
     const [isId, setIsId] = useState("");
     const [isPw, setIsPw] = useState("");
 
+    //팝업 처리
+    const [modalOpen, setModalOpen] = useState(false);
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
     // 5~ 20자리의 영문자, 숫자, 언더스코어(_)로 이루어진 문자열이 유효한 아이디 형식인지 검사하는 정규표현식
     const onChangeId = (e) => {
         const regexId = /^\w{5,20}$/;
@@ -158,7 +165,10 @@ const Login = () => {
       }
     }
     const onClickLogin = async() => {
+      console.log("모달창 띄우기");
 
+      // 모달 테스트
+      setModalOpen(true);
 
     }
 
@@ -187,8 +197,7 @@ const Login = () => {
               <button className="enable-button" onClick={onClickLogin}>SING IN</button>  :
               <button className="disable-button" onClick={onClickLogin}>SING IN</button>}
             </div>
-            
-
+            <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
        </Container>
     );
 

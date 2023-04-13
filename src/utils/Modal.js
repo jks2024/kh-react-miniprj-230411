@@ -2,14 +2,16 @@ import React from "react";
 import styled from 'styled-components';
 
 const ModalStyle = styled.div`
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 99;
-    background-color: rgba(0, 0, 0, 0.6);
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 99;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
 
     .openModal {
         display: flex;
@@ -57,17 +59,43 @@ const ModalStyle = styled.div`
         text-align: right;
     }
 
+    section > footer button {
+        padding: 6px 12px;
+        color: #fff;
+        background-color: #6c757d;
+        border-radius: 5px;
+        font-size: 13px;
+    }
 
-
-
+    @keyframes modal-show {
+        from {
+            opacity: 0;
+            margin-top: -50px;
+        }
+        to {
+            opacity: 1;
+            margin-top: 0;
+        }
+    }
+    @keyframes modal-bg-show {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
 
 `;
 
 const Modal = (props) => {
     const { open, confirm, close, type, header, children } = props;
 
+    console.log("Modal Component : " + type);
+
     return (
-        <ModalStyle className={open ? 'openModal modal' : 'modal'}>
+        <ModalStyle>
+            <div className={open ? 'openModal modal' : 'modal'}>
             {open &&
                 <section>
                     <header>
@@ -83,6 +111,7 @@ const Modal = (props) => {
                     </footer>
                 </section>
             }
+            </div>
         </ModalStyle>
     );
 };
