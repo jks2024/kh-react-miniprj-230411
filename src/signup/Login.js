@@ -3,6 +3,7 @@ import {useNavigate} from "react-router-dom";
 import Modal from '../utils/Modal';
 import imgLogo from "../images/tier_logo.png"
 import styled from 'styled-components';
+import AxiosApi from '../api/AxiosApi';
 
 const Container = styled.div`
   display: flex;
@@ -165,11 +166,17 @@ const Login = () => {
       }
     }
     const onClickLogin = async() => {
-      console.log("모달창 띄우기");
-
-      // 모달 테스트
-      setModalOpen(true);
-
+      // 로그인을 위한 axios 호출
+      const res = await AxiosApi.memberLogin(inputId, inputPw);
+      console.log(res.data);
+      if(res.data === true) {
+        window.localStorage.setItem("userId", inputId); // 브라우저에서 임시호 값을 저장하는 기술
+        window.localStorage.setItem("userPw", inputPw);
+        window.localStorage.setItem("isLogin", "TRUE");
+        navigate('/home');  
+      } else {
+        setModalOpen(true);
+      }
     }
 
     return (

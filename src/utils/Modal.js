@@ -36,6 +36,14 @@ const ModalStyle = styled.div`
         animation: modal-show 0.3s;
         overflow: hidden;
     }
+
+    section > header {
+    position: relative;
+    padding: 16px 64px 16px 16px;
+    background-color: #f1f1f1;
+    font-weight: 700;
+}
+
     section > header button {
         position: absolute;
         top: 15px;
@@ -90,8 +98,6 @@ const ModalStyle = styled.div`
 
 const Modal = (props) => {
     const { open, confirm, close, type, header, children } = props;
-
-    console.log("Modal Component : " + type);
 
     return (
         <ModalStyle>
