@@ -46,20 +46,6 @@ const Container = styled.div`
       font-size: 12px;
       color: #999;
   }
-  .input {
-      margin-left: 30px;
-      margin-right: 30px;
-      width: 100%; /* 원하는 너비 설정 */
-      height: auto; /* 높이값 초기화 */
-      line-height : normal; /* line-height 초기화 */
-      padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
-      font-family: inherit; /* 폰트 상속 */
-      border: 1px solid #999;
-      border-radius: 18px; /* iSO 둥근모서리 제거 */
-      outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
-      -webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */
-      -moz-appearance: none; appearance: none;
-  }
   .success {
     color: royalblue;
   }
@@ -119,6 +105,21 @@ const Container = styled.div`
   }
 `;
 
+const Input = styled.input`
+  margin-left: 30px;
+  margin-right: 30px;
+  width: 100%; /* 원하는 너비 설정 */
+  height: auto; /* 높이값 초기화 */
+  line-height : normal; /* line-height 초기화 */
+  padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+  font-family: inherit; /* 폰트 상속 */
+  border: 1px solid #999;
+  border-radius: 18px; /* iSO 둥근모서리 제거 */
+  outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
+  -webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */
+  -moz-appearance: none; appearance: none;
+`;
+
 const Login = () => {
     const navigate = useNavigate();
 
@@ -161,7 +162,7 @@ const Login = () => {
           setPwMessage('숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요!')
           setIsPw(false)
       } else {
-          setPwMessage('안전한 비밀번호에요 : )')
+          setPwMessage('안전한 비밀번호에요 : )');
           setIsPw(true);
       }
     }
@@ -186,14 +187,14 @@ const Login = () => {
             </div>
 
             <div className="item2">
-                <input className="input" placeholder="이름" value ={inputId} onChange={onChangeId}/>
+                <Input placeholder="이름" value ={inputId} onChange={onChangeId}/>
             </div>
             <div className="hint">
               {inputId.length > 0 && <span className={`${isId ? 'success' : 'error'}`}>{idMessage}</span>}
             </div>
 
             <div className="item2">
-                <input className="input" placeholder="패스워드" value ={inputPw} onChange={onChangePw}/>
+                <Input placeholder="패스워드" value ={inputPw} onChange={onChangePw}/>
             </div>
             <div className="hint">
                 {inputPw.length > 0 && (
