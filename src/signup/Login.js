@@ -1,5 +1,5 @@
 import React, {useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Modal from '../utils/Modal';
 import imgLogo from "../images/tier_logo.png"
 import styled from 'styled-components';
@@ -171,7 +171,7 @@ const Login = () => {
       const res = await AxiosApi.memberLogin(inputId, inputPw);
       console.log(res.data);
       if(res.data === true) {
-        window.localStorage.setItem("userId", inputId); // 브라우저에서 임시호 값을 저장하는 기술
+        window.localStorage.setItem("userId", inputId); // 브라우저에서 임시로 값을 저장하는 기술
         window.localStorage.setItem("userPw", inputPw);
         window.localStorage.setItem("isLogin", "TRUE");
         navigate('/home');  
@@ -206,6 +206,11 @@ const Login = () => {
               <button className="disable-button" onClick={onClickLogin}>SING IN</button>}
             </div>
             <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 재확인해 주세요.</Modal>
+            <div className="signup">
+                <Link to="/Signup" className="link_style">
+                    <span>Sign Up</span>
+                </Link>
+            </div>
        </Container>
     );
 

@@ -2,6 +2,107 @@ import React, { useState } from 'react';
 import {useNavigate} from "react-router-dom";
 import Modal from '../utils/Modal';
 import AxiosApi from '../api/AxiosApi';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  .item1 {
+    margin-top: 100px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .item2 {
+    margin: 10px;
+    display: flex;
+    align-items: center;
+  }
+
+  .item3 {
+    margin-top: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #999;
+    font-size: 14px;
+  }
+
+  .hint {
+      display: flex;
+      margin-top: -5px;
+      margin-bottom: 10px;
+      margin-right: 40px;
+      justify-content:right;
+      align-items:center;
+      font-size: 12px;
+      color: #999;
+  }
+  .success {
+    color: royalblue;
+  }
+  .error {
+    color: red;
+  }
+
+  .enable-button {
+    margin-top: 100px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    width: 100%; /* 원하는 너비 설정 */
+    height: 50px;
+    color: white;
+    background-color: orange;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 18px;
+    border: orange;
+    font-weight: 700;
+  }
+  .enable-button:active {
+    margin-top: 100px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    width: 100%; /* 원하는 너비 설정 */
+    height: 50px;
+    color: white;
+    background-color: #999;
+    font-size: 15px;
+    font-weight: 400;
+    border-radius: 18px;
+    border: #999;
+    font-weight: 700;
+  }
+  .disable-button {
+    margin-top: 100px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    width: 100%; /* 원하는 너비 설정 */
+    height: 50px;
+    color: white;
+    background-color: #999;
+    font-size: 13px;
+    font-weight: 400;
+    border-radius: 18px;
+    border: orange;
+  }
+`;
 
 const Signup = () =>{
      // 키보드 입력
@@ -102,9 +203,17 @@ const Signup = () =>{
 
 
      return(
-        <>
-        </>
+        <Container>
+            <div className="item2">
+                    <input className="input" type="text" placeholder="이름" value ={inputName} onChange={onChangeName}/>
+            </div>
+            <div className="hint">
+                {inputId.length > 0 && <span className={`message ${isName ? 'success' : 'error'}`}>{idMessage}</span>}
+            </div>
 
+
+
+        </Container>
      );
 
 };
