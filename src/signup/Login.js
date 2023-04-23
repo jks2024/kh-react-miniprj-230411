@@ -116,8 +116,6 @@ const Input = styled.input`
   border: 1px solid #999;
   border-radius: 18px; /* iSO 둥근모서리 제거 */
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
-  -webkit-appearance: none; /* 브라우저별 기본 스타일링 제거 */
-  -moz-appearance: none; appearance: none;
 `;
 
 const Login = () => {

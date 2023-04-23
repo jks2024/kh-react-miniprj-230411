@@ -8,7 +8,7 @@ const Home = () => {
     useEffect(() => {
         const memberInfo = async() => {
             const rsp = await AxiosApi.memberGet("ALL"); // 전체회원 조회
-            if(rsp.status === 200) setMemberInfo(rsp.data);
+            setMemberInfo(rsp.data);
             console.log(rsp.data);
         };
         memberInfo();

@@ -10,6 +10,16 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
 
+.sign {
+    margin-top: 47px;
+    margin-left: 34px;
+    font: normal normal bold 24px/35px Poppins;
+    display: flex;
+    letter-spacing: 0px;
+    color: #313131;
+    opacity: 1;
+}
+
   .item1 {
     margin-top: 100px;
     margin-bottom: 40px;
@@ -104,7 +114,21 @@ const Container = styled.div`
   }
 `;
 
+const Input = styled.input`
+  margin-left: 30px;
+  margin-right: 30px;
+  width: 100%; /* 원하는 너비 설정 */
+  height: auto; /* 높이값 초기화 */
+  line-height : normal; /* line-height 초기화 */
+  padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+  font-family: inherit; /* 폰트 상속 */
+  border: 1px solid #999;
+  border-radius: 18px; /* iSO 둥근모서리 제거 */
+  outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
+`;
+
 const Signup = () =>{
+    const navigate = useNavigate();
      // 키보드 입력
      const [inputId, setInputId] = useState("");
      const [inputPw, setInputPw] = useState("");
@@ -187,7 +211,7 @@ const Signup = () =>{
             const memberReg = await AxiosApi.memberReg(inputId, inputPw, inputName, inputEmail);
             console.log(memberReg.data.result);
             if(memberReg.data.result === "OK") {
-                window.location.replace("/");
+                navigate('/');
             } else {
                 setModalOpen(true);
                 setModelText("회원 가입에 실패 했습니다.");
@@ -200,22 +224,47 @@ const Signup = () =>{
         } 
     }
 
-
-
      return(
         <Container>
+            <div className="sign">
+                <span>Sign Up</span>
+            </div>
+
             <div className="item2">
-                    <input className="input" type="text" placeholder="이름" value ={inputName} onChange={onChangeName}/>
+                <Input placeholder="아이디" value ={inputId} onChange={onChangId}/>
             </div>
             <div className="hint">
-                {inputId.length > 0 && <span className={`message ${isName ? 'success' : 'error'}`}>{idMessage}</span>}
+                    {inputId.length > 0 && <span className={`message ${isId ? 'success' : 'error'}`}>{idMessage}</span>}
+            </div>
+            <div className="item2">
+                <Input type="password" placeholder="패스워드" value ={inputPw} onChange={onChangePw}/>
+            </div>
+            <div className="hint">
+                    {inputPw.length > 0 && (
+                    <span className={`message ${isPw ? 'success' : 'error'}`}>{pwMessage}</span>)}
+            </div>
+            <div className="item2">
+                <Input type="password" placeholder="패스워드 확인" value ={inputConPw} onChange={onChangeConPw}/>
+            </div>
+            <div className="hint">
+                    {inputPw.length > 0 && (
+                    <span className={`message ${isConPw ? 'success' : 'error'}`}>{conPwMessage}</span>)}
+            </div>
+            <div className="item2">
+                <Input type="text" placeholder="이름" value ={inputName} onChange={onChangeName}/>
+            </div>
+            <div className="item2">
+                <Input type="email" placeholder="이메일" value ={inputEmail} onChange={onChangeMail}/>
             </div>
 
-
-
+            <div className="item2">
+                {(isId && isPw && isConPw && isName && isMail) ? 
+                <button className="enable-button" onClick={onClickLogin}>NEXT</button> :
+                <button className="disable-button" onClick={onClickLogin}>NEXT</button>}
+                <Modal open={modalOpen} close={closeModal} header="오류">{modalText}</Modal>
+            </div>
         </Container>
      );
-
 };
 
 export default Signup;
