@@ -141,7 +141,7 @@ const Signup = () => {
     console.log("가입 가능 여부 확인 : ", memberCheck.data);
     // 가입 여부 확인 후 가입 절차 진행
 
-    if (memberCheck.data.result === "OK") {
+    if (memberCheck.data === true) {
       console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
       const memberReg = await AxiosApi.memberReg(
         inputId,
@@ -149,8 +149,8 @@ const Signup = () => {
         inputName,
         inputEmail
       );
-      console.log(memberReg.data.result);
-      if (memberReg.data.result === "OK") {
+      console.log(memberReg.data);
+      if (memberReg.data === true) {
         navigate("/");
       } else {
         setModalOpen(true);
