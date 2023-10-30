@@ -27,10 +27,7 @@ const AxiosApi = {
   },
   // 회원 가입 여부 확인
   memberRegCheck: async (id) => {
-    const check = {
-      id: id,
-    };
-    return await axios.post(KH_DOMAIN + "/users/check", check);
+    return await axios.get(KH_DOMAIN + `/users/check/?id=${id}`);
   },
 
   // 회원 탈퇴

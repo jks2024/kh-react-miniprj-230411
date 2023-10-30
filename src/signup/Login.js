@@ -6,6 +6,7 @@ import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
 import Button from "../component/Button";
 import Input from "../component/Input";
+import imgBottom from "../images/nedbank_s.png";
 
 const Container = styled.div`
   display: flex;
@@ -62,6 +63,15 @@ const Items = styled.div`
       color: orange;
       text-decoration-line: none;
     }
+  }
+  &.bdlogo {
+    background-color: #fabd2e;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
   }
 `;
 
@@ -164,6 +174,9 @@ const Login = () => {
         <Link to="/Signup" className="link_style">
           <span>Sign Up</span>
         </Link>
+      </Items>
+      <Items className="bdlogo">
+        <img src={imgBottom} alt="NedBank" />
       </Items>
     </Container>
   );

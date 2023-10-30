@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import styled from "styled-components";
 
@@ -53,26 +54,29 @@ const Home = () => {
   };
 
   return (
-    <MemberListBlock>
-      <MemberList>
-        <MemberTitle>회원 정보</MemberTitle>
-        <tr>
-          <th>아이디</th>
-          <th>이름</th>
-          <th>이메일</th>
-          <th>가입일</th>
-        </tr>
-        {memberInfo &&
-          memberInfo.map((member) => (
-            <tr key={member.id} onClick={() => memberDetail(member.id)}>
-              <td>{member.id}</td>
-              <td>{member.name}</td>
-              <td>{member.email}</td>
-              <td>{member.join}</td>
-            </tr>
-          ))}
-      </MemberList>
-    </MemberListBlock>
+    <>
+      <MemberListBlock>
+        <MemberList>
+          <MemberTitle>회원 정보</MemberTitle>
+          <tr>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>가입일</th>
+          </tr>
+          {memberInfo &&
+            memberInfo.map((member) => (
+              <tr key={member.id} onClick={() => memberDetail(member.id)}>
+                <td>{member.id}</td>
+                <td>{member.name}</td>
+                <td>{member.email}</td>
+                <td>{member.join}</td>
+              </tr>
+            ))}
+        </MemberList>
+      </MemberListBlock>
+      <Link to="/News">News 페이지</Link>
+    </>
   );
 };
 export default Home;
