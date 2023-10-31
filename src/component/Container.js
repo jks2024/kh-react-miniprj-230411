@@ -7,7 +7,7 @@ const Container = styled.div`
   max-width: 900px;
   min-height: 100vh;
   margin: auto;
-  background-color: #f9aa06;
+  background-color: ${(props) => props.color || "#f9aa06"};
   .mainhead {
     display: flex;
     height: 120px;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const ButtonContainer = styled.div`
   display: flex;
@@ -22,6 +22,16 @@ export const TransBtn = styled.button`
   transition: all 0.3s ease;
   border-radius: 5px;
   box-shadow: 1px 1px 5px #888;
+
+  ${(props) =>
+    props.color &&
+    css`
+      flex: 1;
+      max-width: 200px;
+      min-width: 140px;
+      background: ${props.color};
+    `};
+
   &:hover {
     background-color: #555;
     color: #eee;
