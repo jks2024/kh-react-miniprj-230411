@@ -2,78 +2,9 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import imgLogo from "../images/tier_logo.png";
-import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
-import Button from "../component/LoginButton";
-import Input from "../component/Input";
+import { Input, Button, Container, Items } from "../component/LoginComponent";
 import imgBottom from "../images/nedbank_s.png";
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  max-width: 500px;
-  margin: auto;
-
-  .success {
-    color: royalblue;
-  }
-  .error {
-    color: red;
-  }
-`;
-
-const Items = styled.div`
-  display: flex;
-  align-items: center;
-
-  &.item1 {
-    margin-top: 100px;
-    margin-bottom: 40px;
-    justify-content: center;
-  }
-  &.item2 {
-    margin: 10px;
-  }
-  &.item3 {
-    margin-top: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
-    justify-content: space-between;
-    color: #999;
-    font-size: 14px;
-  }
-  &.hint {
-    margin-top: -5px;
-    margin-bottom: 10px;
-    margin-right: 40px;
-    justify-content: right;
-    font-size: 12px;
-    color: #999;
-  }
-
-  &.signup {
-    justify-content: right;
-    color: orange;
-    font-weight: 700;
-    margin-top: 10px;
-    margin-right: 40px;
-    font-size: 14px;
-    .link_style {
-      color: orange;
-      text-decoration-line: none;
-    }
-  }
-  &.bdlogo {
-    background-color: #fabd2e;
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    justify-content: center;
-  }
-`;
 
 const Login = () => {
   const navigate = useNavigate();

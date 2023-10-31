@@ -2,65 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import AxiosApi from "../api/AxiosApi";
-import styled from "styled-components";
-import Button from "../component/LoginButton";
-import Input from "../component/Input";
-
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  max-width: 500px;
-  margin: 0 auto;
-
-  .success {
-    color: royalblue;
-  }
-  .error {
-    color: red;
-  }
-`;
-
-const Items = styled.div`
-  display: flex;
-  align-items: center;
-
-  &.item1 {
-    margin-top: 100px;
-    margin-bottom: 40px;
-    justify-content: center;
-  }
-
-  &.item2 {
-    margin: 10px;
-  }
-
-  &.item3 {
-    margin-top: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
-    justify-content: space-between;
-    color: #999;
-    font-size: 14px;
-  }
-
-  &.hint {
-    margin-top: -5px;
-    margin-bottom: 10px;
-    margin-right: 40px;
-    justify-content: right;
-    font-size: 12px;
-    color: #999;
-  }
-  &.sign {
-    margin-top: 47px;
-    margin-left: 34px;
-    font: normal normal bold 24px/35px Poppins;
-    letter-spacing: 0px;
-    color: #313131;
-    opacity: 1;
-  }
-`;
+import { Input, Button, Container, Items } from "../component/LoginComponent";
 
 const Signup = () => {
   const navigate = useNavigate();

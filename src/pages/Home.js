@@ -14,6 +14,7 @@ const Home = () => {
         navigate("/news");
         break;
       case 3:
+        break;
       case 4:
         navigate("/setting");
         break;
