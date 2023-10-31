@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import AxiosApi from "../api/AxiosApi";
 import styled from "styled-components";
-import Button from "../component/Button";
+import Button from "../component/LoginButton";
 import Input from "../component/Input";
 
 const Container = styled.div`

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import NewsItem from "./NewsItem";
 import axios from "axios";
-import Loding from "./Loding";
+import Loading from "./Loading";
 
 const NewsListBlock = styled.div`
   box-sizing: border-box;
@@ -15,13 +15,6 @@ const NewsListBlock = styled.div`
     padding-left: 1em;
     padding-right: 1em;
   }
-`;
-
-const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 `;
 
 const NewsList = (props) => {
@@ -48,7 +41,7 @@ const NewsList = (props) => {
   }, [props.category]);
 
   if (loading) {
-    return <Loding />;
+    return <Loading />;
   }
   if (!articles) return null;
 

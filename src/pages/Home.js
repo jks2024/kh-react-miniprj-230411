@@ -1,81 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import AxiosApi from "../api/AxiosApi";
-import styled from "styled-components";
-
-const MemberListBlock = styled.div`
-  box-sizing: border-box;
-  padding-bottom: 3em;
-  width: 768px;
-  margin: 0 auto;
-  margin-top: 2rem;
-  @media screen and (max-width: 768px) {
-    witdh: 100%;
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-`;
-const MemberList = styled.table`
-  border-collapse: collapse;
-  width: 768px;
-  margin: 0 auto;
-  font-size: 1.125em;
-  @media screen and (max-width: 768px) {
-    witdh: 100%;
-  }
-  th,
-  td {
-    border: 1px solid #ccc;
-    padding: 2px;
-  }
-  th {
-    background-color: bisque;
-  }
-`;
-const MemberTitle = styled.table`
-  font-size: 2em;
-  text-align: center;
-`;
+import { useNavigate } from "react-router-dom";
+import imgBottom from "../images/nedbank_s.png";
+import { ButtonContainer, TransBtn } from "../component/ButtonContainer";
 
 const Home = () => {
-  const [memberInfo, setMemberInfo] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const memberInfo = async () => {
-      const rsp = await AxiosApi.memberGet("ALL"); // 전체회원 조회
-      setMemberInfo(rsp.data);
-      console.log(rsp.data);
-    };
-    memberInfo();
-  }, []);
-
-  const memberDetail = (id) => {
-    console.log(id);
+  const onClickBtn = (num) => {
+    switch (num) {
+      case 1:
+        navigate("/members");
+        break;
+      case 2:
+        navigate("/news");
+        break;
+      case 3:
+      case 4:
+        navigate("/setting");
+        break;
+      default:
+    }
   };
 
   return (
     <>
-      <MemberListBlock>
-        <MemberList>
-          <MemberTitle>회원 정보</MemberTitle>
-          <tr>
-            <th>아이디</th>
-            <th>이름</th>
-            <th>이메일</th>
-            <th>가입일</th>
-          </tr>
-          {memberInfo &&
-            memberInfo.map((member) => (
-              <tr key={member.id} onClick={() => memberDetail(member.id)}>
-                <td>{member.id}</td>
-                <td>{member.name}</td>
-                <td>{member.email}</td>
-                <td>{member.join}</td>
-              </tr>
-            ))}
-        </MemberList>
-      </MemberListBlock>
-      <Link to="/News">News 페이지</Link>
+      <div>
+        <ButtonContainer>
+          <TransBtn onClick={() => onClickBtn(1)}>회원리스트</TransBtn>
+          <TransBtn onClick={() => onClickBtn(2)}>뉴스 보기</TransBtn>
+          <TransBtn onClick={() => onClickBtn(3)}>프로필 수정</TransBtn>
+          <TransBtn onClick={() => onClickBtn(4)}>테마 변경</TransBtn>
+        </ButtonContainer>
+        <div className="bdlogo">
+          <img src={imgBottom} alt="NedBank" />
+        </div>
+      </div>
     </>
   );
 };

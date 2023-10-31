@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-const Button = styled.button`
+const LoginButton = styled.button`
   margin-top: 100px;
   margin-left: 30px;
   margin-right: 30px;
@@ -29,4 +29,4 @@ const Button = styled.button`
   }
 `;
 
-export default Button;
+export default LoginButton;

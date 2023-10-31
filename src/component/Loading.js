@@ -9,7 +9,7 @@ const LoadingContainer = styled.div`
   height: 100vh;
 `;
 
-const Loding = () => {
+const Loading = () => {
   return (
     <LoadingContainer>
       <FontAwesomeIcon icon={faSpinner} spin size="3x" />
@@ -17,4 +17,4 @@ const Loding = () => {
   );
 };
 
-export default Loding;
+export default Loading;

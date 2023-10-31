@@ -4,7 +4,7 @@ import Modal from "../utils/Modal";
 import imgLogo from "../images/tier_logo.png";
 import styled from "styled-components";
 import AxiosApi from "../api/AxiosApi";
-import Button from "../component/Button";
+import Button from "../component/LoginButton";
 import Input from "../component/Input";
 import imgBottom from "../images/nedbank_s.png";
 
