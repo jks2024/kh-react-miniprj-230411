@@ -55,7 +55,6 @@ const Members = () => {
 
   const onClickMember = (id) => {
     console.log("onCLick member : " + id);
-    //window.localStorage.setItem("selId", id);
     navigate(`/memberInfo/${id}`);
   };
 
