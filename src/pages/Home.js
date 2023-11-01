@@ -14,6 +14,7 @@ const Home = () => {
         navigate("/news");
         break;
       case 3:
+        navigate("/profile/frontend");
         break;
       case 4:
         navigate("/setting");
@@ -28,7 +29,7 @@ const Home = () => {
         <ButtonContainer>
           <TransBtn onClick={() => onClickBtn(1)}>회원리스트</TransBtn>
           <TransBtn onClick={() => onClickBtn(2)}>뉴스 보기</TransBtn>
-          <TransBtn onClick={() => onClickBtn(3)}>프로필 수정</TransBtn>
+          <TransBtn onClick={() => onClickBtn(3)}>사진 업로드</TransBtn>
           <TransBtn onClick={() => onClickBtn(4)}>테마 변경</TransBtn>
         </ButtonContainer>
         <div className="bdlogo">
