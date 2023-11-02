@@ -41,5 +41,14 @@ const AxiosApi = {
   boardList: async () => {
     return await axios.get(KH_DOMAIN + "/api/board");
   },
+  // 게시글 쓰기
+  boardWrite: async (title, content, userId) => {
+    const board = {
+      title: title,
+      content: content,
+      user_id: userId,
+    };
+    return await axios.post(KH_DOMAIN + "/api/board/new", board);
+  },
 };
 export default AxiosApi;

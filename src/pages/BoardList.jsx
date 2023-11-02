@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AxiosApi from "../api/AxiosApi";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const BoardContainer = styled.div`
   padding: 30px;
@@ -67,6 +68,7 @@ const WriteButton = styled.button`
 
 function BoardList() {
   const [boardList, setBoardList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const boardList = async () => {
@@ -86,6 +88,7 @@ function BoardList() {
   // 글쓰기 버튼 클릭 시
   const handleWriteClick = () => {
     console.log("onClickWrite");
+    navigate("/boardWrite");
   };
 
   return (

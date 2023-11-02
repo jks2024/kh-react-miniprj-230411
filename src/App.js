@@ -9,6 +9,7 @@ import Setting from "./pages/Setting";
 import Profile from "./pages/Profile";
 import Layout from "./component/Layout";
 import BoardList from "./pages/BoardList";
+import WriteForm from "./component/WriteForm";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserStore from "./context/UserStore";
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/MemberInfo/:id" element={<MemberInfo />} />
             <Route path="/Setting" element={<Setting />} />
             <Route path="/Boards" element={<BoardList />} />
+            <Route path="/boardWrite" element={<WriteForm />} />
           </Route>
         </Routes>
       </Router>
