@@ -19,6 +19,9 @@ const Home = () => {
       case 4:
         navigate("/setting");
         break;
+      case 5:
+        navigate("/boards");
+        break;
       default:
     }
   };
@@ -31,6 +34,7 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(2)}>뉴스 보기</TransBtn>
           <TransBtn onClick={() => onClickBtn(3)}>사진 업로드</TransBtn>
           <TransBtn onClick={() => onClickBtn(4)}>테마 변경</TransBtn>
+          <TransBtn onClick={() => onClickBtn(5)}>게시판</TransBtn>
         </ButtonContainer>
         <div className="bdlogo">
           <img src={imgBottom} alt="NedBank" />

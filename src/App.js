@@ -8,6 +8,7 @@ import MemberInfo from "./pages/MemberInfo";
 import Setting from "./pages/Setting";
 import Profile from "./pages/Profile";
 import Layout from "./component/Layout";
+import BoardList from "./pages/BoardList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserStore from "./context/UserStore";
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/Profile/:username" element={<Profile />} />
             <Route path="/MemberInfo/:id" element={<MemberInfo />} />
             <Route path="/Setting" element={<Setting />} />
+            <Route path="/Boards" element={<BoardList />} />
           </Route>
         </Routes>
       </Router>

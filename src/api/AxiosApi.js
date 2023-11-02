@@ -37,5 +37,9 @@ const AxiosApi = {
     };
     return await axios.post(KH_DOMAIN + "/user/delete", del);
   },
+  // 게시글 조회
+  boardList: async () => {
+    return await axios.get(KH_DOMAIN + "/api/board");
+  },
 };
 export default AxiosApi;
