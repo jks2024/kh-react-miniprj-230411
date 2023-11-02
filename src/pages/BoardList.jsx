@@ -19,19 +19,20 @@ const BoardUl = styled.ul`
 const BoardLi = styled.li`
   background-color: #f2f2f2;
   margin: 10px 0;
-  padding: 10px;
+  padding: 10px 14px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
 const BoardTitle = styled.h2`
+  font-size: 1.4em;
   color: #007bff;
   margin: 0 0 10px;
 `;
 
 const BoardContent = styled.p`
-  color: #666;
-  font-size: 14px;
+  color: #444;
+  font-size: 1em;
 `;
 
 const BoardHeader = styled.div`
@@ -41,14 +42,16 @@ const BoardHeader = styled.div`
 `;
 
 const UserId = styled.span`
-  color: #888;
-  font-size: 12px;
+  color: #555;
+  font-style: italic;
+  font-size: 13px;
 `;
 
 const WriteButton = styled.button`
   width: 160px;
   margin-top: 20px;
   padding: 10px 15px;
+  font-weight: bold;
   background-color: #4caf50;
   color: white;
   border: 1px solid #ddd;
