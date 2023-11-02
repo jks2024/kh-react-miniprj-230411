@@ -1,8 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 export const UserContext = createContext(null);
 
 const UserStore = (props) => {
-  const [color, setColor] = useState("orange");
+  const [color, setColor] = useState(
+    localStorage.getItem("bgcolor") || "orange"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("bgcolor", color);
+  }, [color]);
 
   return (
     <UserContext.Provider
