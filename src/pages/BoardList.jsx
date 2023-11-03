@@ -18,12 +18,10 @@ const BoardUl = styled.ul`
 `;
 
 const BoardImage = styled.img`
-  width: 120px; // 원하는 이미지 크기로 조정하세요
+  width: 120px;
   height: 120px;
-  background-color: darkgray;
   border-radius: 8px;
   margin-right: 15px; // 이미지와 텍스트 사이의 간격을 조정하세요
-  float: left; // 왼쪽 정렬을 위해 float 속성을 사용합니다
 `;
 
 const BoardLi = styled.li`
@@ -34,7 +32,6 @@ const BoardLi = styled.li`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex; // 내부 요소들을 flex로 배치합니다.
   align-items: center; // 세로 중앙 정렬
-  overflow: hidden; // float 때문에 생길 수 있는 레이아웃 이슈를 방지합니다.
 `;
 
 const BoardTitle = styled.h2`

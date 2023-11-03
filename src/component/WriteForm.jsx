@@ -30,12 +30,6 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-`;
-
 const StyledInput = styled.input`
   width: 90%; // 너비를 100%로 설정하여 컨테이너의 너비에 맞춤
   padding: 10px;
