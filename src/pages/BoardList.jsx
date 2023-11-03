@@ -36,6 +36,12 @@ const BoardContent = styled.p`
   font-size: 1em;
 `;
 
+const BoardDate = styled.p`
+  color: #777;
+  font-size: 0.8em;
+  text-align: right;
+`;
+
 const BoardHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -87,7 +93,6 @@ function BoardList() {
 
   // 글쓰기 버튼 클릭 시
   const handleWriteClick = () => {
-    console.log("onClickWrite");
     navigate("/boardWrite");
   };
 
@@ -103,6 +108,7 @@ function BoardList() {
                 <UserId>{board.userId}</UserId>
               </BoardHeader>
               <BoardContent>{board.content}</BoardContent>
+              <BoardDate>{board.regDate}</BoardDate>
             </BoardLi>
           ))}
       </BoardUl>

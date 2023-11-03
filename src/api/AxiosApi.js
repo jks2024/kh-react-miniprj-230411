@@ -46,7 +46,7 @@ const AxiosApi = {
     const board = {
       title: title,
       content: content,
-      user_id: userId,
+      userId: userId,
     };
     return await axios.post(KH_DOMAIN + "/api/board/new", board);
   },

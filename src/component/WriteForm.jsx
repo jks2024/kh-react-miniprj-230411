@@ -67,21 +67,18 @@ const SubmitButton = styled.button`
   }
 `;
 
-const Label = styled.label`
-  margin-bottom: 5px;
-  color: #666;
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center; // 버튼을 중앙에 위치시킴
   margin-top: 20px; // 버튼 상단에 여백 추가
+  gap: 10px; // 버튼 사이에 여백 추가
 `;
 
 const WriteForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const userId = window.localStorage.getItem("userId");
+  console.log("userId : " + userId);
   const navigate = useNavigate();
 
   const handleTitleChange = (e) => {
@@ -106,6 +103,11 @@ const WriteForm = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+  const handleReset = () => {
+    setTitle("");
+    setContent("");
+    navigate("/Boards");
   };
 
   return (
@@ -133,6 +135,9 @@ const WriteForm = () => {
         </FieldContainer>
         <ButtonContainer>
           <SubmitButton type="submit">글쓰기</SubmitButton>
+          <SubmitButton type="reset" onClick={handleReset}>
+            취소
+          </SubmitButton>
         </ButtonContainer>
       </StyledForm>
     </FormContainer>
