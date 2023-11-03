@@ -42,11 +42,12 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + "/api/board");
   },
   // 게시글 쓰기
-  boardWrite: async (title, content, userId) => {
+  boardWrite: async (title, content, userId, img) => {
     const board = {
       title: title,
       content: content,
       userId: userId,
+      img: img,
     };
     return await axios.post(KH_DOMAIN + "/api/board/new", board);
   },

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import styled from "styled-components";
+import { storage } from "../api/firebase";
 
 const FormContainer = styled.div`
   padding: 20px;
@@ -74,9 +75,38 @@ const ButtonContainer = styled.div`
   gap: 10px; // 버튼 사이에 여백 추가
 `;
 
+const UserImage = styled.img`
+  width: 120px;
+  height: 120px;
+  border-radius: 5px;
+  margin-top: 20px;
+`;
+
+const UploadButton = styled.button`
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+
+const FileUploadContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
 const WriteForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [file, setFile] = useState(null);
+  const [url, setUrl] = useState("");
   const userId = window.localStorage.getItem("userId");
   console.log("userId : " + userId);
   const navigate = useNavigate();
@@ -88,12 +118,10 @@ const WriteForm = () => {
     setContent(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(title, content);
+  const handleSubmit = async () => {
+    console.log(title, content, userId, url);
     try {
-      const rsp = await AxiosApi.boardWrite(title, content, userId);
-      console.log("게시글 등록 결과 : " + rsp.data);
+      const rsp = await AxiosApi.boardWrite(title, content, userId, url);
       if (rsp.data === true) {
         alert("글쓰기 성공");
         navigate("/Boards");
@@ -110,36 +138,53 @@ const WriteForm = () => {
     navigate("/Boards");
   };
 
+  const handleFileInputChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleUploadClick = () => {
+    const storageRef = storage.ref();
+    const fileRef = storageRef.child(file.name);
+    fileRef.put(file).then(() => {
+      console.log("File uploaded successfully!");
+      fileRef.getDownloadURL().then((url) => {
+        console.log("저장경로 확인 : " + url);
+        setUrl(url);
+      });
+    });
+  };
+
   return (
     <FormContainer>
       <Title>글쓰기</Title>
-      <StyledForm onSubmit={handleSubmit}>
-        <FieldContainer>
-          <StyledLabel htmlFor="title">제목</StyledLabel>
-          <StyledInput
-            type="text"
-            id="title"
-            name="title"
-            value={title}
-            onChange={handleTitleChange}
-          />
-        </FieldContainer>
-        <FieldContainer>
-          <StyledLabel htmlFor="content">내용</StyledLabel>
-          <StyledTextarea
-            id="content"
-            name="content"
-            value={content}
-            onChange={handleContentChange}
-          />
-        </FieldContainer>
-        <ButtonContainer>
-          <SubmitButton type="submit">글쓰기</SubmitButton>
-          <SubmitButton type="reset" onClick={handleReset}>
-            취소
-          </SubmitButton>
-        </ButtonContainer>
-      </StyledForm>
+      <FieldContainer>
+        <StyledLabel htmlFor="title">제목</StyledLabel>
+        <StyledInput
+          type="text"
+          id="title"
+          name="title"
+          value={title}
+          onChange={handleTitleChange}
+        />
+      </FieldContainer>
+      <FieldContainer>
+        <StyledLabel htmlFor="content">내용</StyledLabel>
+        <StyledTextarea
+          id="content"
+          name="content"
+          value={content}
+          onChange={handleContentChange}
+        />
+      </FieldContainer>
+      <FileUploadContainer>
+        <StyledInput type="file" onChange={handleFileInputChange} />
+        <UploadButton onClick={handleUploadClick}>Upload</UploadButton>
+      </FileUploadContainer>
+      {url && <UserImage src={url} alt="uploaded" />}
+      <ButtonContainer>
+        <SubmitButton onClick={handleSubmit}>글쓰기</SubmitButton>
+        <SubmitButton onClick={handleReset}>취소</SubmitButton>
+      </ButtonContainer>
     </FormContainer>
   );
 };
