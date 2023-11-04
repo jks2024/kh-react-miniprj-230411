@@ -12,7 +12,7 @@ const AxiosApi = {
   },
   //회원 조회
   memberGet: async (id) => {
-    return await axios.get(KH_DOMAIN + `/users/member/?name=${id}`);
+    return await axios.get(KH_DOMAIN + `/users/member/?id=${id}`);
   },
 
   // 회원 가입
@@ -50,6 +50,27 @@ const AxiosApi = {
       img: img,
     };
     return await axios.post(KH_DOMAIN + "/api/board/new", board);
+  },
+  // Todo 조회
+  todoList: async (userId) => {
+    return await axios.get(KH_DOMAIN + `/api/todo/list?userId=${userId}`);
+  },
+  // Todo 쓰기
+  todoInsert: async (userId, content) => {
+    const todo = {
+      userId: userId,
+      text: content,
+      checked: false,
+    };
+    return await axios.post(KH_DOMAIN + "/api/todo/new", todo);
+  },
+  // Todo 삭제
+  todoDelete: async (todoId) => {
+    return await axios.delete(KH_DOMAIN + `/api/todo/${todoId}`);
+  },
+  // Todo 수정
+  todoUpdate: async (todoId) => {
+    return await axios.put(KH_DOMAIN + `/api/todo/${todoId}`);
   },
 };
 export default AxiosApi;

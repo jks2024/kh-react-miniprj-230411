@@ -21,7 +21,13 @@ const Setting = () => {
         <TransBtn color="green" onClick={() => themeColorChange("green")}>
           그린
         </TransBtn>
-        <TransBtn color="darkgrey" onClick={() => themeColorChange("darkgrey")}>
+        <TransBtn
+          color="lightgrey"
+          onClick={() => themeColorChange("lightgrey")}
+        >
+          밝은 회색
+        </TransBtn>
+        <TransBtn color="grey" onClick={() => themeColorChange("grey")}>
           어두운 회색
         </TransBtn>
         <TransBtn
