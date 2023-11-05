@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
-import NewsList from "../component/NewsList";
-import Categories from "../component/Categories";
+import NewsList from "../component/news/NewsList";
+import Categories from "../component/news/Categories";
 
 const News = () => {
   const [category, setCategory] = useState("all");

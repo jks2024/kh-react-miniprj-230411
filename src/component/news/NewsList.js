@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import NewsItem from "./NewsItem";
 import axios from "axios";
-import Loading from "./Loading";
+import Loading from "../../utils/Loading";
 
 const NewsListBlock = styled.div`
   box-sizing: border-box;

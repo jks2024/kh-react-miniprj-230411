@@ -3,7 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import imgLogo from "../images/tier_logo.png";
 import AxiosApi from "../api/AxiosApi";
-import { Input, Button, Container, Items } from "../component/LoginComponent";
+import {
+  Input,
+  Button,
+  Container,
+  Items,
+} from "../component/signup/LoginComponent";
 import imgBottom from "../images/nedbank_s.png";
 
 const Login = () => {

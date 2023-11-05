@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import AxiosApi from "../api/AxiosApi";
-import { Input, Button, Container, Items } from "../component/LoginComponent";
+import {
+  Input,
+  Button,
+  Container,
+  Items,
+} from "../component/signup/LoginComponent";
 
 const Signup = () => {
   const navigate = useNavigate();

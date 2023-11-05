@@ -1,4 +1,4 @@
-import { ButtonContainer, TransBtn } from "../component/ButtonContainer";
+import { ButtonContainer, TransBtn } from "../component/menu/ButtonContainer";
 import { useContext } from "react";
 import { UserContext } from "../context/UserStore";
 

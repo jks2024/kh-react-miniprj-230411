@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import imgBottom from "../images/nedbank_s.png";
-import { ButtonContainer, TransBtn } from "../component/ButtonContainer";
+import { ButtonContainer, TransBtn } from "../component/menu/ButtonContainer";
 
 const Home = () => {
   const navigate = useNavigate();
