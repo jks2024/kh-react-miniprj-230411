@@ -11,6 +11,7 @@ import Layout from "./component/layout/Layout";
 import BoardList from "./pages/BoardList";
 import WriteForm from "./component/board/WriteForm";
 import ToDos from "./pages/ToDos";
+import Movies from "./pages/Movies";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserStore from "./context/UserStore";
 
@@ -31,6 +32,7 @@ function App() {
             <Route path="/Boards" element={<BoardList />} />
             <Route path="/boardWrite" element={<WriteForm />} />
             <Route path="/Todos" element={<ToDos />} />
+            <Route path="/Movies" element={<Movies />} />
           </Route>
         </Routes>
       </Router>

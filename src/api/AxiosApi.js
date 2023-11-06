@@ -72,5 +72,9 @@ const AxiosApi = {
   todoUpdate: async (todoId) => {
     return await axios.put(KH_DOMAIN + `/api/todo/${todoId}`);
   },
+  // 영화 목록 조회
+  movieList: async () => {
+    return await axios.get(KH_DOMAIN + "/api/movie/list");
+  },
 };
 export default AxiosApi;
