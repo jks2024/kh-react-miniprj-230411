@@ -28,6 +28,9 @@ const Home = () => {
       case 7:
         navigate("/movies");
         break;
+      case 8:
+        navigate("/Calendar");
+        break;
       default:
     }
   };
@@ -43,6 +46,7 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(5)}>게시판</TransBtn>
           <TransBtn onClick={() => onClickBtn(6)}>일정 관리</TransBtn>
           <TransBtn onClick={() => onClickBtn(7)}>영화 목록</TransBtn>
+          <TransBtn onClick={() => onClickBtn(8)}>캘린더</TransBtn>
         </ButtonContainer>
         <div className="bdlogo">
           <img src={imgBottom} alt="NedBank" />
