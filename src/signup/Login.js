@@ -26,6 +26,9 @@ const Login = () => {
   const [isId, setIsId] = useState("");
   const [isPw, setIsPw] = useState("");
 
+  // 모달 내용 변경
+  const [modalContent, setModalContent] = useState("");
+
   //팝업 처리
   const [modalOpen, setModalOpen] = useState(false);
   const closeModal = () => {
@@ -68,6 +71,7 @@ const Login = () => {
       navigate("/home");
     } else {
       setModalOpen(true);
+      setModalContent("아이디 및 패스워드를 재확인해 주세요.^^");
     }
   };
 
@@ -104,7 +108,7 @@ const Login = () => {
         )}
       </Items>
       <Modal open={modalOpen} close={closeModal} header="오류">
-        아이디 및 패스워드를 재확인해 주세요.
+        {modalContent}
       </Modal>
       <Items className="signup">
         <Link to="/Signup" className="link_style">
