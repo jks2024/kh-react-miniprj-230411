@@ -38,8 +38,6 @@ function App() {
       </Router>
     </UserStore>
   );
-
-  // 테스트
 }
 
 export default App;
