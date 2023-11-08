@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 export const ButtonContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 10px 40px;
+  margin: 40px 40px;
 `;
 
 export const TransBtn = styled.button`

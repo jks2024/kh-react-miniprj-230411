@@ -38,7 +38,6 @@ const FruitRadioBtn = () => {
           id="apple"
           value="apple"
           onChange={handleChange}
-          checked={selectedValue === "apple"}
         />
         사과
       </RadioButtonLabel>
@@ -50,7 +49,6 @@ const FruitRadioBtn = () => {
           id="orange"
           value="orange"
           onChange={handleChange}
-          checked={selectedValue === "orange"}
         />
         오렌지
       </RadioButtonLabel>
@@ -65,7 +63,6 @@ const FruitRadioBtn = () => {
           id="strawberry"
           value="strawberry"
           onChange={handleChange}
-          checked={selectedValue === "strawberry"}
         />
         딸기
       </RadioButtonLabel>

@@ -10,16 +10,16 @@ const Container = styled.div`
   background-color: ${(props) => props.color || "#f9aa06"};
   .mainhead {
     display: flex;
-    height: 120px;
+    height: 44px;
     justify-content: space-between;
 
     .logo2 {
-      margin-top: 24px;
-      margin-left: 30px;
+      margin-top: 20px;
+      margin-left: 34px;
     }
     .bell {
-      margin-top: 30px;
-      margin-right: 30px;
+      margin-top: 20px;
+      margin-right: 34px;
     }
   }
   .bdlogo {
