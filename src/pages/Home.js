@@ -31,6 +31,9 @@ const Home = () => {
       case 8:
         navigate("/Calendar");
         break;
+      case 9:
+        navigate("/FruitRadioBtn");
+        break;
       default:
     }
   };
@@ -47,6 +50,7 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(6)}>일정 관리</TransBtn>
           <TransBtn onClick={() => onClickBtn(7)}>영화 목록</TransBtn>
           <TransBtn onClick={() => onClickBtn(8)}>캘린더</TransBtn>
+          <TransBtn onClick={() => onClickBtn(9)}>라디오 버튼</TransBtn>
         </ButtonContainer>
         <div className="bdlogo">
           <img src={imgBottom} alt="NedBank" />

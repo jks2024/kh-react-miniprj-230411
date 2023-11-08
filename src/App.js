@@ -14,6 +14,7 @@ import ToDos from "./pages/ToDos";
 import Movies from "./pages/Movies";
 import MyCalendar from "./pages/Calendar";
 import BoardDetail from "./pages/BoardDetail";
+import FruitRadioBtn from "./pages/RadiBtn";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserStore from "./context/UserStore";
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/Todos" element={<ToDos />} />
             <Route path="/Movies" element={<Movies />} />
             <Route path="/Calendar" element={<MyCalendar />} />
+            <Route path="/FruitRadioBtn" element={<FruitRadioBtn />} />
           </Route>
         </Routes>
       </Router>
