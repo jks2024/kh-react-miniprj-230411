@@ -67,16 +67,25 @@ const Profile = () => {
     setFile(e.target.files[0]);
   };
 
-  const handleUploadClick = () => {
-    const storageRef = storage.ref();
-    const fileRef = storageRef.child(file.name);
-    fileRef.put(file).then(() => {
+  const handleUploadClick = async () => {
+    try {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(file.name);
+
+      // 파일을 업로드하고 기다립니다.
+      await fileRef.put(file);
       console.log("File uploaded successfully!");
-      fileRef.getDownloadURL().then((url) => {
-        console.log("저장경로 확인 : " + url);
-        setUrl(url);
-      });
-    });
+
+      // 다운로드 URL을 가져오고 기다립니다.
+      const url = await fileRef.getDownloadURL();
+      console.log("저장경로 확인 : " + url);
+
+      // 상태를 업데이트합니다.
+      setUrl(url);
+    } catch (error) {
+      // 에러를 처리합니다.
+      console.error("Upload failed", error);
+    }
   };
 
   return (

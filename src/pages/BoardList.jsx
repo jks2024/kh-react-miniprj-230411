@@ -110,6 +110,10 @@ function BoardList() {
   const handleWriteClick = () => {
     navigate("/boardWrite");
   };
+  // 글 상세보기 버튼 클릭 시
+  const handleDetailClick = (id) => {
+    navigate(`/boardDetail/${id}`);
+  };
 
   return (
     <BoardContainer>
@@ -117,7 +121,10 @@ function BoardList() {
       <BoardUl>
         {boardList &&
           boardList.map((board) => (
-            <BoardLi key={board.id}>
+            <BoardLi
+              key={board.boardId}
+              onClick={() => handleDetailClick(board.boardId)}
+            >
               <BoardImage
                 src={board.img ? board.img : "http://via.placeholder.com/160"}
                 alt="Board image"
