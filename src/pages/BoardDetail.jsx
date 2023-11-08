@@ -94,7 +94,7 @@ const BoardDate = styled.p`
   text-align: right;
 `;
 
-function BoardDetail({ match }) {
+function BoardDetail() {
   const { id } = useParams();
   const [board, setBoard] = useState("");
   const [comments, setComments] = useState("");
@@ -114,7 +114,7 @@ function BoardDetail({ match }) {
       }
     };
     getBoardDetail();
-  }, [comAddFlag]);
+  }, [comAddFlag, id]);
 
   const handleCommentChange = (e) => {
     setInputComment(e.target.value);
@@ -154,7 +154,6 @@ function BoardDetail({ match }) {
         <SubmitButton type="submit">댓글 추가</SubmitButton>
       </CommentForm>
       <CommentList>
-        ₩
         {comments &&
           comments.map((comment) => (
             <CommentItem key={comment.commentId}>
