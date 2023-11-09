@@ -4,6 +4,10 @@ import { UserContext } from "../../context/UserStore";
 import { useContext, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSettings } from "react-icons/fi";
+import { LuListTodo } from "react-icons/lu";
+import { FaHome, FaClipboardList, FaRegNewspaper } from "react-icons/fa";
+import { BiCameraMovie } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -27,8 +31,15 @@ const StyledMenuList = styled.ul`
   padding: 0;
 `;
 const StyledMenuItem = styled.li`
-  padding: 10px;
+  padding: 10px 20px;
   border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  display: flex; // 메뉴 항목을 플렉스 아이템으로 만듭니다.
+  align-items: center; // 아이콘과 텍스트를 세로 중앙에 배치합니다.
+`;
+const MenuIcon = styled.span`
+  margin-right: 10px; // 아이콘과 텍스트 사이에 여백을 추가합니다.
+  margin-top: 2px;
 `;
 
 const StyledLink = styled(Link)`
@@ -71,21 +82,39 @@ const Layout = () => {
         >
           <StyledMenuList>
             <StyledMenuItem>
+              <MenuIcon>
+                <FaHome />
+              </MenuIcon>
               <StyledLink to="/home">Home</StyledLink>
             </StyledMenuItem>
             <StyledMenuItem>
+              <MenuIcon>
+                <FaClipboardList />
+              </MenuIcon>
               <StyledLink to="/Boards">Boards</StyledLink>
             </StyledMenuItem>
             <StyledMenuItem>
+              <MenuIcon>
+                <FaRegNewspaper />
+              </MenuIcon>
               <StyledLink to="/News">News</StyledLink>
             </StyledMenuItem>
             <StyledMenuItem>
+              <MenuIcon>
+                <CgProfile />
+              </MenuIcon>
               <StyledLink to="/Members">Members</StyledLink>
             </StyledMenuItem>
             <StyledMenuItem>
+              <MenuIcon>
+                <BiCameraMovie />
+              </MenuIcon>
               <StyledLink to="/Movies">Movies</StyledLink>
             </StyledMenuItem>
             <StyledMenuItem>
+              <MenuIcon>
+                <LuListTodo />
+              </MenuIcon>
               <StyledLink to="/ToDos">ToDos</StyledLink>
             </StyledMenuItem>
           </StyledMenuList>
