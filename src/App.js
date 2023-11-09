@@ -7,7 +7,7 @@ import Members from "./pages/Members";
 import MemberInfo from "./pages/MemberInfo";
 import Setting from "./pages/Setting";
 import Profile from "./pages/Profile";
-import Layout from "./component/layout/Layout";
+import Layout from "./pages/Layout";
 import BoardList from "./pages/BoardList";
 import WriteForm from "./component/board/WriteForm";
 import ToDos from "./pages/ToDos";

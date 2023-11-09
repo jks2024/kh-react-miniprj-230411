@@ -6,10 +6,10 @@ import styled from "styled-components";
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
   background: #eee;
+  gap: 8px;
   justify-content: start;
-  margin: 20px 0;
+  margin: 20px;
 `;
 
 function Movies() {
