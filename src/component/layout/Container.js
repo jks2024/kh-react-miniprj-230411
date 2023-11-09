@@ -5,8 +5,8 @@ const Container = styled.div`
   position: relative;
   flex-wrap: wrap;
   flex-direction: column;
-  max-width: 900px;
   min-height: 100vh;
+  width: 100%;
   margin: auto;
   background-color: ${(props) => props.color || "#f9aa06"};
   .mainhead {
