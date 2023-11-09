@@ -34,6 +34,9 @@ const Home = () => {
       case 9:
         navigate("/FruitRadioBtn");
         break;
+      case 10:
+        navigate("/PositionMove");
+        break;
       default:
     }
   };
@@ -51,6 +54,7 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(7)}>영화 목록</TransBtn>
           <TransBtn onClick={() => onClickBtn(8)}>캘린더</TransBtn>
           <TransBtn onClick={() => onClickBtn(9)}>라디오 버튼</TransBtn>
+          <TransBtn onClick={() => onClickBtn(10)}>포지션 이동</TransBtn>
         </ButtonContainer>
         <div className="bdlogo">
           <img src={imgBottom} alt="NedBank" />
