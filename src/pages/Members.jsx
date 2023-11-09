@@ -6,7 +6,7 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin: 10px 40px;
+  margin: 20px;
 `;
 
 const MemberInfoWrapper = styled.div`

@@ -38,6 +38,9 @@ const StyledLink = styled(Link)`
     color: #3498db; // 호버 상태일 때 색상 변경
   }
 `;
+const Dummy = styled.div`
+  height: 54px;
+`;
 
 const Layout = () => {
   const context = useContext(UserContext);
@@ -81,10 +84,14 @@ const Layout = () => {
             <StyledMenuItem>
               <StyledLink to="/ToDos">ToDos</StyledLink>
             </StyledMenuItem>
+            <StyledMenuItem>
+              <StyledLink to="/Setting">Setting</StyledLink>
+            </StyledMenuItem>
           </StyledMenuList>
         </StyledSideMenu>
       </header>
       <main>
+        <Dummy />
         <Outlet />
       </main>
     </Container>

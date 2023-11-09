@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const BoardContainer = styled.div`
-  padding: 30px;
+  padding: 20px;
   position: relative;
 `;
 
@@ -72,7 +72,8 @@ const UserId = styled.span`
 
 const WriteButton = styled.button`
   position: fixed; // 버튼을 부모 컨테이너에 대해 절대적 위치로 설정
-  bottom: 20px;
+  bottom: 24px;
+  right: 24px;
   z-index: 10;
 
   width: 60px; // 버튼의 크기를 정사각형으로 설정
@@ -87,6 +88,8 @@ const WriteButton = styled.button`
   color: white;
   font-size: 30px; // 플러스 기호 크기
   line-height: 1; // 기본 라인 높이 제거
+  // 그림자 효과
+  box-shadow: 1px 4px 8px rgba(0, 0, 0, 0.4);
 
   border: none; // 기본 테두리 제거
   cursor: pointer;

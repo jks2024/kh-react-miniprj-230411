@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
+  position: relative;
   flex-wrap: wrap;
   flex-direction: column;
   max-width: 900px;
@@ -10,15 +11,21 @@ const Container = styled.div`
   background-color: ${(props) => props.color || "#f9aa06"};
   .mainhead {
     display: flex;
-    height: 44px;
     justify-content: space-between;
+    position: fixed;
+    height: 54px;
+    width: 100%;
+    background-color: ${(props) => props.color || "#f9aa06"};
+    z-index: 100;
+    top: 0;
+    left: 0;
 
     .logo2 {
-      margin-top: 20px;
+      margin-top: 12px;
       margin-left: 34px;
     }
     .bell {
-      margin-top: 20px;
+      margin-top: 12px;
       margin-right: 34px;
     }
   }

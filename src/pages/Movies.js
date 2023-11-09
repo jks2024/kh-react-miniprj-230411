@@ -9,7 +9,7 @@ const CardContainer = styled.div`
   gap: 4px;
   background: #eee;
   justify-content: start;
-  margin: 50px 0;
+  margin: 20px 0;
 `;
 
 function Movies() {
