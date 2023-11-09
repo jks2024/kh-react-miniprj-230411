@@ -6,6 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FiSettings } from "react-icons/fi";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const StyledSideMenu = styled.div`
   position: fixed;
@@ -46,11 +47,14 @@ const Layout = () => {
   const context = useContext(UserContext);
   const { color } = context;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const onClickLeft = () => {
     setIsMenuOpen(true);
   };
-  const onClickRight = () => {};
+  const onClickRight = () => {
+    navigate("/setting");
+  };
 
   return (
     <Container color={color}>
@@ -83,9 +87,6 @@ const Layout = () => {
             </StyledMenuItem>
             <StyledMenuItem>
               <StyledLink to="/ToDos">ToDos</StyledLink>
-            </StyledMenuItem>
-            <StyledMenuItem>
-              <StyledLink to="/Setting">Setting</StyledLink>
             </StyledMenuItem>
           </StyledMenuList>
         </StyledSideMenu>

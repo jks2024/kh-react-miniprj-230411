@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const BoardContainer = styled.div`
-  padding: 20px;
+  padding: 0 30px;
   position: relative;
 `;
 
