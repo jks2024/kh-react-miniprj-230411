@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const BoardContainer = styled.div`
   padding: 0 30px;
   position: relative;
+  margin-bottom: 40px;
 `;
 
 const Title = styled.h1`

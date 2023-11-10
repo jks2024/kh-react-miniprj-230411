@@ -7,6 +7,7 @@ export const ButtonContainer = styled.div`
   align-items: start;
   flex-wrap: wrap;
   margin: 20px;
+  color: orangered;
 `;
 
 export const TransBtn = styled.button`

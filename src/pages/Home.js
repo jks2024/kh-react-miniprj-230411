@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import imgBottom from "../images/nedbank_s.png";
 import { ButtonContainer, TransBtn } from "../component/menu/ButtonContainer";
 
 const Home = () => {
@@ -56,9 +55,6 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(9)}>라디오 버튼</TransBtn>
           <TransBtn onClick={() => onClickBtn(10)}>포지션 이동</TransBtn>
         </ButtonContainer>
-        <div className="bdlogo">
-          <img src={imgBottom} alt="NedBank" />
-        </div>
       </div>
     </>
   );

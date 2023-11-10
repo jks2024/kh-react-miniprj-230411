@@ -40,7 +40,10 @@ const Layout = () => {
         <div className="bell">
           <FiSettings size={32} color="white" onClick={onClickRight} />
         </div>
-        <StyledSideMenu isOpen={isMenuOpen}>
+        <StyledSideMenu
+          isOpen={isMenuOpen}
+          onClick={() => setIsMenuOpen(false)}
+        >
           <StyledMenuList>
             <StyledMenuItem>
               <MenuIcon>
@@ -85,6 +88,11 @@ const Layout = () => {
         <Dummy />
         <Outlet />
       </main>
+      <footer>
+        <div className="footer">
+          <p>저작권 © KyungSoo. Jeong 모든 권한이 있습니다.</p>
+        </div>
+      </footer>
     </Container>
   );
 };

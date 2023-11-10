@@ -30,13 +30,20 @@ export const Container = styled.div`
       margin-right: 34px;
     }
   }
-  .bdlogo {
+  .mainbody {
+    height: calc(100vh - 54px - 50px);
+  }
+  .footer {
     display: flex;
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
+    height: 30px;
+    color: #222;
+    font-size: 0.8em;
     justify-content: center;
+    align-items: center;
   }
 `;
 
