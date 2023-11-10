@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../utils/Modal";
 import AxiosApi from "../api/AxiosApi";
@@ -46,6 +46,7 @@ const Signup = () => {
     } else {
       setIdMessage("올바른 형식 입니다.");
       setIsId(true);
+      memberRegCheck(e.target.value);
     }
   };
   const onChangePw = (e) => {
@@ -81,32 +82,32 @@ const Signup = () => {
     setIsMail(true);
   };
 
-  const onClickLogin = async () => {
-    console.log("Click 회원가입");
-    // 가입 여부 우선 확인
-    const memberCheck = await AxiosApi.memberRegCheck(inputId);
+  // 회원 가입 여부 확인
+  const memberRegCheck = async (id) => {
+    const memberCheck = await AxiosApi.memberRegCheck(id);
     console.log("가입 가능 여부 확인 : ", memberCheck.data);
-    // 가입 여부 확인 후 가입 절차 진행
-
     if (memberCheck.data === true) {
-      console.log("가입된 아이디가 없습니다. 다음 단계 진행 합니다.");
-      const memberReg = await AxiosApi.memberReg(
-        inputId,
-        inputPw,
-        inputName,
-        inputEmail
-      );
-      console.log(memberReg.data);
-      if (memberReg.data === true) {
-        navigate("/");
-      } else {
-        setModalOpen(true);
-        setModelText("회원 가입에 실패 했습니다.");
-      }
+      setIdMessage("사용 가능한 아이디 입니다.");
+      setIsId(true);
     } else {
-      console.log("이미 가입된 회원 입니다.");
+      setIdMessage("중복된 아이디 입니다.");
+      setIsId(false);
+    }
+  };
+
+  const onClickLogin = async () => {
+    const memberReg = await AxiosApi.memberReg(
+      inputId,
+      inputPw,
+      inputName,
+      inputEmail
+    );
+    console.log(memberReg.data);
+    if (memberReg.data === true) {
+      navigate("/");
+    } else {
       setModalOpen(true);
-      setModelText("이미 가입된 회원 입니다.");
+      setModelText("회원 가입에 실패 했습니다.");
     }
   };
 

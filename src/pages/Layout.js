@@ -40,10 +40,7 @@ const Layout = () => {
         <div className="bell">
           <FiSettings size={32} color="white" onClick={onClickRight} />
         </div>
-        <StyledSideMenu
-          isOpen={isMenuOpen}
-          onClick={() => setIsMenuOpen(false)}
-        >
+        <StyledSideMenu isOpen={isMenuOpen}>
           <StyledMenuList>
             <StyledMenuItem>
               <MenuIcon>
@@ -84,7 +81,7 @@ const Layout = () => {
           </StyledMenuList>
         </StyledSideMenu>
       </header>
-      <main>
+      <main onClick={() => setIsMenuOpen(false)}>
         <Dummy />
         <Outlet />
       </main>

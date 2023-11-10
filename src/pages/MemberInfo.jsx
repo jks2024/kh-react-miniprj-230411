@@ -42,15 +42,6 @@ const Label = styled.label`
   font-weight: bold;
 `;
 
-const Button = styled.button`
-  padding: 10px 15px;
-  border: none;
-  border-radius: 4px;
-  background-color: blue;
-  color: white;
-  cursor: pointer;
-`;
-
 const MemberInfo = () => {
   const { id } = useParams();
   const [member, setMember] = useState("");
@@ -62,7 +53,7 @@ const MemberInfo = () => {
       console.log(rsp.data[0]);
     };
     memberInfo();
-  }, []);
+  }, [id]);
 
   return (
     <Container>

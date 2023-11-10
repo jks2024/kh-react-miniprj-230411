@@ -2,6 +2,9 @@ import styled, { css } from "styled-components";
 
 export const ButtonContainer = styled.div`
   display: flex;
+  flex: 1;
+  justify-content: start;
+  align-items: start;
   flex-wrap: wrap;
   margin: 20px;
 `;

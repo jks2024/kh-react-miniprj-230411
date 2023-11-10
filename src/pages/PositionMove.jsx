@@ -69,6 +69,7 @@ const ParentComponent = () => {
 
   const handleClick = () => {
     if (childRef.current) {
+      console.log("childRef.current : " + childRef.current);
       childRef.current.scrollToMyElement(); // 하위 컴포넌트의 함수 호출
     }
   };
