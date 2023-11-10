@@ -94,13 +94,18 @@ const BoardDate = styled.p`
   text-align: right;
 `;
 
-function BoardDetail() {
+const BoardDetail = () => {
   const { id } = useParams();
   const [board, setBoard] = useState("");
   const [comments, setComments] = useState("");
   const [inputComment, setInputComment] = useState("");
   const [comAddFlag, setComAddFlag] = useState(false); // 댓글 추가 성공 여부
   const userId = localStorage.getItem("userId");
+  const [showComments, setShowComments] = useState(false);
+
+  const toggleComments = () => {
+    setShowComments(!showComments);
+  };
 
   useEffect(() => {
     const getBoardDetail = async () => {
@@ -142,9 +147,12 @@ function BoardDetail() {
       <Content>{board.content}</Content>
       <BoardDate>{board.regDate}</BoardDate>
 
+      <button onClick={toggleComments}>
+        {showComments ? "댓글 숨기기" : `댓글 ${comments.length}개 보기`}
+      </button>
+
       <CommentForm onSubmit={handleSubmitComment}>
         <label>
-          댓글:
           <CommentInput
             type="text"
             value={inputComment}
@@ -153,17 +161,19 @@ function BoardDetail() {
         </label>
         <SubmitButton type="submit">댓글 추가</SubmitButton>
       </CommentForm>
-      <CommentList>
-        {comments &&
-          comments.map((comment) => (
-            <CommentItem key={comment.commentId}>
-              <CommentContent>{comment.content}</CommentContent>
-              <CommentUser>{comment.userId}</CommentUser>
-            </CommentItem>
-          ))}
-      </CommentList>
+      {showComments && (
+        <CommentList>
+          {comments &&
+            comments.map((comment) => (
+              <CommentItem key={comment.commentId}>
+                <CommentContent>{comment.content}</CommentContent>
+                <CommentUser>{comment.userId}</CommentUser>
+              </CommentItem>
+            ))}
+        </CommentList>
+      )}
     </Container>
   );
-}
+};
 
 export default BoardDetail;
