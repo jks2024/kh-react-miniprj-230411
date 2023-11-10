@@ -21,11 +21,11 @@ export const Container = styled.div`
     top: 0;
     left: 0;
 
-    .logo2 {
+    .hambeger {
       margin-top: 12px;
       margin-left: 34px;
     }
-    .bell {
+    .setting {
       margin-top: 12px;
       margin-right: 34px;
     }
@@ -50,12 +50,14 @@ export const Container = styled.div`
 export const StyledSideMenu = styled.div`
   position: fixed;
   left: 0;
+  top: 54px;
   width: 250px;
-  height: 100%;
+  height: calc(100vh - 54px);
   background-color: #eee;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
   border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   transform: ${(props) =>
     props.isOpen ? "translateX(0)" : "translateX(-100%)"};
   transition: transform 0.3s ease;

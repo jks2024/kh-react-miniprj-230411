@@ -10,7 +10,7 @@ import {
 } from "../component/layout/LayoutStyles";
 import { UserContext } from "../context/UserStore";
 import { useContext, useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { FiSettings } from "react-icons/fi";
 import { LuListTodo } from "react-icons/lu";
 import { FaHome, FaClipboardList, FaRegNewspaper } from "react-icons/fa";
@@ -25,7 +25,7 @@ const Layout = () => {
   const navigate = useNavigate();
 
   const onClickLeft = () => {
-    setIsMenuOpen(true);
+    setIsMenuOpen(!isMenuOpen);
   };
   const onClickRight = () => {
     navigate("/setting");
@@ -34,10 +34,14 @@ const Layout = () => {
   return (
     <Container color={color}>
       <header className="mainhead">
-        <div className="logo2">
-          <GiHamburgerMenu size={32} color="white" onClick={onClickLeft} />
+        <div className="hambeger">
+          {isMenuOpen ? (
+            <GiCancel size={32} color="white" onClick={onClickLeft} />
+          ) : (
+            <GiHamburgerMenu size={32} color="white" onClick={onClickLeft} />
+          )}
         </div>
-        <div className="bell">
+        <div className="setting">
           <FiSettings size={32} color="white" onClick={onClickRight} />
         </div>
         <StyledSideMenu
