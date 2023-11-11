@@ -12,7 +12,7 @@ const AxiosApi = {
   },
   //회원 조회
   memberGet: async (id) => {
-    return await axios.get(KH_DOMAIN + `/users/member/?id=${id}`);
+    return await axios.get(KH_DOMAIN + `/users/member?id=${id}`);
   },
 
   // 회원 가입
@@ -27,7 +27,7 @@ const AxiosApi = {
   },
   // 회원 가입 여부 확인
   memberRegCheck: async (id) => {
-    return await axios.get(KH_DOMAIN + `/users/check/?id=${id}`);
+    return await axios.get(KH_DOMAIN + `/users/check?id=${id}`);
   },
 
   // 회원 탈퇴

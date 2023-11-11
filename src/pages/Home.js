@@ -36,6 +36,9 @@ const Home = () => {
       case 10:
         navigate("/PositionMove");
         break;
+      case 11:
+        navigate("/Wheather");
+        break;
       default:
     }
   };
@@ -54,6 +57,7 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(8)}>캘린더</TransBtn>
           <TransBtn onClick={() => onClickBtn(9)}>라디오 버튼</TransBtn>
           <TransBtn onClick={() => onClickBtn(10)}>포지션 이동</TransBtn>
+          <TransBtn onClick={() => onClickBtn(11)}>날씨</TransBtn>
         </ButtonContainer>
       </div>
     </>

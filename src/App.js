@@ -16,6 +16,7 @@ import MyCalendar from "./pages/Calendar";
 import BoardDetail from "./pages/BoardDetail";
 import FruitRadioBtn from "./pages/RadiBtn";
 import ParentComponent from "./pages/PositionMove";
+import Wheather from "./pages/Wheather";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserStore from "./context/UserStore";
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/Calendar" element={<MyCalendar />} />
             <Route path="/FruitRadioBtn" element={<FruitRadioBtn />} />
             <Route path="/PositionMove" element={<ParentComponent />} />
+            <Route path="/Wheather" element={<Wheather />} />
           </Route>
         </Routes>
       </Router>

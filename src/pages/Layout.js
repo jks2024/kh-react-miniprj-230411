@@ -2,6 +2,9 @@ import { Outlet } from "react-router-dom";
 import {
   Container,
   StyledSideMenu,
+  UserContainer,
+  UserImage,
+  UserIdAndName,
   StyledMenuList,
   StyledMenuItem,
   MenuIcon,
@@ -9,7 +12,7 @@ import {
   Dummy,
 } from "../component/layout/LayoutStyles";
 import { UserContext } from "../context/UserStore";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { FiSettings } from "react-icons/fi";
 import { LuListTodo } from "react-icons/lu";
@@ -17,12 +20,15 @@ import { FaHome, FaClipboardList, FaRegNewspaper } from "react-icons/fa";
 import { BiCameraMovie } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
+import AxiosApi from "../api/AxiosApi";
 
 const Layout = () => {
   const context = useContext(UserContext);
   const { color } = context;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const userId = localStorage.getItem("userId");
+  const [member, setMember] = useState({});
 
   const onClickLeft = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -30,6 +36,18 @@ const Layout = () => {
   const onClickRight = () => {
     navigate("/setting");
   };
+
+  useEffect(() => {
+    const getMember = async () => {
+      try {
+        const rsp = await AxiosApi.memberGet(userId);
+        setMember(rsp.data[0]);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    getMember();
+  }, []);
 
   return (
     <Container color={color}>
@@ -49,6 +67,13 @@ const Layout = () => {
           onClick={() => setIsMenuOpen(false)}
         >
           <StyledMenuList>
+            <UserContainer>
+              <UserImage src={"http://via.placeholder.com/160"} alt="User" />
+              <UserIdAndName>
+                <span>{member.id}</span>
+                <sapn>{member.name}</sapn>
+              </UserIdAndName>
+            </UserContainer>
             <StyledMenuItem>
               <MenuIcon>
                 <FaHome />

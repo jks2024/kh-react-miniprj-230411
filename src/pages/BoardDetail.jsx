@@ -6,7 +6,7 @@ import styled from "styled-components";
 // 여기에 스타일드 컴포넌트를 정의합니다.
 const Container = styled.div`
   padding: 20px;
-  margin: auto;
+  margin: 20px auto;
   max-width: 800px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 8px;

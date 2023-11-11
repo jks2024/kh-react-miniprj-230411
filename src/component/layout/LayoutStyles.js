@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { ExposureTwoTone } from "@material-ui/icons";
 
 export const Container = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ export const Container = styled.div`
     height: 54px;
     width: 100%;
     background-color: ${(props) => props.color || "#f9aa06"};
+    border-bottom: 1px solid #ccc;
     z-index: 100;
     top: 0;
     left: 0;
@@ -47,6 +49,27 @@ export const Container = styled.div`
   }
 `;
 
+export const UserContainer = styled.div`
+  display: flex;
+  margin: 40px 20px;
+`;
+
+export const UserImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+`;
+
+export const UserIdAndName = styled.div`
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin: 2px 10px;
+  line-height: 1.5;
+`;
+
 export const StyledSideMenu = styled.div`
   position: fixed;
   left: 0;
@@ -68,6 +91,7 @@ export const StyledMenuList = styled.ul`
   padding: 0;
 `;
 export const StyledMenuItem = styled.li`
+  clear: left;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
