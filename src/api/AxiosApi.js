@@ -1,5 +1,5 @@
 import axios from "axios";
-const KH_DOMAIN = "http://localhost:8111";
+import { KH_DOMAIN } from "../config/const";
 
 const AxiosApi = {
   // 로그인
