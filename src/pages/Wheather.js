@@ -138,8 +138,7 @@ const Wheather = () => {
       <p>온도 : {weather.tmp}</p>
       <p>습도 : {weather.hum}</p>
       <p>강수량 : {weather.pre}</p>
-      <p>상태1 : {weather.sky}</p>
-      <p>상태2 : {weather.sky2}</p>
+      <p>상태 : {weather.sky2}</p>
     </>
   );
 };
