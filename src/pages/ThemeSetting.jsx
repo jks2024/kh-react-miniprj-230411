@@ -2,7 +2,7 @@ import { ButtonContainer, TransBtn } from "../component/menu/ButtonContainer";
 import { useContext } from "react";
 import { UserContext } from "../context/UserStore";
 
-const Setting = () => {
+const ThemeSetting = () => {
   const context = useContext(UserContext);
   const { setColor } = context;
   const themeColorChange = (color) => {
@@ -40,4 +40,4 @@ const Setting = () => {
     </>
   );
 };
-export default Setting;
+export default ThemeSetting;

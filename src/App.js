@@ -5,7 +5,7 @@ import Signup from "./signup/Signup";
 import News from "./pages/News";
 import Members from "./pages/Members";
 import MemberInfo from "./pages/MemberInfo";
-import Setting from "./pages/Setting";
+import ThemeSetting from "./pages/ThemeSetting";
 import Profile from "./pages/Profile";
 import Layout from "./pages/Layout";
 import BoardList from "./pages/BoardList";
@@ -33,7 +33,7 @@ function App() {
             <Route path="/Members" element={<Members />} />
             <Route path="/Profile/:username" element={<Profile />} />
             <Route path="/MemberInfo/:email" element={<MemberInfo />} />x
-            <Route path="/Setting" element={<Setting />} />
+            <Route path="/ThemeSetting" element={<ThemeSetting />} />
             <Route path="/Boards" element={<BoardList />} />
             <Route path="/BoardDetail/:id" element={<BoardDetail />} />
             <Route path="/boardWrite" element={<WriteForm />} />

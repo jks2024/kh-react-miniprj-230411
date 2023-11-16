@@ -16,7 +16,7 @@ const Home = () => {
         navigate("/profile/frontend");
         break;
       case 4:
-        navigate("/setting");
+        navigate("/themeSetting");
         break;
       case 5:
         navigate("/boards");
