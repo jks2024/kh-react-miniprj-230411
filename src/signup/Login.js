@@ -15,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   // 키보드 입력
-  const [inputId, setInputId] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
   const [inputPw, setInputPw] = useState("");
 
   // 오류 메시지
@@ -36,11 +36,11 @@ const Login = () => {
   };
 
   // 5~ 20자리의 영문자, 숫자, 언더스코어(_)로 이루어진 문자열이 유효한 아이디 형식인지 검사하는 정규표현식
-  const onChangeId = (e) => {
-    const regexId = /^\w{5,20}$/;
-    setInputId(e.target.value);
-    if (!regexId.test(e.target.value)) {
-      setIdMessage("5자리 이상 20자리 미만으로 입력해 주세요.");
+  const onChangeEmail = (e) => {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    setInputEmail(e.target.value);
+    if (!emailRegex.test(e.target.value)) {
+      setIdMessage("이메일 형식이 올바르지 않습니다.");
       setIsId(false);
     } else {
       setIdMessage("올바른 형식 입니다.");
@@ -62,10 +62,10 @@ const Login = () => {
   };
   const onClickLogin = async () => {
     //로그인을 위한 axios 호출
-    const res = await AxiosApi.memberLogin(inputId, inputPw);
+    const res = await AxiosApi.memberLogin(inputEmail, inputPw);
     console.log(res.data);
     if (res.data === true) {
-      window.localStorage.setItem("userId", inputId); // 브라우저에서 임시로 값을 저장하는 기술
+      window.localStorage.setItem("email", inputEmail); // 브라우저에서 임시로 값을 저장하는 기술
       window.localStorage.setItem("userPw", inputPw);
       window.localStorage.setItem("isLogin", "TRUE");
       navigate("/home");
@@ -82,10 +82,14 @@ const Login = () => {
       </Items>
 
       <Items className="item2">
-        <Input placeholder="이름" value={inputId} onChange={onChangeId} />
+        <Input
+          placeholder="이메일"
+          value={inputEmail}
+          onChange={onChangeEmail}
+        />
       </Items>
       <Items className="hint">
-        {inputId.length > 0 && (
+        {inputEmail.length > 0 && (
           <span className={`${isId ? "success" : "error"}`}>{idMessage}</span>
         )}
       </Items>

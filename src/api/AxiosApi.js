@@ -1,33 +1,38 @@
 import axios from "axios";
-import { KH_DOMAIN } from "../config/const";
+import { KH_DOMAIN } from "../utils/Common";
 
 const AxiosApi = {
   // 로그인
-  memberLogin: async (id, pw) => {
+  memberLogin: async (email, pw) => {
+    console.log("로그인 : ", email, pw);
     const login = {
-      id: id,
+      email: email,
       pwd: pw,
     };
     return await axios.post(KH_DOMAIN + "/users/login", login);
   },
-  //회원 조회
-  memberGet: async (id) => {
-    return await axios.get(KH_DOMAIN + `/users/member?id=${id}`);
+  //회원 전체 조회
+  memberGet: async () => {
+    return await axios.get(KH_DOMAIN + `/users/list`);
+  },
+  // 회원 조회
+  memberGetOne: async (email) => {
+    return await axios.get(KH_DOMAIN + `/users/detail/${email}`);
   },
 
   // 회원 가입
-  memberReg: async (id, pwd, name, mail) => {
+  memberReg: async (email, pwd, name) => {
     const member = {
-      id: id,
+      email: email,
       pwd: pwd,
       name: name,
-      mail: mail,
     };
     return await axios.post(KH_DOMAIN + "/users/new", member);
   },
   // 회원 가입 여부 확인
-  memberRegCheck: async (id) => {
-    return await axios.get(KH_DOMAIN + `/users/check?id=${id}`);
+  memberRegCheck: async (email) => {
+    console.log("가입 가능 여부 확인 : ", email);
+    return await axios.get(KH_DOMAIN + `/users/check?email=${email}`);
   },
 
   // 회원 탈퇴

@@ -27,7 +27,7 @@ const Layout = () => {
   const { color } = context;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const userId = localStorage.getItem("userId");
+  const email = localStorage.getItem("email");
   const [member, setMember] = useState({});
 
   const onClickLeft = () => {
@@ -40,8 +40,8 @@ const Layout = () => {
   useEffect(() => {
     const getMember = async () => {
       try {
-        const rsp = await AxiosApi.memberGet(userId);
-        setMember(rsp.data[0]);
+        const rsp = await AxiosApi.memberGetOne(email);
+        setMember(rsp.data);
       } catch (e) {
         console.error(e);
       }
@@ -70,8 +70,8 @@ const Layout = () => {
             <UserContainer>
               <UserImage src={"http://via.placeholder.com/160"} alt="User" />
               <UserIdAndName>
-                <span>{member.id}</span>
                 <sapn>{member.name}</sapn>
+                <span>{member.email}</span>
               </UserIdAndName>
             </UserContainer>
             <StyledMenuItem>

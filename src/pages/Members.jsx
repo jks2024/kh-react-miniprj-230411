@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
+  direction: column;
   flex-wrap: wrap;
   margin: 20px;
 `;
@@ -46,16 +47,16 @@ const Members = () => {
 
   useEffect(() => {
     const memberInfo = async () => {
-      const rsp = await AxiosApi.memberGet("ALL"); // 전체 조회
+      const rsp = await AxiosApi.memberGet(); // 전체 조회
       if (rsp.status === 200) setMemberInfo(rsp.data);
       console.log(rsp.data);
     };
     memberInfo();
   }, []);
 
-  const onClickMember = (id) => {
-    console.log("onCLick member : " + id);
-    navigate(`/memberInfo/${id}`);
+  const onClickMember = (email) => {
+    console.log("onCLick member : " + email);
+    navigate(`/memberInfo/${email}`);
   };
 
   return (
@@ -64,9 +65,8 @@ const Members = () => {
         memberInfo.map((member) => (
           <MemberInfoWrapper
             key={member.id}
-            onClick={() => onClickMember(member.id)}
+            onClick={() => onClickMember(member.email)}
           >
-            <MemberId>ID: {member.id}</MemberId>
             <MemberName>이름: {member.name}</MemberName>
             <MemberEmail>이메일: {member.email}</MemberEmail>
             <MemberJoinDate>가입일: {member.join}</MemberJoinDate>

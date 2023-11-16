@@ -43,17 +43,17 @@ const Label = styled.label`
 `;
 
 const MemberInfo = () => {
-  const { id } = useParams();
+  const { email } = useParams();
   const [member, setMember] = useState("");
 
   useEffect(() => {
     const memberInfo = async () => {
-      const rsp = await AxiosApi.memberGet(id);
-      if (rsp.status === 200) setMember(rsp.data[0]);
+      const rsp = await AxiosApi.memberGetOne(email);
+      if (rsp.status === 200) setMember(rsp.data);
       console.log(rsp.data[0]);
     };
     memberInfo();
-  }, [id]);
+  }, [email]);
 
   return (
     <Container>
@@ -61,10 +61,6 @@ const MemberInfo = () => {
         <UserImage src={"http://via.placeholder.com/160"} alt="User" />
         <h3>{member.name}</h3>
       </UserInfo>
-      <Field>
-        <Label>아이디</Label>
-        <div>{member.id}</div>
-      </Field>
       <Field>
         <Label>이메일</Label>
         <div>{member.email}</div>
