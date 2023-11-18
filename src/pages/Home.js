@@ -22,7 +22,7 @@ const Home = () => {
         navigate("/boards");
         break;
       case 6:
-        navigate("/todos");
+        navigate("/category");
         break;
       case 7:
         navigate("/movies");
@@ -52,7 +52,7 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(3)}>사진 업로드</TransBtn>
           <TransBtn onClick={() => onClickBtn(4)}>테마 변경</TransBtn>
           <TransBtn onClick={() => onClickBtn(5)}>게시판</TransBtn>
-          <TransBtn onClick={() => onClickBtn(6)}>일정 관리</TransBtn>
+          <TransBtn onClick={() => onClickBtn(6)}>카테고리</TransBtn>
           <TransBtn onClick={() => onClickBtn(7)}>영화 목록</TransBtn>
           <TransBtn onClick={() => onClickBtn(8)}>캘린더</TransBtn>
           <TransBtn onClick={() => onClickBtn(9)}>라디오 버튼</TransBtn>

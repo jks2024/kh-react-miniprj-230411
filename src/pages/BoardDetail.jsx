@@ -100,7 +100,7 @@ const BoardDetail = () => {
   const [comments, setComments] = useState("");
   const [inputComment, setInputComment] = useState("");
   const [comAddFlag, setComAddFlag] = useState(false); // 댓글 추가 성공 여부
-  const userId = localStorage.getItem("userId");
+  const email = localStorage.getItem("email");
   const [showComments, setShowComments] = useState(false);
 
   const toggleComments = () => {
@@ -109,6 +109,7 @@ const BoardDetail = () => {
 
   useEffect(() => {
     const getBoardDetail = async () => {
+      console.log("getBoardDetail : " + id);
       try {
         const response = await AxiosApi.boardDetail(id);
         setBoard(response.data);
@@ -128,7 +129,7 @@ const BoardDetail = () => {
   const handleSubmitComment = async (e) => {
     e.preventDefault();
     try {
-      const response = await AxiosApi.commentWrite(userId, id, inputComment);
+      const response = await AxiosApi.commentWrite(email, id, inputComment);
       console.log(response);
       setInputComment("");
       setComAddFlag(!comAddFlag);

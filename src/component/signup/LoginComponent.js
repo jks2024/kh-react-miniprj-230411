@@ -6,7 +6,7 @@ export const Input = styled.input`
   width: 100%; /* 원하는 너비 설정 */
   height: auto; /* 높이값 초기화 */
   line-height: normal; /* line-height 초기화 */
-  padding: 0.8em 0.5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+  padding: 1em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
   border: 1px solid #999;
   border-radius: 18px; /* iSO 둥근모서리 제거 */
   outline-style: none; /* 포커스시 발생하는 효과 제거를 원한다면 */
@@ -50,6 +50,19 @@ export const Container = styled.div`
   }
   .error {
     color: red;
+  }
+  .footer {
+    display: flex;
+    position: absolute;
+    background-color: #ccc;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    color: #222;
+    font-size: 0.8em;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -100,14 +113,5 @@ export const Items = styled.div`
       color: orange;
       text-decoration-line: none;
     }
-  }
-  &.bdlogo {
-    background-color: #fabd2e;
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    justify-content: center;
   }
 `;

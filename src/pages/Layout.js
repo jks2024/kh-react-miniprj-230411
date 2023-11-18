@@ -15,7 +15,6 @@ import { UserContext } from "../context/UserStore";
 import { useContext, useState, useEffect } from "react";
 import { GiHamburgerMenu, GiCancel } from "react-icons/gi";
 import { FiSettings } from "react-icons/fi";
-import { LuListTodo } from "react-icons/lu";
 import { FaHome, FaClipboardList, FaRegNewspaper } from "react-icons/fa";
 import { BiCameraMovie } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
@@ -103,12 +102,6 @@ const Layout = () => {
                 <BiCameraMovie />
               </MenuIcon>
               <StyledLink to="/Movies">Movies</StyledLink>
-            </StyledMenuItem>
-            <StyledMenuItem>
-              <MenuIcon>
-                <LuListTodo />
-              </MenuIcon>
-              <StyledLink to="/ToDos">ToDos</StyledLink>
             </StyledMenuItem>
           </StyledMenuList>
         </StyledSideMenu>

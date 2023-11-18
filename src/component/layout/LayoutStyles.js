@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { ExposureTwoTone } from "@material-ui/icons";
 
 export const Container = styled.div`
   display: flex;

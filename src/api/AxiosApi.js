@@ -44,18 +44,19 @@ const AxiosApi = {
   },
   // 게시글 조회
   boardList: async () => {
-    return await axios.get(KH_DOMAIN + "/api/board");
+    return await axios.get(KH_DOMAIN + "/api/board/list");
   },
   // 게시글 상세 조회
   boardDetail: async (boardId) => {
     return await axios.get(KH_DOMAIN + `/api/board/detail/${boardId}`);
   },
   // 게시글 쓰기
-  boardWrite: async (title, content, userId, img) => {
+  boardWrite: async (email, title, categoryId, content, img) => {
     const board = {
+      email: email,
       title: title,
+      categoryId: categoryId,
       content: content,
-      userId: userId,
       img: img,
     };
     return await axios.post(KH_DOMAIN + "/api/board/new", board);
@@ -65,33 +66,33 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + `/api/comment/list/${boardId}`);
   },
   // 댓글 쓰기
-  commentWrite: async (userId, boardId, content) => {
+  commentWrite: async (email, boardId, content) => {
+    console.log("댓글 쓰기 : ", email, boardId, content);
     const comment = {
       boardId: boardId,
-      userId: userId,
+      email: email,
       content: content,
     };
     return await axios.post(KH_DOMAIN + `/api/comment/new`, comment);
   },
-  // Todo 조회
-  todoList: async (userId) => {
-    return await axios.get(KH_DOMAIN + `/api/todo/list?userId=${userId}`);
+  // 카테고리 조회
+  cateList: async () => {
+    return await axios.get(KH_DOMAIN + `/api/category/list`);
   },
-  // Todo 쓰기
-  todoInsert: async (userId, content) => {
-    const todo = {
-      userId: userId,
-      text: content,
-      checked: false,
+  // 카테고리 쓰기
+  cateInsert: async (email, category) => {
+    const cate = {
+      email: email,
+      categoryName: category,
     };
-    return await axios.post(KH_DOMAIN + "/api/todo/new", todo);
+    return await axios.post(KH_DOMAIN + "/api/category/new", cate);
   },
-  // Todo 삭제
-  todoDelete: async (todoId) => {
-    return await axios.delete(KH_DOMAIN + `/api/todo/${todoId}`);
+  // 카테고리 삭제
+  cateDelete: async (categoryId) => {
+    return await axios.delete(KH_DOMAIN + `/api/category/delete/${categoryId}`);
   },
-  // Todo 수정
-  todoUpdate: async (todoId) => {
+  // 카테고리 수정
+  cateUpdate: async (todoId) => {
     return await axios.put(KH_DOMAIN + `/api/todo/${todoId}`);
   },
   // 영화 목록 조회

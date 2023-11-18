@@ -106,37 +106,78 @@ const WriteButton = styled.button`
   }
 `;
 
+const CategorySelect = styled.select`
+  // 카테고리 선택 드롭다운에 대한 스타일 정의
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  width: 200px; // 드롭다운 너비 조정
+`;
+
 function BoardList() {
   const [boardList, setBoardList] = useState([]);
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]); // 새 상태 추가
+  const [selectedCategory, setSelectedCategory] = useState("all"); // 선택된 카테고리 상태
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const rsp = await AxiosApi.cateList();
+        console.log(rsp.data);
+        setCategories(rsp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCategories();
+  }, []);
 
   useEffect(() => {
     const boardList = async () => {
+      console.log("useFeect selectedCategory : " + selectedCategory);
       try {
         const rsp = await AxiosApi.boardList();
-        console.log(rsp.data);
-        setBoardList(rsp.data);
+
+        // 카테고리가 "all"이 아닐 때만 필터링 적용
+        const filteredList =
+          selectedCategory === "all"
+            ? rsp.data
+            : rsp.data.filter(
+                (board) => board.categoryId === parseInt(selectedCategory)
+              );
+        console.log(filteredList);
+        setBoardList(filteredList);
       } catch (error) {
         console.log(error);
-      } finally {
-        console.log("finally");
       }
     };
     boardList();
-  }, []);
+  }, [selectedCategory]);
 
   // 글쓰기 버튼 클릭 시
   const handleWriteClick = () => {
     navigate("/boardWrite");
   };
   // 글 상세보기 버튼 클릭 시
-  const handleDetailClick = (id) => {
-    navigate(`/boardDetail/${id}`);
+  const handleDetailClick = (email) => {
+    navigate(`/boardDetail/${email}`);
   };
 
   return (
     <BoardContainer>
       <Title>게시판 목록</Title>
+      <CategorySelect
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+      >
+        <option value="all">전체</option>
+        {categories.map((category) => (
+          <option key={category.categoryId} value={category.categoryId}>
+            {category.categoryName}
+          </option>
+        ))}
+      </CategorySelect>
       <BoardUl>
         {boardList &&
           boardList.map((board) => (
@@ -151,7 +192,7 @@ function BoardList() {
               <BoardContentWrapper>
                 <BoardHeader>
                   <BoardTitle>{board.title}</BoardTitle>
-                  <UserId>{board.userId}</UserId>
+                  <UserId>{board.email}</UserId>
                 </BoardHeader>
                 <BoardContent>{board.content}</BoardContent>
                 <BoardDate>{board.regDate}</BoardDate>

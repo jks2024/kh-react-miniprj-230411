@@ -119,9 +119,12 @@ const Login = () => {
           <span>Sign Up</span>
         </Link>
       </Items>
-      <Items className="bdlogo">
-        <img src={imgBottom} alt="NedBank" />
-      </Items>
+      <div className="footer">
+        <p>
+          저작권 ©<span style={{ fontWeight: "bold" }}>KyungSoo. Jeong</span>{" "}
+          에게 모든 권한이 있습니다.
+        </p>
+      </div>
     </Container>
   );
 };

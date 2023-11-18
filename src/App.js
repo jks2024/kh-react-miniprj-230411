@@ -9,14 +9,15 @@ import ThemeSetting from "./pages/ThemeSetting";
 import Profile from "./pages/Profile";
 import Layout from "./pages/Layout";
 import BoardList from "./pages/BoardList";
-import WriteForm from "./component/board/WriteForm";
-import ToDos from "./pages/ToDos";
+import BoardWriteForm from "./component/board/BoardWriteForm";
+import Category from "./pages/Category";
 import Movies from "./pages/Movies";
 import MyCalendar from "./pages/Calendar";
 import BoardDetail from "./pages/BoardDetail";
 import FruitRadioBtn from "./pages/RadiBtn";
 import ParentComponent from "./pages/PositionMove";
 import Wheather from "./pages/Wheather";
+import Setting from "./pages/Setting";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserStore from "./context/UserStore";
 
@@ -36,13 +37,14 @@ function App() {
             <Route path="/ThemeSetting" element={<ThemeSetting />} />
             <Route path="/Boards" element={<BoardList />} />
             <Route path="/BoardDetail/:id" element={<BoardDetail />} />
-            <Route path="/boardWrite" element={<WriteForm />} />
-            <Route path="/Todos" element={<ToDos />} />
+            <Route path="/boardWrite" element={<BoardWriteForm />} />
+            <Route path="/Category" element={<Category />} />
             <Route path="/Movies" element={<Movies />} />
             <Route path="/Calendar" element={<MyCalendar />} />
             <Route path="/FruitRadioBtn" element={<FruitRadioBtn />} />
             <Route path="/PositionMove" element={<ParentComponent />} />
             <Route path="/Wheather" element={<Wheather />} />
+            <Route path="/Setting" element={<Setting />} />
           </Route>
         </Routes>
       </Router>

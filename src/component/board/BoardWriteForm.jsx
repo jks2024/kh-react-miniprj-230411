@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "../../api/AxiosApi";
 import styled from "styled-components";
@@ -96,13 +96,49 @@ const FileUploadContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-const WriteForm = () => {
+const StyledSelect = styled.select`
+  width: 90%; // 너비 설정
+  padding: 10px; // 패딩 추가
+  border: 1px solid #ddd; // 테두리 스타일링
+  border-radius: 4px; // 테두리 둥글게
+  font-size: 16px; // 글꼴 크기
+  background-color: white; // 배경색
+  cursor: pointer; // 마우스 커서 변경
+  margin-bottom: 20px; // 아래쪽 여백
+
+  &:hover {
+    border-color: #bcbcbc; // 호버 시 테두리 색상 변경
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #4caf50; // 포커스 시 테두리 색상 변경
+  }
+`;
+
+const BoardWriteForm = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState("");
-  const userId = window.localStorage.getItem("userId");
-  console.log("userId : " + userId);
+  const [categories, setCategories] = useState([]); // 새 상태 추가
+  const [selectedCategory, setSelectedCategory] = useState(""); // 선택된 카테고리 상태
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const rsp = await AxiosApi.cateList();
+        console.log(rsp.data);
+        setCategories(rsp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCategories();
+  }, []);
+
+  const email = window.localStorage.getItem("email");
+  console.log("email : " + email);
   const navigate = useNavigate();
 
   const handleTitleChange = (e) => {
@@ -113,9 +149,15 @@ const WriteForm = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(title, content, userId, url);
+    console.log(title, content, email, url);
     try {
-      const rsp = await AxiosApi.boardWrite(title, content, userId, url);
+      const rsp = await AxiosApi.boardWrite(
+        email,
+        title,
+        selectedCategory,
+        content,
+        url
+      );
       if (rsp.data === true) {
         alert("글쓰기 성공");
         navigate("/Boards");
@@ -161,6 +203,23 @@ const WriteForm = () => {
     <FormContainer>
       <Title>글쓰기</Title>
       <FieldContainer>
+        <StyledLabel htmlFor="category">카테고리</StyledLabel>
+        <StyledSelect
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="" disabled selected>
+            카테고리를 선택하세요
+          </option>
+          {categories.map((category) => (
+            <option key={category.categoryId} value={category.categoryId}>
+              {category.categoryName}
+            </option>
+          ))}
+        </StyledSelect>
+      </FieldContainer>
+
+      <FieldContainer>
         <StyledLabel htmlFor="title">제목</StyledLabel>
         <StyledInput
           type="text"
@@ -192,4 +251,4 @@ const WriteForm = () => {
   );
 };
 
-export default WriteForm;
+export default BoardWriteForm;
