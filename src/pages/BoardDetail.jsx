@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import AxiosApi from "../api/AxiosApi";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { timeFromNow } from "../utils/Common";
 
 // 여기에 스타일드 컴포넌트를 정의합니다.
 const Container = styled.div`
@@ -66,7 +67,9 @@ const CommentList = styled.ul`
   padding: 0;
 `;
 
-const CommentItem = styled.li`
+const CommentItem = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 10px 0;
   border-bottom: 1px solid #ddd;
 `;
@@ -76,16 +79,15 @@ const CommentContent = styled.p`
   font-size: 1em;
   margin: 0;
   padding: 0;
-  font-size: 13px;
-  float: left;
 `;
-const CommentUser = styled.p`
+const CommentEmail = styled.p`
+  display: flex;
+  justify-content: space-between;
   color: #555;
   font-style: italic;
   font-size: 13px;
   margin: 0;
   padding: 0;
-  text-align: right;
 `;
 
 const BoardDate = styled.p`
@@ -146,7 +148,7 @@ const BoardDetail = () => {
       />
       <Title>{board.title}</Title>
       <Content>{board.content}</Content>
-      <BoardDate>{board.regDate}</BoardDate>
+      <BoardDate>{timeFromNow(board.regDate)}</BoardDate>
 
       <button onClick={toggleComments}>
         {showComments ? "댓글 숨기기" : `댓글 ${comments.length}개 보기`}
@@ -167,8 +169,11 @@ const BoardDetail = () => {
           {comments &&
             comments.map((comment) => (
               <CommentItem key={comment.commentId}>
+                <CommentEmail>
+                  <p>{comment.email}</p>
+                  <p>{timeFromNow(comment.regDate)}</p>
+                </CommentEmail>
                 <CommentContent>{comment.content}</CommentContent>
-                <CommentUser>{comment.userId}</CommentUser>
               </CommentItem>
             ))}
         </CommentList>

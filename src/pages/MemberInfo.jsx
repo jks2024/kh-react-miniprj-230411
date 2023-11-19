@@ -2,13 +2,15 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import AxiosApi from "../api/AxiosApi";
+import { formatDate } from "../utils/Common";
+import { storage } from "../api/firebase";
 
 const Container = styled.div`
   padding: 24px;
   border: 1px solid #ddd;
   border-radius: 8px;
   max-width: 320px;
-  margin: auto;
+  margin: 20px auto;
   background: rgba(0, 0, 0, 0.2);
 `;
 
@@ -18,9 +20,13 @@ const UserInfo = styled.div`
   margin-bottom: 10px;
 `;
 
+const UserName = styled.h2`
+  margin-left: 20px;
+`;
+
 const UserImage = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 5px;
   margin-right: 10px;
 `;
@@ -38,37 +44,116 @@ const Input = styled.input`
 `;
 const Label = styled.label`
   display: block;
-  margin-bottom: 5px;
+  margin: 20px 30px;
   font-weight: bold;
 `;
 
 const MemberInfo = () => {
   const { email } = useParams();
   const [member, setMember] = useState("");
+  const [editMode, setEditMode] = useState(false);
+  const [editName, setEditName] = useState();
+  const [isCurrentUser, setIsCurrentUser] = useState(false);
+  const [file, setFile] = useState(null);
+  const [url, setUrl] = useState("");
 
   useEffect(() => {
     const memberInfo = async () => {
       const rsp = await AxiosApi.memberGetOne(email);
-      if (rsp.status === 200) setMember(rsp.data);
-      console.log(rsp.data[0]);
+      if (rsp.status === 200) {
+        setMember(rsp.data);
+        setUrl(rsp.data.image);
+      }
     };
     memberInfo();
+
+    // 로컬스토리지에서 로그인한 사용자 정보를 가져옵니다.
+    const loginUserEmail = localStorage.getItem("email");
+    // 로그인한 사용자와 글쓴이가 같은지 비교합니다.
+    if (loginUserEmail === email) {
+      setIsCurrentUser(true);
+    }
   }, [email]);
+
+  // 입력 필드 변경 처리
+  const handleChange = (e) => {
+    if (e.target.name === "file") {
+      setFile(e.target.files[0]);
+    } else {
+      setEditName(e.target.value);
+    }
+  };
+
+  // 폼 제출 처리
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const rsp = await AxiosApi.memberUpdate(email, editName, url);
+    if (rsp.status === 200) {
+      setEditMode(false);
+    }
+  };
+
+  const handleUploadClick = async () => {
+    if (!file) {
+      alert("파일을 선택해주세요.");
+      return;
+    }
+
+    try {
+      const storageRef = storage.ref();
+      const fileRef = storageRef.child(file.name);
+      await fileRef.put(file);
+
+      // 업로드 후 이미지 URL 가져오기
+      const uploadedUrl = await fileRef.getDownloadURL();
+      setUrl(uploadedUrl); // 미리보기 URL 업데이트
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
+  };
 
   return (
     <Container>
       <UserInfo>
-        <UserImage src={"http://via.placeholder.com/160"} alt="User" />
-        <h3>{member.name}</h3>
+        <UserImage src={url || "http://via.placeholder.com/160"} alt="User" />
+        {!editMode ? (
+          <UserName>{member.name}</UserName>
+        ) : (
+          <Input
+            type="text"
+            name="name"
+            value={editName || member.name}
+            onChange={handleChange}
+          />
+        )}
       </UserInfo>
-      <Field>
-        <Label>이메일</Label>
-        <div>{member.email}</div>
-      </Field>
-      <Field>
-        <Label>가입일</Label>
-        <div>{member.join}</div>
-      </Field>
+      {!editMode ? (
+        <>
+          <Field>
+            <Label>Email</Label>
+            <div>{member.email}</div>
+          </Field>
+          <Field>
+            <Label>가입일</Label>
+            <div>{formatDate(member.regDate)}</div>
+          </Field>
+          {/* 현재 사용자가 로그인한 사용자인 경우에만 편집 버튼 표시 */}
+          {isCurrentUser && (
+            <button onClick={() => setEditMode(true)}>편집</button>
+          )}
+        </>
+      ) : (
+        <>
+          <Field>
+            <Label>이미지 업로드</Label>
+            <input type="file" name="file" onChange={handleChange} />
+            <button onClick={handleUploadClick}>업로드</button>
+          </Field>
+          {/* 필요한 다른 입력 필드 */}
+          <button onClick={handleSubmit}>전송</button>
+          <button onClick={() => setEditMode(false)}>취소</button>
+        </>
+      )}
     </Container>
   );
 };

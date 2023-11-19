@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AxiosApi from "../api/AxiosApi";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { timeFromNow } from "../utils/Common";
 
 const BoardContainer = styled.div`
   padding: 0 30px;
@@ -195,7 +196,7 @@ function BoardList() {
                   <UserId>{board.email}</UserId>
                 </BoardHeader>
                 <BoardContent>{board.content}</BoardContent>
-                <BoardDate>{board.regDate}</BoardDate>
+                <BoardDate>{timeFromNow(board.regDate)}</BoardDate>
               </BoardContentWrapper>
             </BoardLi>
           ))}

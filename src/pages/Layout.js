@@ -67,7 +67,10 @@ const Layout = () => {
         >
           <StyledMenuList>
             <UserContainer>
-              <UserImage src={"http://via.placeholder.com/160"} alt="User" />
+              <UserImage
+                src={member.image || "http://via.placeholder.com/160"}
+                alt="User"
+              />
               <UserIdAndName>
                 <sapn>{member.name}</sapn>
                 <span>{member.email}</span>

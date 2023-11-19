@@ -34,6 +34,16 @@ const AxiosApi = {
     console.log("가입 가능 여부 확인 : ", email);
     return await axios.get(KH_DOMAIN + `/users/check?email=${email}`);
   },
+  // 회원 정보 수정
+  memberUpdate: async (email, name, image) => {
+    console.log("회원 정보 수정 : ", email, name, image);
+    const member = {
+      email: email,
+      name: name,
+      image: image,
+    };
+    return await axios.put(KH_DOMAIN + `/users/modify`, member);
+  },
 
   // 회원 탈퇴
   memberDel: async (id) => {
@@ -97,7 +107,19 @@ const AxiosApi = {
   },
   // 영화 목록 조회
   movieList: async () => {
-    return await axios.get(KH_DOMAIN + "/api/movie/list");
+    return await axios.get(KH_DOMAIN + "/api/movies/list");
+  },
+  // 영화 페이지 수 조회
+  moviePage: async (page, size) => {
+    return await axios.get(
+      KH_DOMAIN + `/api/movies/list/count?page=${page}&size=${size}`
+    );
+  },
+  // 영화 페이지네이션 조회
+  moviePageList: async (page, size) => {
+    return await axios.get(
+      KH_DOMAIN + `/api/movies/list/page?page=${page}&size=${size}`
+    );
   },
 };
 export default AxiosApi;
