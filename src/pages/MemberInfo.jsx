@@ -47,6 +47,20 @@ const Label = styled.label`
   margin: 20px 30px;
   font-weight: bold;
 `;
+const SubmitButton = styled.button`
+  padding: 8px;
+  background-color: #4caf50;
+  width: 60px;
+  margin-left: 4px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  &:hover {
+    background-color: #2c7d32;
+  }
+`;
 
 const MemberInfo = () => {
   const { email } = useParams();
@@ -130,16 +144,14 @@ const MemberInfo = () => {
       {!editMode ? (
         <>
           <Field>
-            <Label>Email</Label>
-            <div>{member.email}</div>
+            <Label>Email : {member.email}</Label>
           </Field>
           <Field>
-            <Label>가입일</Label>
-            <div>{formatDate(member.regDate)}</div>
+            <Label>가입일 : {formatDate(member.regDate)}</Label>
           </Field>
           {/* 현재 사용자가 로그인한 사용자인 경우에만 편집 버튼 표시 */}
           {isCurrentUser && (
-            <button onClick={() => setEditMode(true)}>편집</button>
+            <SubmitButton onClick={() => setEditMode(true)}>편집</SubmitButton>
           )}
         </>
       ) : (
@@ -147,11 +159,11 @@ const MemberInfo = () => {
           <Field>
             <Label>이미지 업로드</Label>
             <input type="file" name="file" onChange={handleChange} />
-            <button onClick={handleUploadClick}>업로드</button>
+            <SubmitButton onClick={handleUploadClick}>업로드</SubmitButton>
           </Field>
           {/* 필요한 다른 입력 필드 */}
-          <button onClick={handleSubmit}>전송</button>
-          <button onClick={() => setEditMode(false)}>취소</button>
+          <SubmitButton onClick={handleSubmit}>전송</SubmitButton>
+          <SubmitButton onClick={() => setEditMode(false)}>취소</SubmitButton>
         </>
       )}
     </Container>
