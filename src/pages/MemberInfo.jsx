@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import AxiosApi from "../api/AxiosApi";
 import { formatDate } from "../utils/Common";
 import { storage } from "../api/firebase";
+import { useContext } from "react";
+import { UserContext } from "../context/UserStore";
 
 const Container = styled.div`
   padding: 24px;
@@ -66,10 +68,12 @@ const MemberInfo = () => {
   const { email } = useParams();
   const [member, setMember] = useState("");
   const [editMode, setEditMode] = useState(false);
-  const [editName, setEditName] = useState();
+  const [editName, setEditName] = useState("");
   const [isCurrentUser, setIsCurrentUser] = useState(false);
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState("");
+  const context = useContext(UserContext);
+  const { setName } = context;
 
   useEffect(() => {
     const memberInfo = async () => {
@@ -98,12 +102,18 @@ const MemberInfo = () => {
     }
   };
 
-  // 폼 제출 처리
+  // 회원 정보 업데이트 Axios 호출
   const handleSubmit = async (e) => {
     e.preventDefault();
     const rsp = await AxiosApi.memberUpdate(email, editName, url);
     if (rsp.status === 200) {
       setEditMode(false);
+      setName(editName);
+      const rsp = await AxiosApi.memberGetOne(email);
+      if (rsp.status === 200) {
+        setMember(rsp.data);
+        setUrl(rsp.data.image);
+      }
     }
   };
 
@@ -136,7 +146,8 @@ const MemberInfo = () => {
           <Input
             type="text"
             name="name"
-            value={editName || member.name}
+            placeholder="이름을 입력하세요."
+            value={editName}
             onChange={handleChange}
           />
         )}

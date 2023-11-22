@@ -121,5 +121,17 @@ const AxiosApi = {
       KH_DOMAIN + `/api/movies/list/page?page=${page}&size=${size}`
     );
   },
+  // 채팅방 목록 보기
+  chatList: async () => {
+    return await axios.get(KH_DOMAIN + "/chat/list");
+  },
+  // 채팅방 생성
+  chatCreate: async (email, name) => {
+    const chat = {
+      email: email,
+      name: name,
+    };
+    return await axios.post(KH_DOMAIN + "/chat/new", chat);
+  },
 };
 export default AxiosApi;

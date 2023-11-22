@@ -72,7 +72,7 @@ const UserId = styled.span`
   font-size: 13px;
 `;
 
-const WriteButton = styled.button`
+const CircleFixedButton = styled.button`
   position: fixed; // 버튼을 부모 컨테이너에 대해 절대적 위치로 설정
   bottom: 24px;
   right: 30px;
@@ -114,6 +114,8 @@ const CategorySelect = styled.select`
   margin-bottom: 20px;
   width: 200px; // 드롭다운 너비 조정
 `;
+
+// 게시판 목록 페이지 입니다.
 
 function BoardList() {
   const [boardList, setBoardList] = useState([]);
@@ -201,7 +203,7 @@ function BoardList() {
             </BoardLi>
           ))}
       </BoardUl>
-      <WriteButton onClick={handleWriteClick}></WriteButton>
+      <CircleFixedButton onClick={handleWriteClick}></CircleFixedButton>
     </BoardContainer>
   );
 }

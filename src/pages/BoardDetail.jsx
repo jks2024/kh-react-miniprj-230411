@@ -96,6 +96,8 @@ const BoardDate = styled.p`
   text-align: right;
 `;
 
+// 게시글 상세 보기와 댓글 목록을 보여주는 컴포넌트입니다.
+
 const BoardDetail = () => {
   const { id } = useParams();
   const [board, setBoard] = useState("");

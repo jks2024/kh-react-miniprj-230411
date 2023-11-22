@@ -21,9 +21,11 @@ import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 
+// 사이드바 메뉴를 구성 합니다.
+
 const Layout = () => {
   const context = useContext(UserContext);
-  const { color } = context;
+  const { color, name } = context;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const email = localStorage.getItem("email");
@@ -46,7 +48,7 @@ const Layout = () => {
       }
     };
     getMember();
-  }, []);
+  }, [name]);
 
   return (
     <Container color={color}>

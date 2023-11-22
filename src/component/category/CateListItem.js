@@ -1,10 +1,10 @@
 import { MdRemoveCircleOutline } from "react-icons/md";
-import "./TodoListItem.scss";
+import "./CateListItem.scss";
 
-const TodoListItem = ({ todo, onRemove }) => {
+const CateListItem = ({ todo, onRemove }) => {
   const { categoryId, categoryName } = todo;
   return (
-    <div className="TodoListItem">
+    <div className="CateListItem">
       <div className="text">{categoryName}</div>
       <div className="remove" onClick={() => onRemove(categoryId)}>
         <MdRemoveCircleOutline />
@@ -13,4 +13,4 @@ const TodoListItem = ({ todo, onRemove }) => {
   );
 };
 
-export default TodoListItem;
+export default CateListItem;

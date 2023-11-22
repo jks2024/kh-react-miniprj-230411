@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import TodoTemplate from "../component/todos/TodoTemplate";
-import TodoInsert from "../component/todos/TodoInsert";
-import TodoList from "../component/todos/TodoList";
+import CateTemplate from "../component/category/CateTemplate";
+import CateInsert from "../component/category/CateInsert";
+import TodoList from "../component/category/CateList";
 import AxiosApi from "../api/AxiosApi";
 import Modal from "../utils/Modal";
 
@@ -62,13 +62,13 @@ const Category = () => {
   // };
 
   return (
-    <TodoTemplate>
-      <TodoInsert onInsert={onInsert} />
+    <CateTemplate>
+      <CateInsert onInsert={onInsert} />
       <TodoList todos={todos} onRemove={onRemove} />
       <Modal open={modalOpen} close={closeModal} header="오류">
         {modlaMessage}
       </Modal>
-    </TodoTemplate>
+    </CateTemplate>
   );
 };
 export default Category;

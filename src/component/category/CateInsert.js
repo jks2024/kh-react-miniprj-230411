@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
 import { MdAdd } from "react-icons/md";
-import "./TodoInsert.scss";
+import "./CateInsert.scss";
 
-const TodoInsert = ({ onInsert }) => {
+const CateInsert = ({ onInsert }) => {
   const [value, setValue] = useState("");
 
   const onChange = useCallback((e) => {
@@ -20,7 +20,7 @@ const TodoInsert = ({ onInsert }) => {
   );
 
   return (
-    <form className="TodoInsert" onSubmit={onSubmit}>
+    <form className="CateInsert" onSubmit={onSubmit}>
       <input
         placeholder="카테고리 목록 입력"
         value={value}
@@ -33,4 +33,4 @@ const TodoInsert = ({ onInsert }) => {
   );
 };
 
-export default TodoInsert;
+export default CateInsert;
