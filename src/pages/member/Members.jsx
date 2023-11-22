@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { formatDate } from "../utils/Common";
-import AxiosApi from "../api/AxiosApi";
+import { formatDate } from "../../utils/Common";
+import AxiosApi from "../../api/AxiosApi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import CateTemplate from "../component/category/CateTemplate";
-import CateInsert from "../component/category/CateInsert";
-import TodoList from "../component/category/CateList";
-import AxiosApi from "../api/AxiosApi";
-import Modal from "../utils/Modal";
+import CateTemplate from "../../component/category/CateTemplate";
+import CateInsert from "../../component/category/CateInsert";
+import TodoList from "../../component/category/CateList";
+import AxiosApi from "../../api/AxiosApi";
+import Modal from "../../utils/Modal";
 
 const Category = () => {
   const [todos, setTodos] = useState([]);

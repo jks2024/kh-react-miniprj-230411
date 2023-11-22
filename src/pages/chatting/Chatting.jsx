@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { KH_SOCKET_URL } from "../utils/Common";
+import { KH_SOCKET_URL } from "../../utils/Common";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 

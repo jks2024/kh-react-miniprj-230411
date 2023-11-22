@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Axios from "../api/AxiosApi";
+import Axios from "../../api/AxiosApi";
 
 // 스타일 컴포넌트 정의
 const Container = styled.div`

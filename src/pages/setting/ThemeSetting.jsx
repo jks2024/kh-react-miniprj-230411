@@ -1,6 +1,9 @@
-import { ButtonContainer, TransBtn } from "../component/menu/ButtonContainer";
+import {
+  ButtonContainer,
+  TransBtn,
+} from "../../component/menu/ButtonContainer";
 import { useContext } from "react";
-import { UserContext } from "../context/UserStore";
+import { UserContext } from "../../context/UserStore";
 
 const ThemeSetting = () => {
   const context = useContext(UserContext);

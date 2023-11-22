@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { storage } from "../api/firebase";
+import { storage } from "../../api/firebase";
 import styled from "styled-components";
 
 const Container = styled.div`

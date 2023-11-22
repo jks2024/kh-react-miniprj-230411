@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import AxiosApi from "../api/AxiosApi";
-import { formatDate } from "../utils/Common";
-import { storage } from "../api/firebase";
+import AxiosApi from "../../api/AxiosApi";
+import { formatDate } from "../../utils/Common";
+import { storage } from "../../api/firebase";
 import { useContext } from "react";
-import { UserContext } from "../context/UserStore";
+import { UserContext } from "../../context/UserStore";
 
 const Container = styled.div`
   padding: 24px;

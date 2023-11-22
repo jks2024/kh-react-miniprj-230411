@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import AxiosApi from "../api/AxiosApi";
+import AxiosApi from "../../api/AxiosApi";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { timeFromNow } from "../utils/Common";
+import { timeFromNow } from "../../utils/Common";
 
 // 여기에 스타일드 컴포넌트를 정의합니다.
 const Container = styled.div`

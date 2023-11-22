@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AxiosApi from "../api/AxiosApi";
+import AxiosApi from "../../api/AxiosApi";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { formatDate } from "../utils/Common";
+import { formatDate } from "../../utils/Common";
 
 const ChatListContainer = styled.div`
   padding: 30px;

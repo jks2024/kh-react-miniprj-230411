@@ -1,29 +1,29 @@
 import "./App.css";
 import GlobalStyle from "./style/GlobalStyle";
-import Login from "./signup/Login";
+import Login from "./pages/signup/Login";
 import Home from "./pages/Home";
-import Signup from "./signup/Signup";
+import Signup from "./pages/signup/Signup";
 import News from "./pages/News";
-import Members from "./pages/Members";
-import MemberInfo from "./pages/MemberInfo";
-import ThemeSetting from "./pages/ThemeSetting";
-import Profile from "./pages/Profile";
+import Members from "./pages/member/Members";
+import MemberInfo from "./pages/member/MemberInfo";
+import ThemeSetting from "./pages/setting/ThemeSetting";
+import Profile from "./pages/member/Profile";
 import Layout from "./pages/Layout";
-import BoardList from "./pages/BoardList";
-import BoardWriteForm from "./component/board/BoardWriteForm";
-import Category from "./pages/Category";
+import BoardList from "./pages/board/BoardList";
+import BoardWriteForm from "./pages/board/BoardWriteForm";
+import Category from "./pages/board/Category";
 import Movies from "./pages/Movies";
-import MyCalendar from "./pages/Calendar";
-import BoardDetail from "./pages/BoardDetail";
-import FruitRadioBtn from "./pages/RadiBtn";
-import ParentComponent from "./pages/PositionMove";
-import Wheather from "./pages/Wheather";
-import Setting from "./pages/Setting";
+import MyCalendar from "./pages/etc/Calendar";
+import BoardDetail from "./pages/board/BoardDetail";
+import FruitRadioBtn from "./pages/etc/RadiBtn";
+import ParentComponent from "./pages/etc/PositionMove";
+import Wheather from "./pages/etc/Wheather";
+import Setting from "./pages/setting/Setting";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import UserStore from "./context/UserStore";
-import ChatList from "./pages/ChatList";
-import ChatRoomCreate from "./pages/ChatRoomCreate";
-import Chatting from "./pages/Chatting";
+import ChatList from "./pages/chatting/ChatList";
+import ChatRoomCreate from "./pages/chatting/ChatRoomCreate";
+import Chatting from "./pages/chatting/Chatting";
 
 function App() {
   return (

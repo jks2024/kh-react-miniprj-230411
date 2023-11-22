@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import AxiosApi from "../api/AxiosApi";
+import AxiosApi from "../../api/AxiosApi";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { timeFromNow } from "../utils/Common";
+import { timeFromNow } from "../../utils/Common";
 
 const BoardContainer = styled.div`
   padding: 0 30px;
