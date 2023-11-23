@@ -89,11 +89,13 @@ const Chatting = () => {
   };
 
   const onEnterKey = (e) => {
-    if (e.key === "Enter") onClickMsgSend(e);
+    if (e.key === "Enter" && inputMsg.trim() !== "") {
+      e.preventDefault();
+      onClickMsgSend(e);
+    }
   };
 
   const onClickMsgSend = (e) => {
-    e.preventDefault();
     ws.current.send(
       JSON.stringify({
         type: "TALK",

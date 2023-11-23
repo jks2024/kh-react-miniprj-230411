@@ -1,8 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const Input = styled.input`
-  margin-left: 30px;
-  margin-right: 30px;
+  margin: 0 30px;
   width: 100%; /* 원하는 너비 설정 */
   height: auto; /* 높이값 초기화 */
   line-height: normal; /* line-height 초기화 */
@@ -14,14 +13,12 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   margin: 100px 30px 0;
-  font-size: 26px;
   font-weight: bold;
   width: 100%; /* 원하는 너비 설정 */
   height: 50px;
   color: white;
   background-color: #999;
   font-size: 15px;
-  font-weight: 400;
   border-radius: 18px;
   border: orange;
   font-weight: 700;
@@ -86,9 +83,7 @@ export const Items = styled.div`
     margin: 10px;
   }
   &.item3 {
-    margin-top: 10px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin: 10px 40px 0;
     justify-content: space-between;
     color: #999;
     font-size: 14px;
