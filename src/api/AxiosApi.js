@@ -125,6 +125,10 @@ const AxiosApi = {
   chatList: async () => {
     return await axios.get(KH_DOMAIN + "/chat/list");
   },
+  // 채팅방 정보 보기
+  chatDetail: async (roomId) => {
+    return await axios.get(KH_DOMAIN + `/chat/room/${roomId}`);
+  },
   // 채팅방 생성
   chatCreate: async (email, name) => {
     const chat = {

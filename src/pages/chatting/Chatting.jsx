@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { KH_SOCKET_URL } from "../../utils/Common";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import AxiosApi from "../../api/AxiosApi";
 
 const ChatContainer = styled.div`
   padding: 20px;
@@ -80,9 +81,11 @@ const Chatting = () => {
   const [inputMsg, setInputMsg] = useState("");
   const [chatList, setChatList] = useState([]);
   const { roomId } = useParams();
-  const sender = window.localStorage.getItem("email");
+  const [sender, setSender] = useState("");
+  const [roomName, setRoomName] = useState(""); // 채팅방 이름
   const ws = useRef(null);
   const navigate = useNavigate(); // useNavigate 훅 추가
+  const email = window.localStorage.getItem("email");
 
   const onChangMsg = (e) => {
     setInputMsg(e.target.value);
@@ -118,6 +121,34 @@ const Chatting = () => {
     ws.current.close();
     navigate("/Chat");
   };
+
+  useEffect(() => {
+    // 이메일로 회원 정보 가져 오기
+    const getMember = async () => {
+      try {
+        const rsp = await AxiosApi.memberGetOne(email);
+        console.log(rsp.data.name);
+        setSender(rsp.data.name);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMember();
+  });
+
+  useEffect(() => {
+    // 채팅방 정보 가져 오기
+    const getChatRoom = async () => {
+      try {
+        const rsp = await AxiosApi.chatDetail(roomId);
+        console.log(rsp.data.name);
+        setRoomName(rsp.data.name);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getChatRoom();
+  });
 
   useEffect(() => {
     console.log("방번호 : " + roomId);
@@ -157,7 +188,7 @@ const Chatting = () => {
 
   return (
     <ChatContainer>
-      <ChatHeader>채팅방 {roomId}</ChatHeader>
+      <ChatHeader>채팅방 {roomName}</ChatHeader>
       <MessagesContainer ref={chatContainerRef}>
         {chatList.map((chat, index) => (
           <Message key={index} isSender={chat.sender === sender}>
