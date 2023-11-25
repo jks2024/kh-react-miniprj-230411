@@ -7,27 +7,40 @@ const AxiosApi = {
     console.log("로그인 : ", email, pw);
     const login = {
       email: email,
-      pwd: pw,
+      password: pw,
     };
-    return await axios.post(KH_DOMAIN + "/users/login", login);
+    return await axios.post(KH_DOMAIN + "/auth/login", login);
   },
   //회원 전체 조회
   memberGet: async () => {
-    return await axios.get(KH_DOMAIN + `/users/list`);
+    const token = localStorage.getItem("token");
+    return await axios.get(KH_DOMAIN + `/users/list`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 회원 조회
   memberGetOne: async (email) => {
-    return await axios.get(KH_DOMAIN + `/users/detail/${email}`);
+    const token = localStorage.getItem("token");
+    console.log("회원 조회 : ", token);
+    return await axios.get(KH_DOMAIN + `/users/detail/${email}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
 
   // 회원 가입
   memberReg: async (email, pwd, name) => {
     const member = {
       email: email,
-      pwd: pwd,
+      password: pwd,
       name: name,
     };
-    return await axios.post(KH_DOMAIN + "/users/new", member);
+    return await axios.post(KH_DOMAIN + "/auth/signup", member);
   },
   // 회원 가입 여부 확인
   memberRegCheck: async (email) => {
@@ -54,14 +67,27 @@ const AxiosApi = {
   },
   // 게시글 조회
   boardList: async () => {
-    return await axios.get(KH_DOMAIN + "/api/board/list");
+    const token = localStorage.getItem("token");
+    return await axios.get(KH_DOMAIN + "/api/board/list", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 게시글 상세 조회
   boardDetail: async (boardId) => {
-    return await axios.get(KH_DOMAIN + `/api/board/detail/${boardId}`);
+    const token = localStorage.getItem("token");
+    return await axios.get(KH_DOMAIN + `/api/board/detail/${boardId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 게시글 쓰기
   boardWrite: async (email, title, categoryId, content, img) => {
+    const token = localStorage.getItem("token");
     const board = {
       email: email,
       title: title,
@@ -69,37 +95,74 @@ const AxiosApi = {
       content: content,
       img: img,
     };
-    return await axios.post(KH_DOMAIN + "/api/board/new", board);
+    return await axios.post(KH_DOMAIN + "/api/board/new", board, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 게시글에 달린 댓글 조회
   commentList: async (boardId) => {
-    return await axios.get(KH_DOMAIN + `/api/comment/list/${boardId}`);
+    const token = localStorage.getItem("token");
+    return await axios.get(KH_DOMAIN + `/api/comment/list/${boardId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 댓글 쓰기
   commentWrite: async (email, boardId, content) => {
-    console.log("댓글 쓰기 : ", email, boardId, content);
+    const token = localStorage.getItem("token");
     const comment = {
       boardId: boardId,
       email: email,
       content: content,
     };
-    return await axios.post(KH_DOMAIN + `/api/comment/new`, comment);
+    return await axios.post(KH_DOMAIN + `/api/comment/new`, comment, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 카테고리 조회
   cateList: async () => {
-    return await axios.get(KH_DOMAIN + `/api/category/list`);
+    const token = localStorage.getItem("token");
+    return await axios.get(KH_DOMAIN + `/api/category/list`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 카테고리 쓰기
   cateInsert: async (email, category) => {
+    const token = localStorage.getItem("token");
     const cate = {
       email: email,
       categoryName: category,
     };
-    return await axios.post(KH_DOMAIN + "/api/category/new", cate);
+    return await axios.post(KH_DOMAIN + "/api/category/new", cate, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 카테고리 삭제
   cateDelete: async (categoryId) => {
-    return await axios.delete(KH_DOMAIN + `/api/category/delete/${categoryId}`);
+    const token = localStorage.getItem("token");
+    return await axios.delete(
+      KH_DOMAIN + `/api/category/delete/${categoryId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+      }
+    );
   },
   // 카테고리 수정
   cateUpdate: async (todoId) => {
