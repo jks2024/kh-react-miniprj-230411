@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CateTemplate from "../../component/category/CateTemplate";
 import CateInsert from "../../component/category/CateInsert";
-import TodoList from "../../component/category/CateList";
+import CateList from "../../component/category/CateList";
 import AxiosApi from "../../api/AxiosApi";
 import Modal from "../../utils/Modal";
 
 const Category = () => {
-  const [todos, setTodos] = useState([]);
+  const [category, setCategory] = useState([]);
   const email = window.localStorage.getItem("email");
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -18,7 +18,7 @@ const Category = () => {
   useEffect(() => {
     const todoList = async () => {
       const rsp = await AxiosApi.cateList();
-      if (rsp.status === 200) setTodos(rsp.data);
+      if (rsp.status === 200) setCategory(rsp.data);
       console.log(rsp.data);
     };
     todoList();
@@ -29,7 +29,7 @@ const Category = () => {
     const rsp = await AxiosApi.cateInsert(email, text);
     if (rsp.data === true) {
       const rsp = await AxiosApi.cateList();
-      if (rsp.status === 200) setTodos(rsp.data);
+      if (rsp.status === 200) setCategory(rsp.data);
       console.log(rsp.data);
     } else {
       setModalOpen(true);
@@ -39,9 +39,10 @@ const Category = () => {
 
   const onRemove = async (id) => {
     const rsp = await AxiosApi.cateDelete(id);
+    console.log(rsp.data);
     if (rsp.data === true) {
       const rsp = await AxiosApi.cateList();
-      if (rsp.status === 200) setTodos(rsp.data);
+      if (rsp.status === 200) setCategory(rsp.data);
       console.log(rsp.data);
     } else {
       setModalOpen(true);
@@ -64,7 +65,7 @@ const Category = () => {
   return (
     <CateTemplate>
       <CateInsert onInsert={onInsert} />
-      <TodoList todos={todos} onRemove={onRemove} />
+      <CateList todos={category} onRemove={onRemove} />
       <Modal open={modalOpen} close={closeModal} header="오류">
         {modlaMessage}
       </Modal>
