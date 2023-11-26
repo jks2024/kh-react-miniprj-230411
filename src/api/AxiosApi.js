@@ -45,7 +45,7 @@ const AxiosApi = {
   // 회원 가입 여부 확인
   memberRegCheck: async (email) => {
     console.log("가입 가능 여부 확인 : ", email);
-    return await axios.get(KH_DOMAIN + `/users/check?email=${email}`);
+    return await axios.get(KH_DOMAIN + `/auth/exists/${email}`);
   },
   // 회원 정보 수정
   memberUpdate: async (email, name, image) => {
