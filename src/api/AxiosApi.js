@@ -49,13 +49,19 @@ const AxiosApi = {
   },
   // 회원 정보 수정
   memberUpdate: async (email, name, image) => {
+    const token = localStorage.getItem("token");
     console.log("회원 정보 수정 : ", email, name, image);
     const member = {
       email: email,
       name: name,
       image: image,
     };
-    return await axios.put(KH_DOMAIN + `/users/modify`, member);
+    return await axios.put(KH_DOMAIN + `/users/modify`, member, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
 
   // 회원 탈퇴
@@ -166,39 +172,63 @@ const AxiosApi = {
   },
   // 카테고리 수정
   cateUpdate: async (todoId) => {
-    return await axios.put(KH_DOMAIN + `/api/todo/${todoId}`);
+    const token = localStorage.getItem("token");
+    return await axios.put(KH_DOMAIN + `/api/todo/${todoId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 영화 목록 조회
   movieList: async () => {
-    return await axios.get(KH_DOMAIN + "/api/movies/list");
+    return await axios.get(KH_DOMAIN + "/movies/list");
   },
   // 영화 페이지 수 조회
   moviePage: async (page, size) => {
     return await axios.get(
-      KH_DOMAIN + `/api/movies/list/count?page=${page}&size=${size}`
+      KH_DOMAIN + `/movies/list/count?page=${page}&size=${size}`
     );
   },
   // 영화 페이지네이션 조회
   moviePageList: async (page, size) => {
     return await axios.get(
-      KH_DOMAIN + `/api/movies/list/page?page=${page}&size=${size}`
+      KH_DOMAIN + `/movies/list/page?page=${page}&size=${size}`
     );
   },
   // 채팅방 목록 보기
   chatList: async () => {
-    return await axios.get(KH_DOMAIN + "/chat/list");
+    const token = localStorage.getItem("token");
+    return await axios.get(KH_DOMAIN + "/chat/list", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 채팅방 정보 보기
   chatDetail: async (roomId) => {
-    return await axios.get(KH_DOMAIN + `/chat/room/${roomId}`);
+    const token = localStorage.getItem("token");
+    return await axios.get(KH_DOMAIN + `/chat/room/${roomId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
   // 채팅방 생성
   chatCreate: async (email, name) => {
+    const token = localStorage.getItem("token");
     const chat = {
       email: email,
       name: name,
     };
-    return await axios.post(KH_DOMAIN + "/chat/new", chat);
+    return await axios.post(KH_DOMAIN + "/chat/new", chat, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+    });
   },
 };
 export default AxiosApi;
