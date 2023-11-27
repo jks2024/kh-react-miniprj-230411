@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { formatDate } from "../../utils/Common";
+import Common from "../../utils/Common";
 import AxiosApi from "../../api/AxiosApi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -89,7 +89,7 @@ const Members = () => {
               <MemberName>이름: {member.name}</MemberName>
               <MemberEmail>이메일: {member.email}</MemberEmail>
               <MemberJoinDate>
-                가입일: {formatDate(member.regDate)}
+                가입일: {Common.formatDate(member.regDate)}
               </MemberJoinDate>
             </UserInfo>
           </MemberInfoWrapper>
