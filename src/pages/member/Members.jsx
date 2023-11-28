@@ -69,7 +69,7 @@ const Members = () => {
         if (rsp.status === 200) setMemberInfo(rsp.data);
       } catch (e) {
         if (e.response.status === 401) {
-          Common.handleUnauthorized();
+          await Common.handleUnauthorized();
           const newToken = Common.getAccessToken();
           if (newToken !== accessToken) {
             const rsp = await AxiosApi.memberGet(); // 전체 조회
