@@ -76,11 +76,26 @@ const MemberInfo = () => {
   const { setName } = context;
 
   useEffect(() => {
+    const accessToken = Common.getAccessToken();
     const memberInfo = async () => {
-      const rsp = await AxiosApi.memberGetOne(email);
-      if (rsp.status === 200) {
-        setMember(rsp.data);
-        setUrl(rsp.data.image);
+      try {
+        const rsp = await AxiosApi.memberGetOne(email);
+        if (rsp.status === 200) {
+          setMember(rsp.data);
+          setUrl(rsp.data.image);
+        }
+      } catch (error) {
+        if (error.response.status === 401) {
+          await Common.handleUnauthorized();
+          const newToken = Common.getAccessToken();
+          if (newToken !== accessToken) {
+            const rsp = await AxiosApi.memberGetOne(email);
+            if (rsp.status === 200) {
+              setMember(rsp.data);
+              setUrl(rsp.data.image);
+            }
+          }
+        }
       }
     };
     memberInfo();
@@ -104,15 +119,35 @@ const MemberInfo = () => {
 
   // 회원 정보 업데이트 Axios 호출
   const handleSubmit = async (e) => {
+    const accessToken = Common.getAccessToken();
     e.preventDefault();
-    const rsp = await AxiosApi.memberUpdate(email, editName, url);
-    if (rsp.status === 200) {
-      setEditMode(false);
-      setName(editName);
-      const rsp = await AxiosApi.memberGetOne(email);
+    try {
+      const rsp = await AxiosApi.memberUpdate(email, editName, url);
       if (rsp.status === 200) {
-        setMember(rsp.data);
-        setUrl(rsp.data.image);
+        setEditMode(false);
+        setName(editName);
+        const rsp = await AxiosApi.memberGetOne(email);
+        if (rsp.status === 200) {
+          setMember(rsp.data);
+          setUrl(rsp.data.image);
+        }
+      }
+    } catch (error) {
+      if (error.response.status === 401) {
+        await Common.handleUnauthorized();
+        const newToken = Common.getAccessToken();
+        if (newToken !== accessToken) {
+          const rsp = await AxiosApi.memberUpdate(email, editName, url);
+          if (rsp.status === 200) {
+            setEditMode(false);
+            setName(editName);
+            const rsp = await AxiosApi.memberGetOne(email);
+            if (rsp.status === 200) {
+              setMember(rsp.data);
+              setUrl(rsp.data.image);
+            }
+          }
+        }
       }
     }
   };
