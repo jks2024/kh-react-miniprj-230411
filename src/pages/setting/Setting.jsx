@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaChevronRight } from "react-icons/fa";
+import Common from "../../utils/Common";
 
 const Container = styled.div`
   padding: 20px;
@@ -43,6 +44,11 @@ const LinkStyled = styled(Link)`
 `;
 
 const Setting = () => {
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    window.location.href = "/";
+  };
+
   return (
     <Container>
       <Title>설정</Title>
@@ -69,6 +75,12 @@ const Setting = () => {
             <LinkStyled to="/themesetting">
               <FaChevronRight />
             </LinkStyled>
+          </LinkContainer>
+        </ContainerListItem>
+        <ContainerListItem>
+          <LinkContainer onClick={handleLogout}>
+            <span>로그 아웃</span>
+            <FaChevronRight />
           </LinkContainer>
         </ContainerListItem>
       </ContainerList>

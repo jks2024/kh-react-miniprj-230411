@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { KH_SOCKET_URL } from "../../utils/Common";
+import Common from "../../utils/Common";
 import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import AxiosApi from "../../api/AxiosApi";
@@ -153,9 +153,9 @@ const Chatting = () => {
   useEffect(() => {
     console.log("방번호 : " + roomId);
     if (!ws.current) {
-      ws.current = new WebSocket(KH_SOCKET_URL);
+      ws.current = new WebSocket(Common.KH_SOCKET_URL);
       ws.current.onopen = () => {
-        console.log("connected to " + KH_SOCKET_URL);
+        console.log("connected to " + Common.KH_SOCKET_URL);
         setSocketConnected(true);
       };
     }

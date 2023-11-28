@@ -64,9 +64,16 @@ const Members = () => {
 
   useEffect(() => {
     const memberInfo = async () => {
-      const rsp = await AxiosApi.memberGet(); // 전체 조회
-      if (rsp.status === 200) setMemberInfo(rsp.data);
-      console.log(rsp.data);
+      try {
+        const rsp = await AxiosApi.memberGet(); // 전체 조회
+        if (rsp.status === 200) setMemberInfo(rsp.data);
+        console.log(rsp.data);
+      } catch (e) {
+        console.log(e);
+        if (e.response.status === 401) {
+          Common.handleUnauthorized();
+        }
+      }
     };
     memberInfo();
   }, []);

@@ -41,7 +41,7 @@ const Layout = () => {
   useEffect(() => {
     const getMember = async () => {
       try {
-        const rsp = await AxiosApi.memberGetOne(email);
+        const rsp = await AxiosApi.memberGetInfo();
         setMember(rsp.data);
       } catch (e) {
         console.error(e);

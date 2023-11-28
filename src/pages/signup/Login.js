@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Modal from "../../utils/Modal";
 import imgLogo from "../../images/tier_logo.png";
+import Common from "../../utils/Common";
 import AxiosApi from "../../api/AxiosApi";
 import {
   Input,
@@ -65,7 +66,10 @@ const Login = () => {
       const res = await AxiosApi.memberLogin(inputEmail, inputPw);
       console.log(res.data);
       if (res.data.grantType === "Bearer") {
-        localStorage.setItem("token", res.data.accessToken);
+        console.log("accessToken : ", res.data.accessToken);
+        console.log("refreshToken : ", res.data.refreshToken);
+        Common.setAccessToken(res.data.accessToken);
+        Common.setRefreshToken(res.data.refreshToken);
         navigate("/home");
       } else {
         setModalOpen(true);
