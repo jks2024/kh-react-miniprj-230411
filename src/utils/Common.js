@@ -50,8 +50,7 @@ const Common = {
         config
       );
       console.log(res.data);
-      Common.setAccessToken(res.data.accessToken);
-      Common.setRefreshToken(res.data.refreshToken);
+      Common.setAccessToken(res.data);
       return true;
     } catch (err) {
       console.log(err);

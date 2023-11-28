@@ -28,7 +28,6 @@ const Layout = () => {
   const { color, name } = context;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const email = localStorage.getItem("email");
   const [member, setMember] = useState({});
 
   const onClickLeft = () => {
