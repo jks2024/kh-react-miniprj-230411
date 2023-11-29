@@ -85,7 +85,6 @@ const Chatting = () => {
   const [roomName, setRoomName] = useState(""); // 채팅방 이름
   const ws = useRef(null);
   const navigate = useNavigate(); // useNavigate 훅 추가
-  const email = window.localStorage.getItem("email");
 
   const onChangMsg = (e) => {
     setInputMsg(e.target.value);
@@ -126,7 +125,7 @@ const Chatting = () => {
     // 이메일로 회원 정보 가져 오기
     const getMember = async () => {
       try {
-        const rsp = await AxiosApi.memberGetOne(email);
+        const rsp = await AxiosApi.memberGetInfo();
         console.log(rsp.data.name);
         setSender(rsp.data.name);
       } catch (error) {

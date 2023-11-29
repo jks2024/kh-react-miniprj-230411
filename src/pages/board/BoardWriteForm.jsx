@@ -137,8 +137,6 @@ const BoardWriteForm = () => {
     getCategories();
   }, []);
 
-  const email = window.localStorage.getItem("email");
-  console.log("email : " + email);
   const navigate = useNavigate();
 
   const handleTitleChange = (e) => {
@@ -149,10 +147,9 @@ const BoardWriteForm = () => {
   };
 
   const handleSubmit = async () => {
-    console.log(title, content, email, url);
+    console.log(title, content, url);
     try {
       const rsp = await AxiosApi.boardWrite(
-        email,
         title,
         selectedCategory,
         content,

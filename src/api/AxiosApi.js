@@ -101,10 +101,9 @@ const AxiosApi = {
     });
   },
   // 게시글 쓰기
-  boardWrite: async (email, title, categoryId, content, img) => {
+  boardWrite: async (title, categoryId, content, img) => {
     const accessToken = Common.getAccessToken();
     const board = {
-      email: email,
       title: title,
       categoryId: categoryId,
       content: content,
@@ -128,11 +127,10 @@ const AxiosApi = {
     });
   },
   // 댓글 쓰기
-  commentWrite: async (email, boardId, content) => {
+  commentWrite: async (boardId, content) => {
     const accessToken = Common.getAccessToken();
     const comment = {
       boardId: boardId,
-      email: email,
       content: content,
     };
     return await axios.post(Common.KH_DOMAIN + `/api/comment/new`, comment, {
@@ -153,10 +151,9 @@ const AxiosApi = {
     });
   },
   // 카테고리 쓰기
-  cateInsert: async (email, category) => {
+  cateInsert: async (category) => {
     const accessToken = Common.getAccessToken();
     const cate = {
-      email: email,
       categoryName: category,
     };
     return await axios.post(Common.KH_DOMAIN + "/api/category/new", cate, {
@@ -226,10 +223,9 @@ const AxiosApi = {
     });
   },
   // 채팅방 생성
-  chatCreate: async (email, name) => {
+  chatCreate: async (name) => {
     const accessToken = Common.getAccessToken();
     const chat = {
-      email: email,
       name: name,
     };
     return await axios.post(Common.KH_DOMAIN + "/chat/new", chat, {

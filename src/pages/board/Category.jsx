@@ -7,7 +7,6 @@ import Modal from "../../utils/Modal";
 
 const Category = () => {
   const [category, setCategory] = useState([]);
-  const email = window.localStorage.getItem("email");
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modlaMessage, setModalMessage] = useState("");
@@ -16,17 +15,16 @@ const Category = () => {
   };
 
   useEffect(() => {
-    const todoList = async () => {
+    const cateList = async () => {
       const rsp = await AxiosApi.cateList();
       if (rsp.status === 200) setCategory(rsp.data);
       console.log(rsp.data);
     };
-    todoList();
+    cateList();
   }, []);
 
   const onInsert = async (text) => {
-    console.log("onInsert : " + text + " " + email);
-    const rsp = await AxiosApi.cateInsert(email, text);
+    const rsp = await AxiosApi.cateInsert(text);
     if (rsp.data === true) {
       const rsp = await AxiosApi.cateList();
       if (rsp.status === 200) setCategory(rsp.data);

@@ -57,9 +57,6 @@ const MemberJoinDate = styled.span`
 const Members = () => {
   const navigate = useNavigate();
   const [memberInfo, setMemberInfo] = useState("");
-  const isLogin = window.localStorage.getItem("isLogin");
-  console.log(isLogin);
-  if (isLogin !== "TRUE") navigate("/");
 
   useEffect(() => {
     const accessToken = Common.getAccessToken();

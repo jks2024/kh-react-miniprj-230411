@@ -46,10 +46,9 @@ const Button = styled.button`
 function ChatRoomCreate() {
   const [chatRoomTitle, setChatRoomTitle] = useState("");
   const navigate = useNavigate();
-  const email = localStorage.getItem("email");
 
   const handleCreateChatRoom = async () => {
-    const response = await Axios.chatCreate(email, chatRoomTitle);
+    const response = await Axios.chatCreate(chatRoomTitle);
     console.log(response.data);
     navigate(`/chatting/${response.data}`);
   };

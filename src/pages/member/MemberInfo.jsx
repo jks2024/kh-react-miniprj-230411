@@ -65,11 +65,11 @@ const SubmitButton = styled.button`
 `;
 
 const MemberInfo = () => {
-  const { email } = useParams();
+  const { email } = useParams(); // URL 파라미터에서 email 값 추출 (회원 리스트에서 클릭한 회원의 이메일)
   const [member, setMember] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [editName, setEditName] = useState("");
-  const [isCurrentUser, setIsCurrentUser] = useState(false);
+  const [loginUserEmail, setLoginUserEmail] = useState(""); // 현재 로그인 유저의 이메일
   const [file, setFile] = useState(null);
   const [url, setUrl] = useState("");
   const context = useContext(UserContext);
@@ -84,6 +84,9 @@ const MemberInfo = () => {
           setMember(rsp.data);
           setUrl(rsp.data.image);
         }
+        const rsp2 = await AxiosApi.memberGetInfo();
+        console.log(rsp2.data.email);
+        setLoginUserEmail(rsp2.data.email);
       } catch (error) {
         if (error.response.status === 401) {
           await Common.handleUnauthorized();
@@ -99,13 +102,6 @@ const MemberInfo = () => {
       }
     };
     memberInfo();
-
-    // 로컬스토리지에서 로그인한 사용자 정보를 가져옵니다.
-    const loginUserEmail = localStorage.getItem("email");
-    // 로그인한 사용자와 글쓴이가 같은지 비교합니다.
-    if (loginUserEmail === email) {
-      setIsCurrentUser(true);
-    }
   }, [email]);
 
   // 입력 필드 변경 처리
@@ -196,7 +192,7 @@ const MemberInfo = () => {
             <Label>가입일 : {Common.formatDate(member.regDate)}</Label>
           </Field>
           {/* 현재 사용자가 로그인한 사용자인 경우에만 편집 버튼 표시 */}
-          {isCurrentUser && (
+          {email === loginUserEmail && (
             <SubmitButton onClick={() => setEditMode(true)}>편집</SubmitButton>
           )}
         </>
