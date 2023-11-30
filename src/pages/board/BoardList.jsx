@@ -116,7 +116,6 @@ const CategorySelect = styled.select`
 `;
 
 // 게시판 목록 페이지 입니다.
-
 function BoardList() {
   const [boardList, setBoardList] = useState([]);
   const navigate = useNavigate();

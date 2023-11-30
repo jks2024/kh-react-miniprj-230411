@@ -1,31 +1,18 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { UserContext } from "../../context/UserStore";
 
-const Wheather = () => {
-  const [location, setLocation] = useState({ lat: 0, long: 0 });
-  const [coords, setCoords] = useState("");
-  const [weather, setWeather] = useState("");
-  const [address, setAddress] = useState("");
+const useWeather = () => {
+  const [location, setLocation] = useState({ lat: 0, long: 0 }); // 위도, 경도
+  const [coords, setCoords] = useState(""); // 위도, 경도
+  const [addr, setAddr] = useState(""); // 주소
+  const [temp, setTemp] = useState(""); // 온도
+  const [intervalId, setIntervalId] = useState(null); // 갱신 주기를 관리하기 위한 상태
+  const updateInterval = 60000; // 주기적 갱신 간격 (예: 1분)
 
-  // 카카오 API를 이용한 주소 가져오기
-  const getGeocodeKakao = async (lat, lng) => {
-    try {
-      const response = await axios.get(
-        `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`,
-        {
-          headers: {
-            Authorization: `KakaoAK 2dda918f299fb6e8325412499bf9a08a`,
-          },
-        }
-      );
-      const fullAddress = response.data.documents[0].address;
-      const neighborhoodAddress = `${fullAddress.region_1depth_name} ${fullAddress.region_2depth_name} ${fullAddress.region_3depth_name}`;
-      setAddress(neighborhoodAddress);
-    } catch (error) {
-      console.error("Kakao Geocoding error:", error);
-    }
-  };
+  // 현재 위치 가져오기
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+  }, []);
 
   // 현재 위치 가져오기
   const onSuccess = (position) => {
@@ -38,37 +25,55 @@ const Wheather = () => {
   const onError = (error) => {
     console.log(error);
   };
-
-  // 현재 위치 가져오기
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-  }, []);
-
   // 현재 위치가 변경되면 주소를 가져온다.
   useEffect(() => {
     console.log(location.lat, location.long);
     getGeocodeKakao(location.lat, location.long);
   }, [location]);
 
+  // 주소 가져 오기
+  const getGeocodeKakao = async (lat, lng) => {
+    try {
+      const response = await axios.get(
+        `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${lng}&y=${lat}`,
+        {
+          headers: {
+            Authorization: `KakaoAK 2dda918f299fb6e8325412499bf9a08a`,
+          },
+        }
+      );
+      const fullAddress = response.data.documents[0].address;
+      const neighborhoodAddress = `${fullAddress.region_1depth_name} ${fullAddress.region_2depth_name} ${fullAddress.region_3depth_name}`;
+      setAddr(neighborhoodAddress); // context에 저장
+    } catch (error) {
+      console.error("Kakao Geocoding error:", error);
+    }
+  };
+  // 주소가 변경되면 좌표 변환을 실행한다.
   useEffect(() => {
-    dfs_xy_conv("toXY", location.lat, location.long);
-  }, [address]);
+    if (addr) {
+      dfs_xy_conv("toXY", location.lat, location.long);
+    }
+  }, [addr]);
 
-  // 좌표 변환
+  // 좌표가 변경되면 날씨 정보를 가져온다.
   useEffect(() => {
-    const getWeather = async () => {
-      console.log("weather Call", coords.x, coords.y);
-      try {
-        const response = await axios.get(
-          `http://127.0.0.1:5000/api/weather2?x=${coords.x}&y=${coords.y}`
-        );
-        console.log(response.data);
-        setWeather(response.data);
-      } catch (error) {
-        console.error("Weather error:", error);
+    if (coords) {
+      getWeather();
+      // 주기적 갱신 설정
+      if (!intervalId) {
+        const newIntervalId = setInterval(() => {
+          getWeather();
+        }, updateInterval);
+        setIntervalId(newIntervalId);
+      }
+    }
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
       }
     };
-    if (coords) getWeather();
   }, [coords]);
 
   function dfs_xy_conv(code, v1, v2) {
@@ -136,19 +141,20 @@ const Wheather = () => {
     setCoords({ x: rs.x, y: rs.y });
   }
 
-  return (
-    <>
-      <p>위도: {location.lat}</p>
-      <p>경도: {location.long}</p>
-      <p>주소 : {address}</p>
-      <p>기상청 X : {coords.x}</p>
-      <p>기상청 Y : {coords.y}</p>
-      <p>온도 : {weather.tmp}</p>
-      <p>습도 : {weather.hum}</p>
-      <p>강수량 : {weather.pre}</p>
-      <p>상태 : {weather.sky2}</p>
-    </>
-  );
+  const getWeather = async () => {
+    console.log("weather Call", coords.x, coords.y);
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:5000/api/weather2?x=${coords.x}&y=${coords.y}`
+      );
+      console.log(response.data);
+      setTemp(response.data.tmp); // context에 저장
+    } catch (error) {
+      console.error("Weather error:", error);
+    }
+  };
+
+  return { addr, temp };
 };
 
-export default Wheather;
+export default useWeather;

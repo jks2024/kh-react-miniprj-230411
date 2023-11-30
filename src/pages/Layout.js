@@ -21,12 +21,14 @@ import { BiCameraMovie } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
+import useWeather from "../hooks/useWeather";
 
 // 사이드바 메뉴를 구성 합니다.
 
 const Layout = () => {
   const context = useContext(UserContext);
-  const { color, name, addr, temp } = context;
+  const { color, name } = context;
+  const { addr, temp } = useWeather(); // 커스텀 훅 사용
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const [member, setMember] = useState({});
