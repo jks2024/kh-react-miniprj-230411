@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { UserContext } from "../../context/UserStore";
 
 const RE = 6371.00877; // 지구 반경(km)
 const GRID = 5.0; // 격자 간격(km)
@@ -15,7 +16,10 @@ const Wheather = () => {
   const [address, setAddress] = useState("");
   const [coords, setCoords] = useState("");
   const [weather, setWeather] = useState("");
+  const context = useContext(UserContext);
+  const { setAddr, setTemp } = context;
 
+  // 카카오 API를 이용한 주소 가져오기
   const getGeocodeKakao = async (lat, lng) => {
     try {
       const response = await axios.get(
@@ -26,12 +30,16 @@ const Wheather = () => {
           },
         }
       );
-      setAddress(response.data.documents[0].address.address_name);
+      const fullAddress = response.data.documents[0].address;
+      const neighborhoodAddress = `${fullAddress.region_1depth_name} ${fullAddress.region_2depth_name} ${fullAddress.region_3depth_name}`;
+      setAddress(neighborhoodAddress);
+      setAddr(neighborhoodAddress); // context에 저장
     } catch (error) {
       console.error("Kakao Geocoding error:", error);
     }
   };
 
+  // 현재 위치 가져오기
   const onSuccess = (position) => {
     setLocation({
       lat: position.coords.latitude,
@@ -43,10 +51,12 @@ const Wheather = () => {
     console.log(error);
   };
 
+  // 현재 위치 가져오기
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
   }, []);
 
+  // 현재 위치가 변경되면 주소를 가져온다.
   useEffect(() => {
     console.log(location.lat, location.long);
     getGeocodeKakao(location.lat, location.long);
@@ -56,6 +66,7 @@ const Wheather = () => {
     dfs_xy_conv("toXY", location.lat, location.long);
   }, [address]);
 
+  // 좌표 변환
   useEffect(() => {
     const getWeather = async () => {
       console.log("weather Call", coords.x, coords.y);
@@ -65,6 +76,7 @@ const Wheather = () => {
         );
         console.log(response.data);
         setWeather(response.data);
+        setTemp(response.data.tmp); // context에 저장
       } catch (error) {
         console.error("Weather error:", error);
       }

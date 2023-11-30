@@ -26,6 +26,14 @@ export const Container = styled.div`
       margin-top: 12px;
       margin-left: 34px;
     }
+    .welcome {
+      margin-top: 12px;
+      margin-left: 34px;
+    }
+    .current-temp {
+      margin-top: 12px;
+      margin-left: 34px;
+    }
     .setting {
       margin-top: 12px;
       margin-right: 34px;
@@ -50,7 +58,8 @@ export const Container = styled.div`
 
 export const UserContainer = styled.div`
   display: flex;
-  margin: 40px 20px;
+  margin: 40px 20px 20px;
+  align-items: center;
 `;
 
 export const UserImage = styled.img`
@@ -68,7 +77,6 @@ export const UserIdAndName = styled.div`
   margin: 2px 10px;
   line-height: 1.5;
 `;
-
 export const StyledSideMenu = styled.div`
   position: fixed;
   left: 0;
@@ -83,6 +91,15 @@ export const StyledSideMenu = styled.div`
   transform: ${(props) =>
     props.isOpen ? "translateX(0)" : "translateX(-100%)"};
   transition: transform 0.3s ease;
+`;
+
+export const Addr = styled.div`
+  display: flex;
+  margin-left: 12px;
+  align-items: center;
+  font-size: 0.9em;
+  font-style: italic;
+  color: #222;
 `;
 
 export const StyledMenuList = styled.ul`
