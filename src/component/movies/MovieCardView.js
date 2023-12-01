@@ -29,10 +29,11 @@ const CardView = styled.div`
   align-items: center;
   width: 200px;
   height: 350px;
-  padding: 10px;
+  padding: 4px;
   border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1.1;
 `;
 
@@ -41,8 +42,8 @@ const Ranking = styled.div`
   top: 0;
   left: 0;
   padding: 5px;
-  top: 10px;
-  left: 10px;
+  top: 4px;
+  left: 4px;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   font-size: 1.2rem;
@@ -59,7 +60,7 @@ const Poster = styled.img`
 
 const Title = styled.h3`
   margin: 10px 0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   text-align: center;
   overflow: hidden;
@@ -70,7 +71,7 @@ const Title = styled.h3`
 
 const Rating = styled.div`
   margin-bottom: 5px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
   color: black;
 `;

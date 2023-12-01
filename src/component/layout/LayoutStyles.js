@@ -27,8 +27,7 @@ export const Container = styled.div`
       margin-left: 34px;
     }
     .welcome {
-      margin-top: 12px;
-      margin-left: 34px;
+      margin-top: 16px;
     }
     .current-temp {
       margin-top: 12px;

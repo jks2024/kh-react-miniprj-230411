@@ -19,7 +19,7 @@ const MemberInfoWrapper = styled.div`
   border: 1px solid #ccc;
   padding: 16px;
   border-radius: 8px;
-  background-color: antiquewhite;
+  background-color: rgba(255, 255, 255, 0.6);
 `;
 
 const UserInfo = styled.div`

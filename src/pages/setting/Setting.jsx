@@ -2,12 +2,10 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FaChevronRight } from "react-icons/fa";
-import Common from "../../utils/Common";
 
 const Container = styled.div`
   padding: 20px;
   margin: 20px auto;
-  border-radius: 8px;
 `;
 const Title = styled.h1`
   color: #333;
@@ -23,11 +21,14 @@ const ContainerList = styled.div`
 
 const ContainerListItem = styled.div`
   display: flex;
+  border-radius: 20px;
+  height: 50px;
   background: rgba(255, 255, 255, 0.6);
   box-sizing: border-box;
   width: 100%;
   justify-content: space-between;
-  border-bottom: 2px solid #ccc;
+  align-items: center;
+  border-bottom: 1px solid #fff;
   padding: 10px 30px;
 `;
 const LinkContainer = styled.div`

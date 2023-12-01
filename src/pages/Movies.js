@@ -6,7 +6,6 @@ import styled from "styled-components";
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  background: #eee;
   gap: 8px;
   justify-content: start;
   margin: 20px;

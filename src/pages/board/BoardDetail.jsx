@@ -13,15 +13,26 @@ const Container = styled.div`
   border-radius: 8px;
 `;
 
+const FieldContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`;
+
 const Title = styled.h1`
   color: #333;
   font-size: 2em;
-  margin-bottom: 10px;
 `;
 
 const Content = styled.p`
   color: #666;
   line-height: 1.5;
+  white-space: pre-wrap;
 `;
 
 const CommentForm = styled.form`
@@ -144,13 +155,17 @@ const BoardDetail = () => {
 
   return (
     <Container>
-      <BoardImage
-        src={board.img ? board.img : "http://via.placeholder.com/160"}
-        alt="Board image"
-      />
-      <Title>{board.title}</Title>
-      <Content>{board.content}</Content>
-      <BoardDate>{Common.timeFromNow(board.regDate)}</BoardDate>
+      <FieldContainer>
+        <BoardImage
+          src={board.img ? board.img : "http://via.placeholder.com/160"}
+          alt="Board image"
+        />
+        <TextContainer>
+          <Title>{board.title}</Title>
+          <Content>{board.content}</Content>
+          <BoardDate>{Common.timeFromNow(board.regDate)}</BoardDate>
+        </TextContainer>
+      </FieldContainer>
 
       <button onClick={toggleComments}>
         {showComments ? "댓글 숨기기" : `댓글 ${comments.length}개 보기`}

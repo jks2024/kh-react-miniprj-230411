@@ -13,7 +13,7 @@ const Container = styled.div`
   border-radius: 8px;
   max-width: 320px;
   margin: 20px auto;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.1);
 `;
 
 const UserInfo = styled.div`
@@ -65,7 +65,7 @@ const SubmitButton = styled.button`
 `;
 
 const MemberInfo = () => {
-  const { email } = useParams(); // URL 파라미터에서 email 값 추출 (회원 리스트에서 클릭한 회원의 이메일)
+  const { email } = useParams(); // URL 파라미터에서 email 값 추출 (회원 리스트)
   const [member, setMember] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [editName, setEditName] = useState("");

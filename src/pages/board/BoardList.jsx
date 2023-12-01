@@ -28,7 +28,7 @@ const BoardImage = styled.img`
 `;
 
 const BoardLi = styled.li`
-  background-color: #f2f2f2;
+  background-color: rgba(255, 255, 255, 0.6);
   margin: 10px 0;
   padding: 10px 14px;
   border-radius: 8px;
@@ -46,6 +46,7 @@ const BoardTitle = styled.h2`
 const BoardContent = styled.p`
   color: #444;
   font-size: 1em;
+  white-space: pre-wrap; // 줄바꿈을 적용합니다.
 `;
 
 const BoardDate = styled.p`
