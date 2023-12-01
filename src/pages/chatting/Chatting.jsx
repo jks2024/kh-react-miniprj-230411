@@ -7,14 +7,14 @@ import AxiosApi from "../../api/AxiosApi";
 const ChatContainer = styled.div`
   padding: 20px;
   max-width: 800px;
-  margin: 0 auto;
-  background-color: #f9f9f9;
+  margin: 10px auto;
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 const ChatHeader = styled.div`
-  font-size: 1.5em;
+  font-size: 1.3em;
   color: #333;
   text-align: center;
   margin-bottom: 20px;
@@ -44,7 +44,7 @@ const Message = styled.div`
 
 const Input = styled.input`
   padding: 10px;
-  width: 70%;
+  width: 84%;
   border-radius: 4px;
   border: 1px solid #ddd;
 `;
@@ -52,7 +52,9 @@ const Input = styled.input`
 const SendButton = styled.button`
   padding: 10px 15px;
   border: none;
+  width: 100px;
   background-color: #4caf50;
+  box-shadow: 1px 1px 1px #ccc;
   color: white;
   border-radius: 4px;
   margin-left: 10px;

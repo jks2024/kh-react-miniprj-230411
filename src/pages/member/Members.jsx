@@ -14,7 +14,7 @@ const Container = styled.div`
 
 const MemberInfoWrapper = styled.div`
   display: flex;
-  margin: 10px;
+  margin: 10px 26px;
   width: 100%;
   border: 1px solid #ccc;
   padding: 16px;

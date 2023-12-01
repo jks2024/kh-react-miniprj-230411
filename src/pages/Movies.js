@@ -6,9 +6,9 @@ import styled from "styled-components";
 const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  justify-content: start;
-  margin: 20px;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px auto;
 `;
 
 const PaginationContainer = styled.div`

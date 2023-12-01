@@ -137,22 +137,32 @@ function BoardList() {
   }, []);
 
   useEffect(() => {
+    const accessToken = Common.getAccessToken();
     const boardList = async () => {
-      console.log("useFeect selectedCategory : " + selectedCategory);
       try {
         const rsp = await AxiosApi.boardList();
-
-        // 카테고리가 "all"이 아닐 때만 필터링 적용
         const filteredList =
           selectedCategory === "all"
             ? rsp.data
             : rsp.data.filter(
                 (board) => board.categoryId === parseInt(selectedCategory)
               );
-        console.log(filteredList);
         setBoardList(filteredList);
-      } catch (error) {
-        console.log(error);
+      } catch (e) {
+        if (e.response.status === 401) {
+          await Common.handleUnauthorized();
+          const newToken = Common.getAccessToken();
+          if (newToken !== accessToken) {
+            const rsp = await AxiosApi.boardList();
+            const filteredList =
+              selectedCategory === "all"
+                ? rsp.data
+                : rsp.data.filter(
+                    (board) => board.categoryId === parseInt(selectedCategory)
+                  );
+            setBoardList(filteredList);
+          }
+        }
       }
     };
     boardList();

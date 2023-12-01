@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "../../api/AxiosApi";
+import Common from "../../utils/Common";
 
 // 스타일 컴포넌트 정의
 const Container = styled.div`
@@ -48,9 +49,22 @@ function ChatRoomCreate() {
   const navigate = useNavigate();
 
   const handleCreateChatRoom = async () => {
-    const response = await Axios.chatCreate(chatRoomTitle);
-    console.log(response.data);
-    navigate(`/chatting/${response.data}`);
+    const accessToken = Common.getAccessToken();
+    try {
+      const response = await Axios.chatCreate(chatRoomTitle);
+      console.log(response.data);
+      navigate(`/chatting/${response.data}`);
+    } catch (e) {
+      if (e.response.status === 401) {
+        await Common.handleUnauthorized();
+        const newToken = Common.getAccessToken();
+        if (newToken !== accessToken) {
+          const response = await Axios.chatCreate(chatRoomTitle);
+          console.log(response.data);
+          navigate(`/chatting/${response.data}`);
+        }
+      }
+    }
   };
 
   const handleCancel = () => {

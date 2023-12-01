@@ -123,6 +123,7 @@ const BoardDetail = () => {
   };
 
   useEffect(() => {
+    const token = Common.getToken();
     const getBoardDetail = async () => {
       console.log("getBoardDetail : " + id);
       try {
@@ -130,8 +131,17 @@ const BoardDetail = () => {
         setBoard(response.data);
         const response2 = await AxiosApi.commentList(id);
         setComments(response2.data);
-      } catch (error) {
-        console.log(error);
+      } catch (e) {
+        if (e.response.status === 401) {
+          await Common.handleUnauthorized();
+          const newToken = Common.getToken();
+          if (newToken !== token) {
+            const response = await AxiosApi.boardDetail(id);
+            setBoard(response.data);
+            const response2 = await AxiosApi.commentList(id);
+            setComments(response2.data);
+          }
+        }
       }
     };
     getBoardDetail();
