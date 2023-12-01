@@ -28,8 +28,10 @@ const useWeather = () => {
   // 현재 위치가 변경되면 주소를 가져온다.
   useEffect(() => {
     console.log(location.lat, location.long);
-    getGeocodeKakao(location.lat, location.long);
-  }, [location]);
+    if (location.lat !== 0 && location.long !== 0) {
+      getGeocodeKakao(location.lat, location.long);
+    }
+  }, [location.lat, location.long]); // 의존성 배열에 lat과 long 추가
 
   // 주소 가져 오기
   const getGeocodeKakao = async (lat, lng) => {
