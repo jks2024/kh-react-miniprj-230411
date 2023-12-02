@@ -156,7 +156,7 @@ const useWeather = () => {
     }
   };
 
-  return { addr, temp };
+  return { addr, temp, location };
 };
 
 export default useWeather;
