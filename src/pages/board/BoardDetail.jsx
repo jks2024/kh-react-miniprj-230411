@@ -3,6 +3,7 @@ import AxiosApi from "../../api/AxiosApi";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Common from "../../utils/Common";
+import { useNavigate } from "react-router-dom";
 
 // 여기에 스타일드 컴포넌트를 정의합니다.
 const Container = styled.div`
@@ -101,6 +102,22 @@ const CommentEmail = styled.p`
   padding: 0;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+`;
+
+const Button = styled.button`
+  padding: 8px 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+`;
+
 const BoardDate = styled.p`
   color: #777;
   font-size: 0.8em;
@@ -115,26 +132,29 @@ const BoardDetail = () => {
   const [comments, setComments] = useState("");
   const [inputComment, setInputComment] = useState("");
   const [comAddFlag, setComAddFlag] = useState(false); // 댓글 추가 성공 여부
-
+  const [loginUserEmail, setLoginUserEmail] = useState(""); // 현재 로그인 유저의 이메일
   const [showComments, setShowComments] = useState(false);
+  const navigate = useNavigate();
 
   const toggleComments = () => {
     setShowComments(!showComments);
   };
 
   useEffect(() => {
-    const token = Common.getToken();
+    const token = Common.getAccessToken();
     const getBoardDetail = async () => {
       console.log("getBoardDetail : " + id);
       try {
-        const response = await AxiosApi.boardDetail(id);
+        const response = await AxiosApi.boardDetail(id); // 게시글 상세
         setBoard(response.data);
-        const response2 = await AxiosApi.commentList(id);
+        const response2 = await AxiosApi.commentList(id); // 댓글 목록
         setComments(response2.data);
+        const response3 = await AxiosApi.memberGetInfo(); // 현재 로그인 유저의 이메일
+        setLoginUserEmail(response3.data.email);
       } catch (e) {
         if (e.response.status === 401) {
           await Common.handleUnauthorized();
-          const newToken = Common.getToken();
+          const newToken = Common.getAccessToken();
           if (newToken !== token) {
             const response = await AxiosApi.boardDetail(id);
             setBoard(response.data);
@@ -146,6 +166,37 @@ const BoardDetail = () => {
     };
     getBoardDetail();
   }, [comAddFlag, id]);
+
+  const modifyBoard = () => {
+    console.log("modifyBoard : " + id);
+  };
+  const deleteBoard = () => {
+    console.log("deleteBoard : " + id);
+    // 삭제 확인을 위한 팝업 띄우기
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      const token = Common.getAccessToken();
+      const deleteBoard = async () => {
+        try {
+          const response = await AxiosApi.boardDelete(id);
+          console.log(response);
+          window.alert("삭제되었습니다.");
+          navigate("/boards");
+        } catch (e) {
+          if (e.response.status === 401) {
+            await Common.handleUnauthorized();
+            const newToken = Common.getAccessToken();
+            if (newToken !== token) {
+              const response = await AxiosApi.boardDelete(id);
+              console.log(response);
+              window.alert("삭제되었습니다.");
+              window.location.href = "/boardList";
+            }
+          }
+        }
+      };
+      deleteBoard();
+    }
+  };
 
   const handleCommentChange = (e) => {
     setInputComment(e.target.value);
@@ -177,9 +228,17 @@ const BoardDetail = () => {
         </TextContainer>
       </FieldContainer>
 
-      <button onClick={toggleComments}>
-        {showComments ? "댓글 숨기기" : `댓글 ${comments.length}개 보기`}
-      </button>
+      <ButtonContainer>
+        <Button onClick={toggleComments}>
+          {showComments ? "댓글 숨기기" : `댓글 ${comments.length}개 보기`}
+        </Button>
+        {loginUserEmail === board.email && (
+          <>
+            <Button onClick={modifyBoard}>수정</Button>
+            <Button onClick={deleteBoard}>삭제</Button>
+          </>
+        )}
+      </ButtonContainer>
 
       <CommentForm onSubmit={handleSubmitComment}>
         <label>

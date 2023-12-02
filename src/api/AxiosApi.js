@@ -116,6 +116,19 @@ const AxiosApi = {
       },
     });
   },
+  // 게시글 삭제
+  boardDelete: async (boardId) => {
+    const accessToken = Common.getAccessToken();
+    return await axios.delete(
+      Common.KH_DOMAIN + `/api/board/delete/${boardId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    );
+  },
   // 게시글에 달린 댓글 조회
   commentList: async (boardId) => {
     const accessToken = Common.getAccessToken();
