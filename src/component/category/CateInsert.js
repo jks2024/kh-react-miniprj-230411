@@ -1,6 +1,45 @@
+import styled from "styled-components";
 import { useState, useCallback } from "react";
 import { MdAdd } from "react-icons/md";
-import "./CateInsert.scss";
+
+const CateInsertForm = styled.form`
+  display: flex;
+  background: #495057;
+`;
+
+const Input = styled.input`
+  background: none;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: white;
+  flex: 1;
+
+  &::placeholder {
+    color: #dee2e6;
+  }
+`;
+
+const Button = styled.button`
+  background: none;
+  outline: none;
+  border: none;
+  background: #868e96;
+  color: white;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.1s background ease-in;
+
+  &:hover {
+    background: #abd5bd;
+  }
+`;
 
 const CateInsert = ({ onInsert }) => {
   const [value, setValue] = useState("");
@@ -13,23 +52,22 @@ const CateInsert = ({ onInsert }) => {
     (e) => {
       onInsert(value);
       setValue("");
-      // submit 이벤트는 브라우저에서 새로고침을 발생시킵니다. 이를 방지하기 위한 처리
       e.preventDefault();
     },
     [onInsert, value]
   );
 
   return (
-    <form className="CateInsert" onSubmit={onSubmit}>
-      <input
+    <CateInsertForm onSubmit={onSubmit}>
+      <Input
         placeholder="카테고리 목록 입력"
         value={value}
         onChange={onChange}
       />
-      <button type="submit">
+      <Button type="submit">
         <MdAdd />
-      </button>
-    </form>
+      </Button>
+    </CateInsertForm>
   );
 };
 

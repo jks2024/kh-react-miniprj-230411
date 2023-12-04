@@ -63,7 +63,7 @@ const Category = () => {
   return (
     <CateTemplate>
       <CateInsert onInsert={onInsert} />
-      <CateList todos={category} onRemove={onRemove} />
+      <CateList cates={category} onRemove={onRemove} />
       <Modal open={modalOpen} close={closeModal} header="오류">
         {modlaMessage}
       </Modal>
