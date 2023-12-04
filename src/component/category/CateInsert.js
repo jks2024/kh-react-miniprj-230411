@@ -34,10 +34,10 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: 0.1s background ease-in;
+  transition: 0.1s all ease-in;
 
   &:hover {
-    background: #abd5bd;
+    background: orangered;
   }
 `;
 
@@ -60,7 +60,7 @@ const CateInsert = ({ onInsert }) => {
   return (
     <CateInsertForm onSubmit={onSubmit}>
       <Input
-        placeholder="카테고리 목록 입력"
+        placeholder="게시글 카테고리 입력"
         value={value}
         onChange={onChange}
       />

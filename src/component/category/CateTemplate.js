@@ -8,7 +8,7 @@ const CateTemplateContainer = styled.div`
 `;
 
 const AppTitle = styled.div`
-  background: #22b8cf;
+  background: rgba(255, 255, 255, 0.3);
   color: white;
   height: 4rem;
   font-size: 1.5rem;
