@@ -45,6 +45,9 @@ const Home = () => {
       case 13:
         navigate("/KakaoMap");
         break;
+      case 14:
+        navigate("/GenderChart");
+        break;
       default:
     }
   };
@@ -66,6 +69,7 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(11)}>날씨</TransBtn>
           <TransBtn onClick={() => onClickBtn(12)}>채팅</TransBtn>
           <TransBtn onClick={() => onClickBtn(13)}>카카오맵</TransBtn>
+          <TransBtn onClick={() => onClickBtn(14)}>성별 차트</TransBtn>
         </ButtonContainer>
       </div>
     </>

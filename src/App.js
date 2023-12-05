@@ -25,6 +25,7 @@ import ChatList from "./pages/chatting/ChatList";
 import ChatRoomCreate from "./pages/chatting/ChatRoomCreate";
 import Chatting from "./pages/chatting/Chatting";
 import KakaoMap from "./pages/etc/KakaoMap";
+import GenderChart from "./pages/etc/GenderChart";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
               <Route path="/Chat" element={<ChatList />} />
               <Route path="/Chat-create" element={<ChatRoomCreate />} />
               <Route path="/KakaoMap" element={<KakaoMap />} />
+              <Route path="/GenderChart" element={<GenderChart />} />
             </Route>
           </Routes>
         </Router>
