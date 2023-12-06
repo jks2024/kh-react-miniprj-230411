@@ -48,6 +48,9 @@ const Home = () => {
       case 14:
         navigate("/GenderChart");
         break;
+      case 15:
+        navigate("/BloodPieChart");
+        break;
       default:
     }
   };
@@ -70,6 +73,7 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(12)}>채팅</TransBtn>
           <TransBtn onClick={() => onClickBtn(13)}>카카오맵</TransBtn>
           <TransBtn onClick={() => onClickBtn(14)}>성별 차트</TransBtn>
+          <TransBtn onClick={() => onClickBtn(15)}>형액형 파이 차트</TransBtn>
         </ButtonContainer>
       </div>
     </>

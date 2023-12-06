@@ -66,10 +66,12 @@ ChartJS.register(
 );
 
 const GenderChart = () => {
+  // 차트 데이터
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
   });
+  // 지역명
   const [region, setRegion] = useState("신도림");
 
   useEffect(() => {
@@ -86,14 +88,14 @@ const GenderChart = () => {
               {
                 label: "여성",
                 data: rsp.data.female,
-                backgroundColor: "rgba(255, 99, 132, 0.6)",
+                backgroundColor: "rgba(255, 99, 132, 0.8)",
                 borderColor: "rgba(255, 99, 132, 1)",
                 borderWidth: 1,
               },
               {
                 label: "남성",
                 data: rsp.data.male,
-                backgroundColor: "rgba(54, 162, 235, 0.6)",
+                backgroundColor: "rgba(54, 162, 235, 0.8)",
                 borderColor: "rgba(54, 162, 235, 1)",
                 borderWidth: 1,
               },
@@ -165,7 +167,7 @@ const GenderChart = () => {
         />
         <Button onClick={handleRegionClick}>조회</Button>
       </InputContainer>
-      <h2>{region} 지역의 남여 성별 인구 분포</h2>
+      <h2>{region} 지역의 남여 성별 인구 분포(2019년 기준)</h2>
       <Bar data={chartData} options={options} />
     </Container>
   );
