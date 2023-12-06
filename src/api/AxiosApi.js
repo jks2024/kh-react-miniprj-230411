@@ -249,8 +249,8 @@ const AxiosApi = {
     });
   },
   // 파이썬을 연결해 성별 정보 가져오기
-  genderChart: async () => {
-    return await axios.get("http://127.0.0.1:5000/api/gender");
+  genderChart: async (region) => {
+    return await axios.get(`http://127.0.0.1:5000/api/gender/${region}`);
   },
 };
 export default AxiosApi;
