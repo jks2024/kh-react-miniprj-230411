@@ -22,6 +22,7 @@ import { CgProfile } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import useWeather from "../hooks/useWeather";
+import Common from "../utils/Common";
 
 // 사이드바 메뉴를 구성 합니다.
 const Layout = () => {
@@ -40,12 +41,20 @@ const Layout = () => {
   };
 
   useEffect(() => {
+    const accessToken = Common.getAccessToken();
     const getMember = async () => {
       try {
         const rsp = await AxiosApi.memberGetInfo();
         setMember(rsp.data);
       } catch (e) {
-        console.error(e);
+        if (e.response.status === 401) {
+          await Common.handleUnauthorized();
+          const newToken = Common.getAccessToken();
+          if (newToken !== accessToken) {
+            const rsp = await AxiosApi.memberGetInfo();
+            setMember(rsp.data);
+          }
+        }
       }
     };
     getMember();
