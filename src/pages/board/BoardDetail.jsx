@@ -22,6 +22,7 @@ const Title = styled.h1`
 const Content = styled.p`
   color: #666;
   line-height: 1.5;
+  white-space: pre-wrap; // 줄바꿈을 유지합니다.
 `;
 
 const CommentForm = styled.form`
