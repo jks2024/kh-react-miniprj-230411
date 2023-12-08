@@ -51,10 +51,9 @@ const BoardImage = styled.img`
 `;
 
 const CommentInput = styled.input`
-  width: 100%;
+  width: 82%;
   padding: 10px;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin: 10px;
   box-sizing: border-box;
 `;
 const SubmitButton = styled.button`
@@ -66,7 +65,6 @@ const SubmitButton = styled.button`
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
 
@@ -241,13 +239,11 @@ const BoardDetail = () => {
       </ButtonContainer>
 
       <CommentForm onSubmit={handleSubmitComment}>
-        <label>
-          <CommentInput
-            type="text"
-            value={inputComment}
-            onChange={handleCommentChange}
-          />
-        </label>
+        <CommentInput
+          type="text"
+          value={inputComment}
+          onChange={handleCommentChange}
+        />
         <SubmitButton type="submit">댓글 추가</SubmitButton>
       </CommentForm>
       {showComments && (

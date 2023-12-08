@@ -124,6 +124,14 @@ const GenderChart = () => {
   const handleRegionChange = (e) => {
     setRegion(e.target.value); // 지역명 상태 업데이트 함수
   };
+
+  // 엔터키를 누르면 조회 버튼을 누른 것과 동일한 효과
+  const handleRegionKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleRegionClick();
+    }
+  };
+
   const handleRegionClick = async () => {
     try {
       const rsp = await AxiosApi.genderChart(region);
@@ -164,6 +172,7 @@ const GenderChart = () => {
           type="text"
           value={region}
           onChange={handleRegionChange}
+          onKeyUp={handleRegionKeyPress}
           placeholder="지역명 입력"
         />
         <Button onClick={handleRegionClick}>조회</Button>
