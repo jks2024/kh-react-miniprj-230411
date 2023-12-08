@@ -139,13 +139,22 @@ const Chatting = () => {
 
   useEffect(() => {
     // 채팅방 정보 가져 오기
+    const accessToken = Common.getAccessToken();
     const getChatRoom = async () => {
       try {
         const rsp = await AxiosApi.chatDetail(roomId);
         console.log(rsp.data.name);
         setRoomName(rsp.data.name);
-      } catch (error) {
-        console.log(error);
+      } catch (e) {
+        if (e.rsp.status === 401) {
+          await Common.handleUnauthorized();
+          const newToken = Common.getAccessToken();
+          if (newToken !== accessToken) {
+            const rsp = await AxiosApi.chatDetail(roomId);
+            console.log(rsp.data.name);
+            setRoomName(rsp.data.name);
+          }
+        }
       }
     };
     getChatRoom();

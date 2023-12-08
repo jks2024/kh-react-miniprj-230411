@@ -124,13 +124,22 @@ function BoardList() {
   const [selectedCategory, setSelectedCategory] = useState("all"); // 선택된 카테고리 상태
 
   useEffect(() => {
+    const accessToken = Common.getAccessToken();
     const getCategories = async () => {
       try {
         const rsp = await AxiosApi.cateList();
         console.log(rsp.data);
         setCategories(rsp.data);
-      } catch (error) {
-        console.log(error);
+      } catch (e) {
+        if (e.response.status === 401) {
+          await Common.handleUnauthorized();
+          const newToken = Common.getAccessToken();
+          if (newToken !== accessToken) {
+            const rsp = await AxiosApi.cateList();
+            console.log(rsp.data);
+            setCategories(rsp.data);
+          }
+        }
       }
     };
     getCategories();
