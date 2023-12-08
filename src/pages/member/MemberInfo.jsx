@@ -66,14 +66,14 @@ const SubmitButton = styled.button`
 
 const MemberInfo = () => {
   const { email } = useParams(); // URL 파라미터에서 email 값 추출 (회원 리스트)
-  const [member, setMember] = useState("");
-  const [editMode, setEditMode] = useState(false);
-  const [editName, setEditName] = useState("");
+  const context = useContext(UserContext); // UserContext 가져오기
+  const { setName, name } = context; // UserContext에서 name 상태와 setName 함수 추출
+  const [member, setMember] = useState(""); // 회원 정보
+  const [editMode, setEditMode] = useState(false); // 편집 모드
+  const [editName, setEditName] = useState(name); // 편집 중인 이름
   const [loginUserEmail, setLoginUserEmail] = useState(""); // 현재 로그인 유저의 이메일
-  const [file, setFile] = useState(null);
-  const [url, setUrl] = useState("");
-  const context = useContext(UserContext);
-  const { setName } = context;
+  const [file, setFile] = useState(null); // 업로드할 파일
+  const [url, setUrl] = useState(""); // 미리보기 URL
 
   useEffect(() => {
     const accessToken = Common.getAccessToken();

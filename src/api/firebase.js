@@ -1,5 +1,5 @@
-import firebase from "firebase/compat/app";
-import "firebase/compat/storage";
+import firebase from "firebase/compat/app"; // firebase를 사용하기 위해 import
+import "firebase/compat/storage"; // storage를 사용하기 위해 import
 
 const firebaseConfig = {
   apiKey: "AIzaSyDqc3jZo2Kj2bgAVgxTC9su0P1N9kLe-Hg",
@@ -12,5 +12,5 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-export const storage = firebase.storage();
+firebase.initializeApp(firebaseConfig); // firebase를 초기화 시키는 코드
+export const storage = firebase.storage(); // storage를 사용하기 위해 변수에 담아줌

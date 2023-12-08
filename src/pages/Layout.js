@@ -24,7 +24,6 @@ import AxiosApi from "../api/AxiosApi";
 import useWeather from "../hooks/useWeather";
 
 // 사이드바 메뉴를 구성 합니다.
-
 const Layout = () => {
   const context = useContext(UserContext);
   const { color, name } = context;
