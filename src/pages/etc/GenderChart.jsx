@@ -130,8 +130,9 @@ const GenderChart = () => {
       if (rsp.status === 200) {
         setChartData({
           labels: Array.from(
-            { length: rsp.data.female.length },
-            (_, i) => i + 1
+            // Array.from() : 배열을 만드는 함수
+            { length: rsp.data.female.length }, // length: 배열의 길이
+            (_, i) => i + 1 // 배열의 요소를 만드는 함수
           ),
           datasets: [
             {
