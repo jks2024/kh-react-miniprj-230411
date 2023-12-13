@@ -99,7 +99,7 @@ const CircleFixedButton = styled.button`
   outline: none; // 클릭 시 테두리 제거
 
   &:hover {
-    background-color: #1991db; // 호버 시 배경색 변경
+    background-color: #1991db; // 호버 시 배경색 변경ß
   }
 
   &:before {
@@ -122,6 +122,34 @@ function BoardList() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]); // 새 상태 추가
   const [selectedCategory, setSelectedCategory] = useState("all"); // 선택된 카테고리 상태
+  // const [page, setPage] = useState(1); // 페이지 상태
+  // const loader = useRef(null); // 페이지 끝에 도달하면 추가 데이터를 불러오기 위한 ref
+
+  //페이지가 변경되면 추가 데이터를 불러옵니다.
+  // const handleObserver = (entities) => {
+  //   const target = entities[0];
+  //   if (target.isIntersecting) {
+  //     setPage(page + 1);
+  //   }
+  // };
+
+  // 페이지가 변경되면 추가 데이터를 불러옵니다.
+  //useEffect(() => {
+  //   const option = {
+  //     root: null, // 기본값은 브라우저의 viewport입니다.
+  //     rootMargin: "20px", // rootMargin을 20px로 지정합니다.
+  //     threshold: 0, // threshold는 0으로 지정합니다.
+  //   };
+  //   const observer = new IntersectionObserver(handleObserver, option);
+  //   if (loader.current) {
+  //     observer.observe(loader.current);
+  //   }
+  //   return () => {
+  //     if (loader.current) {
+  //       observer.unobserve(loader.current);
+  //     }
+  //   };
+  // }, []);
 
   useEffect(() => {
     const accessToken = Common.getAccessToken();
@@ -150,6 +178,7 @@ function BoardList() {
     const boardList = async () => {
       try {
         const rsp = await AxiosApi.boardList();
+        //const rsp = await AxiosApi.boardPageList(page, 20);
         const filteredList =
           selectedCategory === "all"
             ? rsp.data
@@ -157,12 +186,14 @@ function BoardList() {
                 (board) => board.categoryId === parseInt(selectedCategory)
               );
         setBoardList(filteredList);
+        //setBoardList([...boardList, ...filteredList]);
       } catch (e) {
         if (e.response.status === 401) {
           await Common.handleUnauthorized();
           const newToken = Common.getAccessToken();
           if (newToken !== accessToken) {
             const rsp = await AxiosApi.boardList();
+            //const rsp = await AxiosApi.boardPageList(page, 20);
             const filteredList =
               selectedCategory === "all"
                 ? rsp.data
@@ -170,6 +201,7 @@ function BoardList() {
                     (board) => board.categoryId === parseInt(selectedCategory)
                   );
             setBoardList(filteredList);
+            //setBoardList([...boardList, ...filteredList]);
           }
         }
       }
@@ -221,6 +253,7 @@ function BoardList() {
               </BoardContentWrapper>
             </BoardLi>
           ))}
+        {/* <div ref={loader} /> */}
       </BoardUl>
       <CircleFixedButton onClick={handleWriteClick}></CircleFixedButton>
     </BoardContainer>

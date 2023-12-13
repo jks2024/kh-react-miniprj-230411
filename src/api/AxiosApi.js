@@ -74,12 +74,16 @@ const AxiosApi = {
   },
 
   // 회원 탈퇴
-  memberDel: async (id) => {
-    const del = {
-      id: id,
-    };
-    return await axios.post(Common.KH_DOMAIN + "/user/delete", del);
+  memberDel: async (email) => {
+    const accessToken = Common.getAccessToken();
+    return await axios.delete(Common.KH_DOMAIN + `/users/del/${email}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + accessToken,
+      },
+    });
   },
+
   // 게시글 조회
   boardList: async () => {
     const accessToken = Common.getAccessToken();
@@ -99,6 +103,19 @@ const AxiosApi = {
         Authorization: "Bearer " + accessToken,
       },
     });
+  },
+  // 게시글 페이지네이션 조회
+  boardPageList: async (page, size) => {
+    const accessToken = Common.getAccessToken();
+    return await axios.get(
+      Common.KH_DOMAIN + `/api/board/list/page?page=${page}&size=${size}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+      }
+    );
   },
   // 게시글 쓰기
   boardWrite: async (title, categoryId, content, img) => {

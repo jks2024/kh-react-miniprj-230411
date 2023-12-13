@@ -1,26 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-const MovieCardView = ({
-  rank,
-  image,
-  title,
-  score,
-  rate,
-  reservation,
-  date,
-}) => {
-  return (
-    <CardView>
-      <Ranking>{rank}</Ranking>
-      <Poster src={image} alt={`${title} 포스터`} />
-      <Title>{title}</Title>
-      <Rating>평점 : {score}</Rating>
-      <Participants>{rate}</Participants>
-      <ReservationRate>예매율 : {reservation}</ReservationRate>
-      <ReleaseDate>개봉일 : {date}</ReleaseDate>
-    </CardView>
-  );
-};
 
 const CardView = styled.div`
   display: flex;
@@ -92,5 +71,26 @@ const ReleaseDate = styled.div`
   font-size: 0.8rem;
   color: black;
 `;
+const MovieCardView = ({
+  rank,
+  image,
+  title,
+  score,
+  rate,
+  reservation,
+  date,
+}) => {
+  return (
+    <CardView>
+      <Ranking>{rank}</Ranking>
+      <Poster src={image} alt={`${title} 포스터`} />
+      <Title>{title}</Title>
+      <Rating>평점 : {score}</Rating>
+      <Participants>{rate}</Participants>
+      <ReservationRate>예매율 : {reservation}</ReservationRate>
+      <ReleaseDate>개봉일 : {date}</ReleaseDate>
+    </CardView>
+  );
+};
 
 export default MovieCardView;

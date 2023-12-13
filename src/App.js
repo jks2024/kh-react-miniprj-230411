@@ -27,6 +27,8 @@ import Chatting from "./pages/chatting/Chatting";
 import KakaoMap from "./pages/etc/KakaoMap";
 import GenderChart from "./pages/etc/GenderChart";
 import BloodPieChart from "./pages/etc/PieChart";
+import SwipeTest from "./pages/etc/SwipeTest";
+import Admin from "./pages/etc/Admin";
 
 function App() {
   return (
@@ -60,6 +62,8 @@ function App() {
               <Route path="/KakaoMap" element={<KakaoMap />} />
               <Route path="/GenderChart" element={<GenderChart />} />
               <Route path="/BloodPieChart" element={<BloodPieChart />} />
+              <Route path="/SwipeTest" element={<SwipeTest />} />
+              <Route path="/Admin" element={<Admin />} />
             </Route>
           </Routes>
         </Router>

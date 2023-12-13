@@ -5,10 +5,10 @@ import styled from "styled-components";
 
 const CardContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: wrap; // 자식 요소들이 여러 줄에 걸쳐 정렬되도록 설정
   gap: 10px;
-  justify-content: center;
-  margin: 20px auto;
+  justify-content: center; // 자식 요소들을 가운데 정렬
+  margin: 20px auto; // 위 아래로 20px, 좌우는 자동으로 설정
 `;
 
 const PaginationContainer = styled.div`
@@ -77,11 +77,15 @@ function Movies() {
   const renderPagination = () => {
     return (
       <PaginationContainer>
-        {Array.from({ length: totalPage }, (_, i) => i + 1).map((page) => (
-          <PageButton key={page} onClick={() => handlePageChange(page)}>
-            {page}
-          </PageButton>
-        ))}
+        {Array.from({ length: totalPage }, (_, i) => i + 1).map(
+          (
+            page // Array.from() : 배열을 만드는 함수
+          ) => (
+            <PageButton key={page} onClick={() => handlePageChange(page)}>
+              {page}
+            </PageButton>
+          )
+        )}
       </PaginationContainer>
     );
   };
