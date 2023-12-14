@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Common from "../../utils/Common";
 import AxiosApi from "../../api/AxiosApi";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`

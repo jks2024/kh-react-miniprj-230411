@@ -55,8 +55,8 @@ const Rating = styled.div`
   color: black;
 `;
 
-const Participants = styled.div`
-  margin-bottom: 5px;
+const Cumulative = styled.div`
+  margin-top: 5px;
   font-size: 0.8rem;
   color: black;
 `;
@@ -76,9 +76,9 @@ const MovieCardView = ({
   image,
   title,
   score,
-  rate,
   reservation,
   date,
+  cumulative,
 }) => {
   return (
     <CardView>
@@ -86,9 +86,9 @@ const MovieCardView = ({
       <Poster src={image} alt={`${title} 포스터`} />
       <Title>{title}</Title>
       <Rating>평점 : {score}</Rating>
-      <Participants>{rate}</Participants>
       <ReservationRate>예매율 : {reservation}</ReservationRate>
       <ReleaseDate>개봉일 : {date}</ReleaseDate>
+      <Cumulative>누적 관객수 : {cumulative}</Cumulative>
     </CardView>
   );
 };

@@ -100,9 +100,9 @@ function Movies() {
             image={movie.image}
             title={movie.title}
             score={movie.score}
-            rate={movie.rate}
             reservation={movie.reservation}
             date={movie.date}
+            cumulative={movie.cumulative}
           />
         ))}
       </CardContainer>
