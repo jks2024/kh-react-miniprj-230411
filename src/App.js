@@ -29,6 +29,7 @@ import GenderChart from "./pages/etc/GenderChart";
 import BloodPieChart from "./pages/etc/PieChart";
 import SwipeTest from "./pages/etc/SwipeTest";
 import Admin from "./pages/etc/Admin";
+import Reservation from "./pages/etc/Reservation";
 
 function App() {
   return (
@@ -64,6 +65,7 @@ function App() {
               <Route path="/BloodPieChart" element={<BloodPieChart />} />
               <Route path="/SwipeTest" element={<SwipeTest />} />
               <Route path="/Admin" element={<Admin />} />
+              <Route path="/Reservation" element={<Reservation />} />
             </Route>
           </Routes>
         </Router>

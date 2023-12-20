@@ -57,6 +57,9 @@ const Home = () => {
       case 17:
         navigate("/Admin");
         break;
+      case 18:
+        navigate("/Reservation");
+        break;
       default:
     }
   };
@@ -82,6 +85,7 @@ const Home = () => {
           <TransBtn onClick={() => onClickBtn(15)}>형액형 파이 차트</TransBtn>
           <TransBtn onClick={() => onClickBtn(16)}>스와이프 테스트</TransBtn>
           <TransBtn onClick={() => onClickBtn(17)}>관리자 페이지</TransBtn>
+          <TransBtn onClick={() => onClickBtn(18)}>예약 기능</TransBtn>
         </ButtonContainer>
       </div>
     </>

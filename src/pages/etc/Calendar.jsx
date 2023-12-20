@@ -5,6 +5,9 @@ import "react-calendar/dist/Calendar.css"; // 기본 스타일
 const MyCalendar = () => {
   const [dateRange, setDateRange] = useState([new Date(), new Date()]);
 
+  console.log(dateRange[0].toLocaleDateString());
+  console.log(dateRange[0].toLocaleTimeString());
+
   const onChangeDateRange = (newDateRange) => {
     setDateRange(newDateRange);
   };

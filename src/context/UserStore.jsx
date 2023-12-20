@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-export const UserContext = createContext(null);
+export const UserContext = createContext(null); // UserContext 생성
 
 const UserStore = (props) => {
   const [color, setColor] = useState(
@@ -34,7 +34,7 @@ const UserStore = (props) => {
   }, [temp]);
 
   return (
-    <UserContext.Provider
+    <UserContext.Provider // UserContext.Provider로 감싸기
       value={{
         color,
         setColor,

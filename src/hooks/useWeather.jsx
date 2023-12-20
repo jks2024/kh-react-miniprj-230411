@@ -6,6 +6,7 @@ const useWeather = () => {
   const [coords, setCoords] = useState(""); // 위도, 경도
   const [addr, setAddr] = useState(""); // 주소
   const [temp, setTemp] = useState(""); // 온도
+  const [pty, setPty] = useState(""); // 하늘 상태
   const [intervalId, setIntervalId] = useState(null); // 갱신 주기를 관리하기 위한 상태
   const updateInterval = 60000; // 주기적 갱신 간격 (예: 1분)
 
@@ -16,6 +17,10 @@ const useWeather = () => {
 
   // 현재 위치 가져오기
   const onSuccess = (position) => {
+    console.log(
+      "현재 위치 : " + position.coords.latitude,
+      position.coords.longitude
+    );
     setLocation({
       lat: position.coords.latitude,
       long: position.coords.longitude,
@@ -46,7 +51,7 @@ const useWeather = () => {
       );
       const fullAddress = response.data.documents[0].address;
       const neighborhoodAddress = `${fullAddress.region_1depth_name} ${fullAddress.region_2depth_name} ${fullAddress.region_3depth_name}`;
-      setAddr(neighborhoodAddress); // context에 저장
+      setAddr(neighborhoodAddress);
     } catch (error) {
       console.error("Kakao Geocoding error:", error);
     }
@@ -150,13 +155,14 @@ const useWeather = () => {
         `http://127.0.0.1:5000/api/weather2?x=${coords.x}&y=${coords.y}`
       );
       console.log(response.data);
-      setTemp(response.data.tmp); // context에 저장
+      setTemp(response.data.tmp);
+      setPty(response.data.pty);
     } catch (error) {
       console.error("Weather error:", error);
     }
   };
 
-  return { addr, temp, location };
+  return { addr, temp, location, pty };
 };
 
 export default useWeather;

@@ -33,7 +33,7 @@ const BloodPieChart = () => {
 
   return (
     <Container>
-      <Pie data={data} />;
+      <Pie data={data} />
     </Container>
   );
 };

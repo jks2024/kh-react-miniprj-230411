@@ -79,13 +79,13 @@ const CloseButton = styled.button`
 `;
 
 const Chatting = () => {
-  const [socketConnected, setSocketConnected] = useState(false);
-  const [inputMsg, setInputMsg] = useState("");
-  const [chatList, setChatList] = useState([]);
-  const { roomId } = useParams();
-  const [sender, setSender] = useState("");
+  const [socketConnected, setSocketConnected] = useState(false); // 웹소켓 연결 여부
+  const [inputMsg, setInputMsg] = useState(""); // 입력 메시지
+  const [chatList, setChatList] = useState([]); // 채팅 리스트
+  const { roomId } = useParams(); // 채팅방 번호
+  const [sender, setSender] = useState(""); // 보내는 사람
   const [roomName, setRoomName] = useState(""); // 채팅방 이름
-  const ws = useRef(null);
+  const ws = useRef(null); // 웹소켓 객체
   const navigate = useNavigate(); // useNavigate 훅 추가
 
   const onChangMsg = (e) => {
@@ -94,12 +94,14 @@ const Chatting = () => {
 
   const onEnterKey = (e) => {
     if (e.key === "Enter" && inputMsg.trim() !== "") {
+      // 엔터키 입력시, 공백 제거 후 비어있지 않으면
       e.preventDefault();
       onClickMsgSend(e);
     }
   };
 
   const onClickMsgSend = (e) => {
+    // 메시지 전송
     ws.current.send(
       JSON.stringify({
         type: "TALK",
@@ -111,6 +113,7 @@ const Chatting = () => {
     setInputMsg("");
   };
   const onClickMsgClose = () => {
+    // 채팅 종료
     ws.current.send(
       JSON.stringify({
         type: "CLOSE",
@@ -135,7 +138,7 @@ const Chatting = () => {
       }
     };
     getMember();
-  });
+  }, []);
 
   useEffect(() => {
     // 채팅방 정보 가져 오기
@@ -158,20 +161,23 @@ const Chatting = () => {
       }
     };
     getChatRoom();
-  });
+  }, []);
 
   useEffect(() => {
     console.log("방번호 : " + roomId);
     if (!ws.current) {
-      ws.current = new WebSocket(Common.KH_SOCKET_URL);
+      ws.current = new WebSocket(Common.KH_SOCKET_URL); // 웹소켓 연결
       ws.current.onopen = () => {
+        // 웹소켓 연결되면
         console.log("connected to " + Common.KH_SOCKET_URL);
-        setSocketConnected(true);
+        setSocketConnected(true); // 웹소켓 연결 상태 변경
       };
     }
     if (socketConnected) {
+      // 웹소켓 연결되면
       ws.current.send(
         JSON.stringify({
+          // 서버에 입장 메시지 전송
           type: "ENTER",
           roomId: roomId,
           sender: sender,
@@ -180,21 +186,23 @@ const Chatting = () => {
       );
     }
     ws.current.onmessage = (evt) => {
-      const data = JSON.parse(evt.data);
+      // 서버에서 메시지가 오면
+      const data = JSON.parse(evt.data); // 받은 메시지를 JSON 객체로 변환
       console.log(data.message);
-      setChatList((prevItems) => [...prevItems, data]);
+      setChatList((prevItems) => [...prevItems, data]); // 채팅 리스트에 추가
     };
-  }, [socketConnected]);
+  }, [socketConnected]); // socketConnected 값이 변경되면 useEffect 실행
 
   // 화면 하단으로 자동 스크롤
   const chatContainerRef = useRef(null);
 
   useEffect(() => {
     if (chatContainerRef.current) {
+      // 채팅 컨테이너가 존재하면
       chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
+        chatContainerRef.current.scrollHeight; // 스크롤을 맨 아래로
     }
-  }, [chatList]);
+  }, [chatList]); // chatList 값이 변경되면 useEffect 실행
 
   return (
     <ChatContainer>

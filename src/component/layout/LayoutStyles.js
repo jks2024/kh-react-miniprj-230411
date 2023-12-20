@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+// 상단바의 높이
+const topbarHeight = "54px";
+
 export const Container = styled.div`
   display: flex;
   position: relative;
@@ -14,7 +17,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     position: fixed;
-    height: 54px;
+    height: ${topbarHeight};
     width: 100%;
     background-color: ${(props) => props.color || "#f9aa06"};
     border-bottom: 1px solid #ccc;
@@ -39,7 +42,7 @@ export const Container = styled.div`
     }
   }
   .mainbody {
-    height: calc(100vh - 54px - 50px);
+    height: calc(100vh - ${topbarHeight} - 50px);
   }
   .footer {
     display: flex;
@@ -76,12 +79,13 @@ export const UserIdAndName = styled.div`
   margin: 2px 10px;
   line-height: 1.5;
 `;
+
 export const StyledSideMenu = styled.div`
   position: fixed;
   left: 0;
-  top: 54px;
+  top: ${topbarHeight};
   width: 250px;
-  height: calc(100vh - 54px);
+  height: calc(100vh - ${topbarHeight});
   background-color: #eee;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
   z-index: 1000;
@@ -127,7 +131,7 @@ export const StyledLink = styled(Link)`
   }
 `;
 export const Dummy = styled.div`
-  height: 54px;
+  height: ${topbarHeight};
 `;
 
 export default Container;
