@@ -152,29 +152,19 @@ function BoardList() {
   // }, []);
 
   useEffect(() => {
-    const accessToken = Common.getAccessToken();
     const getCategories = async () => {
       try {
         const rsp = await AxiosApi.cateList();
         console.log(rsp.data);
         setCategories(rsp.data);
       } catch (e) {
-        if (e.response.status === 401) {
-          await Common.handleUnauthorized();
-          const newToken = Common.getAccessToken();
-          if (newToken !== accessToken) {
-            const rsp = await AxiosApi.cateList();
-            console.log(rsp.data);
-            setCategories(rsp.data);
-          }
-        }
+        console.log(e);
       }
     };
     getCategories();
   }, []);
 
   useEffect(() => {
-    const accessToken = Common.getAccessToken();
     const boardList = async () => {
       try {
         const rsp = await AxiosApi.boardList();
@@ -188,22 +178,7 @@ function BoardList() {
         setBoardList(filteredList);
         //setBoardList([...boardList, ...filteredList]);
       } catch (e) {
-        if (e.response.status === 401) {
-          await Common.handleUnauthorized();
-          const newToken = Common.getAccessToken();
-          if (newToken !== accessToken) {
-            const rsp = await AxiosApi.boardList();
-            //const rsp = await AxiosApi.boardPageList(page, 20);
-            const filteredList =
-              selectedCategory === "all"
-                ? rsp.data
-                : rsp.data.filter(
-                    (board) => board.categoryId === parseInt(selectedCategory)
-                  );
-            setBoardList(filteredList);
-            //setBoardList([...boardList, ...filteredList]);
-          }
-        }
+        console.log(e);
       }
     };
     boardList();

@@ -90,20 +90,12 @@ function ChatList() {
 
   useEffect(() => {
     // 서버로부터 채팅방 목록을 가져오는 API 호출
-    const accessToken = Common.getAccessToken();
     const getChatRoom = async () => {
       try {
         const rsp = await AxiosApi.chatList();
         setChatRooms(rsp.data);
       } catch (e) {
-        if (e.rsp.status === 401) {
-          await Common.handleUnauthorized();
-          const newToken = Common.getAccessToken();
-          if (newToken !== accessToken) {
-            const rsp = await AxiosApi.chatList();
-            setChatRooms(rsp.data);
-          }
-        }
+        console.log(e);
       }
     };
     const intervalID = setInterval(getChatRoom, 1000);

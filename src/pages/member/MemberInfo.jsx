@@ -76,7 +76,6 @@ const MemberInfo = () => {
   const [url, setUrl] = useState(""); // 미리보기 URL
 
   useEffect(() => {
-    const accessToken = Common.getAccessToken();
     const memberInfo = async () => {
       try {
         const rsp = await AxiosApi.memberGetOne(email);
@@ -88,17 +87,7 @@ const MemberInfo = () => {
         console.log(rsp2.data.email);
         setLoginUserEmail(rsp2.data.email);
       } catch (error) {
-        if (error.response.status === 401) {
-          await Common.handleUnauthorized();
-          const newToken = Common.getAccessToken();
-          if (newToken !== accessToken) {
-            const rsp = await AxiosApi.memberGetOne(email);
-            if (rsp.status === 200) {
-              setMember(rsp.data);
-              setUrl(rsp.data.image);
-            }
-          }
-        }
+        console.log(error);
       }
     };
     memberInfo();
@@ -115,7 +104,6 @@ const MemberInfo = () => {
 
   // 회원 정보 업데이트 Axios 호출
   const handleSubmit = async (e) => {
-    const accessToken = Common.getAccessToken();
     e.preventDefault();
     try {
       const rsp = await AxiosApi.memberUpdate(email, editName, url);
@@ -129,22 +117,7 @@ const MemberInfo = () => {
         }
       }
     } catch (error) {
-      if (error.response.status === 401) {
-        await Common.handleUnauthorized();
-        const newToken = Common.getAccessToken();
-        if (newToken !== accessToken) {
-          const rsp = await AxiosApi.memberUpdate(email, editName, url);
-          if (rsp.status === 200) {
-            setEditMode(false);
-            setName(editName);
-            const rsp = await AxiosApi.memberGetOne(email);
-            if (rsp.status === 200) {
-              setMember(rsp.data);
-              setUrl(rsp.data.image);
-            }
-          }
-        }
-      }
+      console.log(error);
     }
   };
 

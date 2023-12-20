@@ -139,7 +139,6 @@ const BoardDetail = () => {
   };
 
   useEffect(() => {
-    const token = Common.getAccessToken();
     const getBoardDetail = async () => {
       console.log("getBoardDetail : " + id);
       try {
@@ -150,16 +149,7 @@ const BoardDetail = () => {
         const response3 = await AxiosApi.memberGetInfo(); // 현재 로그인 유저의 이메일
         setLoginUserEmail(response3.data.email);
       } catch (e) {
-        if (e.response.status === 401) {
-          await Common.handleUnauthorized();
-          const newToken = Common.getAccessToken();
-          if (newToken !== token) {
-            const response = await AxiosApi.boardDetail(id);
-            setBoard(response.data);
-            const response2 = await AxiosApi.commentList(id);
-            setComments(response2.data);
-          }
-        }
+        console.log(e);
       }
     };
     getBoardDetail();
@@ -172,7 +162,6 @@ const BoardDetail = () => {
     console.log("deleteBoard : " + id);
     // 삭제 확인을 위한 팝업 띄우기
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      const token = Common.getAccessToken();
       const deleteBoard = async () => {
         try {
           const response = await AxiosApi.boardDelete(id);
@@ -180,16 +169,7 @@ const BoardDetail = () => {
           window.alert("삭제되었습니다.");
           navigate("/boards");
         } catch (e) {
-          if (e.response.status === 401) {
-            await Common.handleUnauthorized();
-            const newToken = Common.getAccessToken();
-            if (newToken !== token) {
-              const response = await AxiosApi.boardDelete(id);
-              console.log(response);
-              window.alert("삭제되었습니다.");
-              window.location.href = "/boardList";
-            }
-          }
+          console.log(e);
         }
       };
       deleteBoard();

@@ -49,21 +49,12 @@ function ChatRoomCreate() {
   const navigate = useNavigate();
 
   const handleCreateChatRoom = async () => {
-    const accessToken = Common.getAccessToken();
     try {
       const response = await Axios.chatCreate(chatRoomTitle);
       console.log(response.data);
       navigate(`/chatting/${response.data}`);
     } catch (e) {
-      if (e.response.status === 401) {
-        await Common.handleUnauthorized();
-        const newToken = Common.getAccessToken();
-        if (newToken !== accessToken) {
-          const response = await Axios.chatCreate(chatRoomTitle);
-          console.log(response.data);
-          navigate(`/chatting/${response.data}`);
-        }
-      }
+      console.log(e);
     }
   };
 

@@ -126,22 +126,13 @@ const BoardWriteForm = () => {
   const [selectedCategory, setSelectedCategory] = useState(""); // 선택된 카테고리 상태
 
   useEffect(() => {
-    const accessToken = Common.getAccessToken();
     const getCategories = async () => {
       try {
         const rsp = await AxiosApi.cateList();
         console.log(rsp.data);
         setCategories(rsp.data);
       } catch (e) {
-        if (e.response.status === 401) {
-          await Common.handleUnauthorized();
-          const newToken = Common.getAccessToken();
-          if (newToken !== accessToken) {
-            const rsp = await AxiosApi.cateList();
-            console.log(rsp.data);
-            setCategories(rsp.data);
-          }
-        }
+        console.log(e);
       }
     };
     getCategories();
@@ -157,7 +148,6 @@ const BoardWriteForm = () => {
   };
 
   const handleSubmit = async () => {
-    const accessToken = Common.getAccessToken();
     try {
       const rsp = await AxiosApi.boardWrite(
         title,
@@ -172,24 +162,7 @@ const BoardWriteForm = () => {
         alert("글쓰기 실패");
       }
     } catch (e) {
-      if (e.response.status === 401) {
-        await Common.handleUnauthorized();
-        const newToken = Common.getAccessToken();
-        if (newToken !== accessToken) {
-          const rsp = await AxiosApi.boardWrite(
-            title,
-            selectedCategory,
-            content,
-            url
-          );
-          if (rsp.data === true) {
-            alert("글쓰기 성공");
-            navigate("/Boards");
-          } else {
-            alert("글쓰기 실패");
-          }
-        }
-      }
+      console.log(e);
     }
   };
 

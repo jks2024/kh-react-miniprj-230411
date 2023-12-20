@@ -59,20 +59,12 @@ const Members = () => {
   const [memberInfo, setMemberInfo] = useState("");
 
   useEffect(() => {
-    const accessToken = Common.getAccessToken();
     const memberInfo = async () => {
       try {
         const rsp = await AxiosApi.memberGet(); // 전체 조회
-        if (rsp.status === 200) setMemberInfo(rsp.data);
+        setMemberInfo(rsp.data);
       } catch (e) {
-        if (e.response.status === 401) {
-          await Common.handleUnauthorized();
-          const newToken = Common.getAccessToken();
-          if (newToken !== accessToken) {
-            const rsp = await AxiosApi.memberGet(); // 전체 조회
-            if (rsp.status === 200) setMemberInfo(rsp.data);
-          }
-        }
+        console.log(e);
       }
     };
     memberInfo();
